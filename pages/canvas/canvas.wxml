@@ -1,0 +1,4 @@
+<!--canvas.wxml-->
+<canvas class="my_canvas" show="{{true}}" canvas-id="my_canvas"></canvas>
+
+<view class="animation_view" animation="{{spreakingAnimation}}"></view>

@@ -9,7 +9,8 @@
     "pages/block/block",
     "pages/imagePreview/imagePreview",
     "pages/mega/mega",
-    "pages/megaNoteEditor/megaNoteEditor"
+    "pages/megaNoteEditor/megaNoteEditor",
+    "pages/canvas/canvas"
   ],
   "window": {
     "backgroundTextStyle": "light",

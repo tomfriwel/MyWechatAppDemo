@@ -1,0 +1,16 @@
+/* canvas.wxss */
+.my_canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 302px;
+  height: 302px;
+  border: 1px solid black;
+}
+
+.animation_view {
+  height: 100px;
+  width: 100px;
+  background-color: #aaa;
+  overflow: hidden;
+}

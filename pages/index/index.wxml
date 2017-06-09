@@ -24,4 +24,8 @@
     <text>mega</text>
     <view class="scroll-view-item-line"></view>
   </navigator>
+  <navigator url="/pages/canvas/canvas" class="scroll-view-item" hover-class="scroll-view-item-hover">
+    <text>canvas</text>
+    <view class="scroll-view-item-line"></view>
+  </navigator>
 </scroll-view>
