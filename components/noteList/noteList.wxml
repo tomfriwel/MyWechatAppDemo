@@ -1,0 +1,8 @@
+<template name="noteList">
+  <block wx:for="{{notes}}" wx:key="image">
+    <navigator url="/pages/megaNoteEditor/megaNoteEditor" class="flex-item">
+      <view class="content">{{item.content}}</view>
+      <view class="flex-item-line"></view>
+    </navigator>
+  </block>
+</template>

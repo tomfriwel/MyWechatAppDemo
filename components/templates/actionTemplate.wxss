@@ -1,0 +1,24 @@
+.flex-item {
+  width: 328rpx;
+  height: 328rpx;
+  margin-top: 30rpx;
+  margin-left: 30rpx;
+  background-color: #ccc;
+  border-radius: 20rpx;
+  border: 1rpx solid #e4e4e4;
+  box-shadow: 0 20rpx 40rpx #eee;
+  overflow: hidden;
+}
+.flex-item .cover_image {
+  display: block;
+  width:100%;
+  height: 250rpx;
+}
+.flex-item text {
+  display: block;
+  height: 78rpx;
+  color: white;
+  line-height: 78rpx;
+  text-align: center;
+  /*padding-left: 15rpx;*/
+}

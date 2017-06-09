@@ -1,0 +1,20 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/logs/logs",
+    "pages/userInfo/userInfo",
+    "pages/map/map",
+    "pages/card/card",
+    "pages/action/action",
+    "pages/block/block",
+    "pages/imagePreview/imagePreview",
+    "pages/mega/mega",
+    "pages/megaNoteEditor/megaNoteEditor"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#333",
+    "navigationBarTitleText": "tomfriwel",
+    "navigationBarTextStyle": "white"
+  }
+}

@@ -1,0 +1,8 @@
+<!--imagePreview.wxml-->
+<image src="{{image}}" mode="aspectFill"></image>
+<text>hehehe e hehh eheh sdk ijf adksjfjksd jfklsdj flkj asldkjf lja dlfkj ldaksjlfj lsadj lfjl asdjflj </text>
+<view class="button-wrapper">
+    <button type="primary" size="{{primarySize}}" loading="{{loading}}" plain="{{plain}}"
+            disabled="{{disabled}}" bindtap="payTap"> primary
+    </button>
+</view>

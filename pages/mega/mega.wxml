@@ -1,0 +1,18 @@
+<!--mega.wxml-->
+<import src="/components/noteList/noteList.wxml"/>
+
+<swiper class="top_bar" indicator-dots="true" autoplay="true" duration="1000" bindchange="listenSwiper" circular="true" >
+    <swiper-item>
+        <view class="top_item" style="background: #eee;"></view>
+    </swiper-item>
+    <swiper-item>
+         <view class="top_item" style="background: #ddd;"></view>
+    </swiper-item>
+    <swiper-item>
+          <view class="top_item" style="background: #aaa;"></view>
+    </swiper-item>    
+</swiper>
+
+<scroll-view class="main_scroll_view" scroll-y>
+  <template is="noteList" data="{{notes: notes}}"></template>
+</scroll-view>

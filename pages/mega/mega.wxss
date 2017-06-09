@@ -1,0 +1,20 @@
+/* mega.wxss */
+@import "/components/noteList/noteList.wxss";
+
+.main_scroll_view {
+  width: 750rpx;
+  height: 70vh;
+}
+
+.top_bar {
+  width: 750rpx;
+  height: 30vh;
+  background-color: #eee;
+  display: flex;
+  white-space: nowrap;
+}
+.top_item {
+  display: inline-block;
+  width: 750rpx;
+  height: 30vh;
+}

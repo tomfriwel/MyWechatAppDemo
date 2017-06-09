@@ -1,0 +1,16 @@
+/* imagePreview.wxss */
+
+image {
+  width: 100%;
+}
+
+text {
+  display: block;
+  width: 710rpx;
+  padding: 0rpx 20rpx;
+  text-align: center;
+}
+.button-wrapper {
+  width: 500rpx;
+  margin: 0 auto;
+}

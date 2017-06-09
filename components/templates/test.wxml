@@ -1,0 +1,11 @@
+<template name="test">
+  <block wx:if="{{showLoading}}">
+    <view class="loading">玩命加载中…</view>
+  </block>
+  <block wx:else>
+    <block wx:for="{{dataArray}}">
+      <view>{{index}}:{{item.title}}</view>
+    </block>
+    <view>hehe</view>
+  </block>
+</template>

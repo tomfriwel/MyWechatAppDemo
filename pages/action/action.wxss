@@ -1,0 +1,14 @@
+/* action.wxss */
+@import "/components/templates/actionTemplate.wxss";
+
+.main_scroll_view {
+  width: 750rpx;
+  height: 100vh;
+  background-color: #eee;
+}
+.container {
+    display: flex;
+    flex-direction:row;
+    flex-wrap:wrap;
+    padding-bottom: 30rpx;
+}

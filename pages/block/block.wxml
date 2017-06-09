@@ -1,0 +1,9 @@
+<!--block.wxml-->
+
+<movable-area style="height: 100vh;width: 750rpx;background: #eee;">
+ <movable-view direction="all" style="height: 50px; width: 50px; background: blue;">
+ </movable-view>
+ <movable-view direction="all" style="height: 50px; width: 50px; background: blue;" x="100" y="400">
+ </movable-view>
+</movable-area>
+

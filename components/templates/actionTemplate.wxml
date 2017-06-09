@@ -1,0 +1,14 @@
+<template name="actionTemplate">
+  <block wx:if="{{showLoading}}">
+    <view class="loading">玩命加载中…</view>
+  </block>
+  <block wx:else>
+    <block wx:for="{{actionArray}}" wx:key="image">
+      <navigator url="/pages/imagePreview/imagePreview?image={{item.image.src}}" class="flex-item">
+        <image src="{{item.image.src}}" data-index="{{index}}" class="cover_image" mode="aspectFill"></image>
+        
+        <text>{{item.title}}</text>
+      </navigator>
+    </block>
+  </block>
+</template>

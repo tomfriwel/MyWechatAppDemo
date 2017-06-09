@@ -1,0 +1,11 @@
+<!--action.wxml-->
+<import src="/components/templates/actionTemplate.wxml"/>
+
+<scroll-view class="main_scroll_view" scroll-y bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll">
+  <view class="container">
+    <template is="actionTemplate" data="{{showLoading: showLoading, actionArray: actionArray}}"></template>
+    <view class="flex-item" bindtap="addImage">
+        <text>添加图片</text>
+    </view>
+  </view>
+</scroll-view>

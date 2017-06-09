@@ -1,0 +1,18 @@
+.flex-item {
+  width: 750rpx;
+  height: 88rpx;
+}
+.flex-item-line {
+    position: absolute;
+    left: 0px;
+    /*bottom: 0;*/
+    right: 0px;
+    height: 2rpx;
+    background-color: #DFDFDF;
+}
+.content {
+  padding-left: 30rpx;
+  color: #A7ABB1;
+  font-size: 32rpx;
+  line-height: 88rpx;
+}
