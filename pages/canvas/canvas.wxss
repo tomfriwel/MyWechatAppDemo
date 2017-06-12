@@ -3,8 +3,8 @@
   position: absolute;
   top: 0;
   left: 0;
-  width: 302px;
-  height: 302px;
+  width: 375px;
+  height: 300px;
   border: 1px solid black;
 }
 
