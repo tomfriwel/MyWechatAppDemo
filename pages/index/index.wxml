@@ -28,4 +28,8 @@
     <text>canvas</text>
     <view class="scroll-view-item-line"></view>
   </navigator>
+  <navigator url="/pages/tabbar/tabbar" class="scroll-view-item" hover-class="scroll-view-item-hover">
+    <text>tabbar</text>
+    <view class="scroll-view-item-line"></view>
+  </navigator>
 </scroll-view>

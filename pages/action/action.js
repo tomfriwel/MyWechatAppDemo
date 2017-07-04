@@ -120,6 +120,9 @@ Page({
   onShareAppMessage: function () {
   
   },
+  scroll: function(){
+    console.log("scroll")
+  },
   addImage: function () {
     var that = this;
     wx.chooseImage({

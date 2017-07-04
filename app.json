@@ -10,12 +10,43 @@
     "pages/imagePreview/imagePreview",
     "pages/mega/mega",
     "pages/megaNoteEditor/megaNoteEditor",
-    "pages/canvas/canvas"
+    "pages/canvas/canvas",
+    "pages/tabbar/tabbar"
   ],
+  "tabBar": {
+    "color":"#333",
+    "selectedColor": "#4EC046",
+    "borderStyle": "black",
+    "backgroundColor": "#FFFFFF",
+    "list": [
+      {
+      "pagePath": "pages/index/index",
+      "text": "首页",
+      "iconPath": "images/icon.png",
+      "selectedIconPath": "images/icon.png"
+    },
+    {
+      "pagePath": "pages/action/action",
+      "text": "action",
+      "iconPath": "images/icon.png",
+      "selectedIconPath": "images/icon.png"
+    },
+    {
+      "pagePath": "pages/logs/logs",
+      "text": "logs",
+      "iconPath": "images/icon.png",
+      "selectedIconPath": "images/icon.png"
+    }]
+  },
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#333",
     "navigationBarTitleText": "tomfriwel",
     "navigationBarTextStyle": "white"
-  }
+  },
+  "networkTimeout": {
+    "request": 10000,
+    "downloadFile": 10000
+  },
+  "debug": true
 }
