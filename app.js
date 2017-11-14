@@ -5,11 +5,11 @@ App({
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
-    console.log(11111)
+    // console.log(11111)
   },
   onShow: function() {
       // Do something when show.
-      console.log(123)
+    //   console.log(123)
   },
   getUserInfo:function(cb){
     var that = this

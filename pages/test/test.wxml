@@ -1,0 +1,38 @@
+<!--test.wxml-->
+<!-- 
+<import src="/components/templates/test/test.wxml" />
+<template is="test" data="{{arr:arr, value:value}}"></template>
+<picker mode="selector" range="{{[1,2,3]}}">
+    <input placeholder='成人' placeholder-class='input_placeholder'></input>
+</picker> -->
+
+<!-- <canvas style="width: 300px; height: 300px; border:1px solid black;" canvas-id="myCanvas"></canvas> -->
+<!-- <view class='container'>
+    <view class='item item0'></view>
+    <view class='item item1'></view>
+    <view class='item item2'></view>
+    <view class='item item3'></view>
+    <view class='item item4'></view>
+</view> -->
+<!-- <form bindsubmit='formHandler' report-submit> 
+    <button form-type='submit'>Submit</button>
+</form> -->
+
+<!-- <import src="../../components/templates/test.wxml" />
+<scroll-view class="main_container" scroll-y>
+    <view class="content_container">
+        <template is="test" data="{{index}}" />
+        <image src="/images/2.png"></image>
+    </view>
+</scroll-view> -->
+
+<view class='main_container'>
+    <scroll-view class="content_container" bindscrolltoupper="upper" scroll-y>
+        <block wx:for="{{fontWeights}}">
+            <view class='w' style="font-weight:{{item}};">哈有微信{{item}}</view>
+        </block>
+    </scroll-view>
+</view>
+
+
+<!-- <canvas canvas-id='myCanvas' style='width:300px; height:300px; border:1px solid black;'></canvas> -->

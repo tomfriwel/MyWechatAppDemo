@@ -1,1 +1,5 @@
 .DS_Store
+.vscode
+typings
+project.config.json
+jsconfig.json

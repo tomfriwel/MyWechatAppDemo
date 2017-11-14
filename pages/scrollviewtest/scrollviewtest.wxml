@@ -1,0 +1,86 @@
+<!-- <view class="index"> -->
+    <!-- <view class="head">
+        <view class="title">小程序组件</view>
+        <view class="desc">这是展示小程序组件的DEMO。</view>
+    </view> -->
+
+    <!-- <view class="body"> -->
+        <view class="widgets">
+            <view class="widgets__item">
+                <view id="view" class="widgets__info">
+                    <text class="widgets__info-name">内容分区</text>
+                </view>
+            </view>
+            <view class="widgets__item">
+                <view id="view" class="widgets__info">
+                    <text class="widgets__info-name">内容分区</text>
+                </view>
+            </view>
+            <view class="widgets__item">
+                <view id="view" class="widgets__info">
+                    <text class="widgets__info-name">内容分区</text>
+                </view>
+            </view>
+            <view class="widgets__item">
+                <view id="view" class="widgets__info">
+                    <text class="widgets__info-name">内容分区</text>
+                </view>
+            </view>
+            <view class="widgets__item">
+                <view id="view" class="widgets__info">
+                    <text class="widgets__info-name">内容分区</text>
+                </view>
+            </view>
+            <view class="widgets__item">
+                <view id="view" class="widgets__info">
+                    <text class="widgets__info-name">内容分区</text>
+                </view>
+            </view>
+            <view class="widgets__item">
+                <view id="view" class="widgets__info">
+                    <text class="widgets__info-name">内容分区</text>
+                </view>
+            </view>
+            <view class="widgets__item">
+                <view id="view" class="widgets__info">
+                    <text class="widgets__info-name">内容分区</text>
+                </view>
+            </view>
+            <view class="widgets__item">
+                <view id="view" class="widgets__info">
+                    <text class="widgets__info-name">内容分区</text>
+                </view>
+            </view>
+            <view class="widgets__item">
+                <view id="view" class="widgets__info">
+                    <text class="widgets__info-name">内容分区</text>
+                </view>
+            </view>
+            <view class="widgets__item">
+                <view id="view" class="widgets__info">
+                    <text class="widgets__info-name">内容分区</text>
+                </view>
+            </view>
+            <view class="widgets__item">
+                <view id="view" class="widgets__info">
+                    <text class="widgets__info-name">内容分区</text>
+                </view>
+            </view>
+            <view class="widgets__item">
+                <view id="view" class="widgets__info">
+                    <text class="widgets__info-name">内容分区</text>
+                </view>
+            </view>
+            <view class="widgets__item">
+                <view id="view" class="widgets__info">
+                    <text class="widgets__info-name">内容分区</text>
+                </view>
+            </view>
+            <view class="widgets__item">
+                <view id="view" class="widgets__info">
+                    <text class="widgets__info-name">内容分区</text>
+                </view>
+            </view>
+        </view>
+    <!-- </view>
+</view> -->

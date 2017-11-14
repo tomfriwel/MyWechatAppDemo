@@ -1,0 +1,2 @@
+<!--pages/clock/clock.wxml-->
+<canvas canvas-id='myCanvas' style='width:300px; height:300px; border:1px solid black;'></canvas>

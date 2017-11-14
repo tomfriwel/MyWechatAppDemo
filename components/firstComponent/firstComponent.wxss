@@ -1,0 +1,14 @@
+/* components/firstComponent/firstComponent.wxss */
+/* 这里的样式只应用于这个自定义组件 */
+.inner {
+  color: red;
+  font-weight: 500;
+}
+
+.button {
+    width: 200rpx;
+    height: 200rpx;
+    background: #eee;
+    text-align: center;
+    line-height: 200rpx;
+}

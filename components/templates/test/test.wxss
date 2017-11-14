@@ -1,0 +1,5 @@
+.test{
+    width: 200rpx;
+    height: 200rpx;
+    background: red;
+}

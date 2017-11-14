@@ -32,4 +32,8 @@
     <text>tabbar</text>
     <view class="scroll-view-item-line"></view>
   </navigator>
+  <navigator url="/pages/webView/webView" class="scroll-view-item" hover-class="scroll-view-item-hover">
+    <text>webView</text>
+    <view class="scroll-view-item-line"></view>
+  </navigator>
 </scroll-view>

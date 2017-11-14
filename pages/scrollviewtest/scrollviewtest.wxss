@@ -1,0 +1,26 @@
+/* .index{
+    background-color: #FBF9FE;
+    font-family: -apple-system-font,Helvetica Neue,Helvetica,sans-serif;
+    flex: 1;
+    min-height: 100%;
+    font-size: 16px;
+} */
+
+.widgets__item{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: #FFFFFF;
+    overflow: hidden;
+    border-radius: 2px;
+    cursor: pointer;
+    background: #ddd;
+}
+.widgets__info{
+    /* display: flex; */
+    padding: 50px;
+    align-items: center;
+    flex-direction: row;
+}
+
+
+

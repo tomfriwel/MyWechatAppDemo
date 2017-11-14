@@ -1,0 +1,8 @@
+/* pages/component/component.wxss */
+.button {
+    width: 200rpx;
+    height: 200rpx;
+    background: #eee;
+    text-align: center;
+    line-height: 200rpx;
+}

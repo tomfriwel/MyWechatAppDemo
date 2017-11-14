@@ -1,0 +1,3 @@
+<template name="test">
+    <input class="test" wx:for="{{arr}}" wx:key="item" bindinput="tap" value="{{value}}"></input>
+</template>>

@@ -1,0 +1,8 @@
+<!--pages/camera/camera.wxml-->
+<button bindtap='tap'>scan</button>
+<camera class="camera" device-position="back" flash="off">
+    <cover-view class='cover' bindtap='takePhotoHandler'>take</cover-view>
+</camera>
+<button bindtap='takePhotoHandler'>takePhoto</button>
+<button bindtap='startRecordHandler'>startRecord</button>
+<button bindtap='stopRecordHandler'>stopRecord</button>
