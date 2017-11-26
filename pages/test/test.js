@@ -27,7 +27,10 @@ Page({
             700,
             800,
             900,
-        ]
+        ],
+        item:{
+            title:12123
+        }
     },
 
     /**
@@ -95,4 +98,35 @@ Page({
     upper: function (event) {
         console.log("refresh")
     },
+    onShareAppMessage: function (res) {
+        return {
+            title: '自定义转发标题',
+            path: '/pages/test/test',
+            success: function (res) {
+                // 转发成功
+            },
+            fail: function (res) {
+                // 转发失败
+            }
+        }
+    },
+    tap: function () {
+        wx.showShareMenu({
+            withShareTicket: true
+        })
+        // wx.showActionSheet({
+        //     itemList: ['Share', 'test1', 'test2'],
+        //     success: function (res) {
+        //         console.log(res.tapIndex)
+        //         if(res.tapIndex==0) {
+        //             wx.showShareMenu({
+        //                 withShareTicket: true
+        //             })
+        //         }
+        //     },
+        //     fail: function (res) {
+        //         console.log(res.errMsg)
+        //     }
+        // })
+    }
 })

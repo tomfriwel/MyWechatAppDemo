@@ -1,5 +1,6 @@
 {
     "usingComponents": {
-        "firstComponent": "/components/firstComponent/firstComponent"
+        "firstComponent": "/components/firstComponent/firstComponent",
+        "anotherComponent": "/components/anotherComponent/anotherComponent"
     }
 }

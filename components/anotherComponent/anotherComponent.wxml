@@ -1,0 +1,7 @@
+<!--components/anotherComponent/anotherComponent.wxml-->
+<view class='container'>
+    <view class='title'>another component:</view>
+    <slot name="before"></slot>
+    <view class='button' bindtap='increaseCount'>{{count}}</view>
+    <slot name="after"></slot>
+</view>

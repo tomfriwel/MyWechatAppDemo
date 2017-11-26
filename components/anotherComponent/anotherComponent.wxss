@@ -1,5 +1,4 @@
-/* components/firstComponent/firstComponent.wxss */
-/* 这里的样式只应用于这个自定义组件 */
+/* components/anotherComponent/anotherComponent.wxss */
 .inner {
   color: red;
   font-weight: 500;

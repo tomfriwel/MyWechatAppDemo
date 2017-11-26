@@ -1,0 +1,3 @@
+<!--pages/iBeacon/iBeacon.wxml-->
+
+<view class='button' bindtap='scan'></view>

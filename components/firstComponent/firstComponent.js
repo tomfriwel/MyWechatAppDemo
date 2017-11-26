@@ -1,5 +1,13 @@
 // components/firstComponent/firstComponent.js
+
+// var myBehavior = require('../anotherComponent/anotherComponent.js')
+
+var myBehavior = require('../anotherComponent/lala.js')
+console.log("myBehavior")
+console.log(myBehavior)
+
 Component({
+    behaviors:[myBehavior],
     options: {
         multipleSlots: true // 在组件定义时的选项中启用多slot支持
     },
@@ -47,6 +55,7 @@ Component({
     },
     ready: function () {
         console.log("firstComponent ready")
+        console.log(this)
         console.log(this.data)
     },
     moved: function () {

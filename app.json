@@ -1,8 +1,12 @@
 {
     "pages": [
-        "pages/component/component",
+        "pages/scrollView/scrollView",
+        "pages/scrollviewtest/scrollviewtest",
         "pages/webView/webView",
         "pages/test/test",
+        "pages/wxPay/wxPay",
+        "pages/iBeacon/iBeacon",
+        "pages/component/component",
         "pages/index/index",
         "pages/form/form",
         "pages/clock/clock",
@@ -18,7 +22,6 @@
         "pages/mega/mega",
         "pages/megaNoteEditor/megaNoteEditor",
         "pages/canvas/canvas",
-        "pages/scrollviewtest/scrollviewtest",
         "pages/action/action",
         "pages/tabbar/tabbar"
     ],

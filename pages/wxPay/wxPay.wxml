@@ -1,0 +1,2 @@
+<!--pages/wxPay/wxPay.wxml-->
+<button bindtap='scan'>scan</button>

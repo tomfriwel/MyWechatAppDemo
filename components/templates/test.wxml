@@ -10,9 +10,5 @@
   </block>
 </template> -->
 <template name="test">
-    <!-- <image src='/images/1.jpg'></image> -->
-    <view>
-        <view>template</view>
-        <text> {{index}}</text>
-    </view>
+    <view>{{item.title}}</view>
 </template>
