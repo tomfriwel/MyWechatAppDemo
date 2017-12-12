@@ -1,5 +1,6 @@
 {
     "pages": [
+        "pages/camera/camera",
         "pages/scrollView/scrollView",
         "pages/scrollviewtest/scrollviewtest",
         "pages/webView/webView",
@@ -10,7 +11,6 @@
         "pages/index/index",
         "pages/form/form",
         "pages/clock/clock",
-        "pages/camera/camera",
         "pages/testCrop/normal",
         "pages/avatarUpload/index",
         "pages/logs/logs",

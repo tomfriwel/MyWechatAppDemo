@@ -1,6 +1,0 @@
-<import src="/components/templates/test.wxml" />
-
-<button open-type="share">tap</button>
-<button bindtap='tap'>share</button>
-
-<template is="test" data="{{item}}" />

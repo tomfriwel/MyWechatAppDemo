@@ -4,8 +4,8 @@
     position: absolute;
     top: 200px;
     left: 0px;
-    width: 300px;
-    height: 300px;
+    width: 200px;
+    height: 100px;
 }
 .cover {
     width: 50px;
