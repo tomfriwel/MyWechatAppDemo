@@ -19,10 +19,10 @@ Page({
     },
 
     // 页面显示后，进行登录和链接，完成后开始启动游戏服务
-    onShow: co.wrap(function* () {
+    onShow: function() {
         
             this.login();
-    }),
+    },
 
     // 微信登录后获得用户信息
     login: function () {

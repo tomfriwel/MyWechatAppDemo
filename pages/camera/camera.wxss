@@ -2,10 +2,10 @@
 
 .camera {
     position: absolute;
-    top: 200px;
+    top: 300px;
     left: 0px;
-    width: 200px;
-    height: 100px;
+    width: 300px;
+    height: 200px;
 }
 .cover {
     width: 50px;

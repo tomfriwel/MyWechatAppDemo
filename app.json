@@ -1,10 +1,11 @@
 {
     "pages": [
+        "pages/test/test",
+        "pages/canvas/canvas",
         "pages/camera/camera",
         "pages/scrollView/scrollView",
         "pages/scrollviewtest/scrollviewtest",
         "pages/webView/webView",
-        "pages/test/test",
         "pages/wxPay/wxPay",
         "pages/iBeacon/iBeacon",
         "pages/component/component",
@@ -21,7 +22,6 @@
         "pages/imagePreview/imagePreview",
         "pages/mega/mega",
         "pages/megaNoteEditor/megaNoteEditor",
-        "pages/canvas/canvas",
         "pages/action/action",
         "pages/tabbar/tabbar"
     ],

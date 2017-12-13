@@ -32,10 +32,17 @@ Page({
             quality:'high',
             success : function(res){
                 console.log(res)
+                var path = res.tempImagePath
                 // wx.showModal({
                 //     title: '',
                 //     content: res.tempImagePath,
                 // })
+                wx.getImageInfo({
+                    src: path,
+                    complete:function(res){
+                        console.log(res)
+                    }
+                })
                 wx.previewImage({
                     urls: [res.tempImagePath],
                 })
