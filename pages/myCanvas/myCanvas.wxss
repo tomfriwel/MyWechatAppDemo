@@ -1,0 +1,8 @@
+/* pages/myCanvas/myCanvas.wxss */
+
+.canvas {
+    margin: 10rpx;
+    width: 666rpx;
+    height: 666rpx;
+    border: 1px solid black;
+}

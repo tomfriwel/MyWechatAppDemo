@@ -1,0 +1,8 @@
+<!--pages/snow/snow.wxml-->
+<scroll-view class='snow_container'>
+    <canvas class='snow canvas1' canvas-id='myCanvas1'></canvas>
+    <canvas class='snow canvas2' canvas-id='myCanvas2'></canvas>
+    <canvas class='snow canvas3' canvas-id='myCanvas3'></canvas>
+    <canvas class='snow canvas4' canvas-id='myCanvas3'></canvas>
+    <!-- <view class='title'>Merry Christmas</view> -->
+</scroll-view>

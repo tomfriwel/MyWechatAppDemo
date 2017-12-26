@@ -1,6 +1,8 @@
 {
     "pages": [
+        "pages/snow/snow",
         "pages/test/test",
+        "pages/myCanvas/myCanvas",
         "pages/canvas/canvas",
         "pages/camera/camera",
         "pages/scrollView/scrollView",

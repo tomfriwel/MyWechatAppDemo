@@ -1,0 +1,28 @@
+/* pages/snow/snow.wxss */
+.snow_container {
+    position: relative;
+    margin: 0 auto;
+    /* width: 600rpx;
+    height: 600rpx; */
+    width: 750rpx;
+    height: 100vh;
+    background: #9BA9CA;
+}
+.snow {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0);
+    display: block;
+}
+
+.title {
+    text-align: center;
+    color: white;
+    font-style: italic;
+    line-height: 100vh;
+    font-size: 29px;
+    font-weight: 500;
+}
