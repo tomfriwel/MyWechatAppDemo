@@ -5,3 +5,9 @@
 ### component
 
 * 组件样式不会传递到父级，即组件定义了`class=inner`的`wxss`，父级有同样的`class`并不会造成影响。即 组件对应 `wxss` 文件的样式，只对组件wxml内的节点生效
+
+### pages
+
+#### snow
+
+![Snow Screen Shot 2017-12-26 at 10.45.58.png](http://upload-images.jianshu.io/upload_images/2158535-bb2d3cdcbaa723f9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/300)
