@@ -2,7 +2,7 @@ import weCropper from '../../utils/weCropper.js'
 import smartcrop from '../../utils/smartcrop.js'
 const device = wx.getSystemInfoSync()
 
-console.log(smartcrop)
+// console.log(smartcrop)
 
 var w = device.windowWidth
 var h = 54 / 85.6 * device.windowWidth

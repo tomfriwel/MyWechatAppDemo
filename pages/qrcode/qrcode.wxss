@@ -1,7 +1,20 @@
 /* pages/qrcode/qrcode.wxss */
-
+.input-wrapper {
+    margin-top: 40rpx;
+    height: 88rpx;
+    border-top: 2rpx solid black;
+    border-bottom: 2rpx solid black;
+    padding-left: 40rpx;
+    padding-right: 40rpx;
+}
+.input-wrapper input {
+    font-size: 32rpx;
+    line-height: 88rpx;
+    height: 100%;
+}
 .canvas {
-    width: 128px;
-    height: 128px;
-    border: 1px solid black;
+    margin: 220rpx auto;
+    width: 150px;
+    height: 150px;
+    /* border: 1px solid black; */
 }
