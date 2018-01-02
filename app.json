@@ -1,10 +1,12 @@
 {
     "pages": [
-        "pages/snow/snow",
+        "pages/qrcode/qrcode",
         "pages/test/test",
-        "pages/myCanvas/myCanvas",
-        "pages/canvas/canvas",
+        "pages/hollowOutCover/hollowOutCover",
         "pages/camera/camera",
+        "pages/canvas/canvas",
+        "pages/myCanvas/myCanvas",
+        "pages/snow/snow",
         "pages/scrollView/scrollView",
         "pages/scrollviewtest/scrollviewtest",
         "pages/webView/webView",

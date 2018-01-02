@@ -1,0 +1,32 @@
+/* pages/hollowOutCover/hollowOutCover.wxss */
+.class2 {
+    /* position: absolute; */
+    margin: -110rpx auto;
+    width: 670rpx;
+    height: 440rpx;
+    border-radius: 40rpx;
+    border: 4rpx dashed red;
+    box-shadow: 0 0 0 1366rpx rgba(0, 0, 0, 0.6);
+}
+
+.class3 {
+    margin: 0 auto;
+    width: 200px;
+    height: 100px;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    border-radius: 10px;
+    border-left-width: 20px;
+    border-left-style: solid;
+    border-left-color: rgba(255, 0, 0, 0.6);
+    border-right-width: 20px;
+    border-right-style: solid;
+    border-right-color: rgba(0, 255, 0, 0.6);
+    border-top-width: 20px;
+    border-top-style: solid;
+    border-top-color: rgba(0, 0, 255, 0.6);
+    border-bottom-width: 20px;
+    border-bottom-style: solid;
+    border-bottom-color: rgba(0, 255, 255, 0.6);
+}

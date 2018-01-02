@@ -1,11 +1,11 @@
 
-<!-- <view class="single_discount_coupon_container">
+ <!-- <view class="single_discount_coupon_container">
     <view class='corner left_top'></view>
     <view class='corner right_top'></view>
     <view class='corner left_bottom'></view>
     <view class='corner right_bottom'></view>
-</view> -->
+</view>  -->
+
+<view></view>
 
 
- <view class='class3'></view> 
-<view class="class2"></view>  

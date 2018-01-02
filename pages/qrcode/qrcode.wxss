@@ -1,0 +1,7 @@
+/* pages/qrcode/qrcode.wxss */
+
+.canvas {
+    width: 128px;
+    height: 128px;
+    border: 1px solid black;
+}
