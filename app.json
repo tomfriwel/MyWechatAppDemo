@@ -1,5 +1,6 @@
 {
     "pages": [
+        "pages/map/map",
         "pages/qrcode/qrcode",
         "pages/test/test",
         "pages/hollowOutCover/hollowOutCover",
@@ -20,14 +21,14 @@
         "pages/avatarUpload/index",
         "pages/logs/logs",
         "pages/userInfo/userInfo",
-        "pages/map/map",
         "pages/card/card",
         "pages/block/block",
         "pages/imagePreview/imagePreview",
         "pages/mega/mega",
         "pages/megaNoteEditor/megaNoteEditor",
         "pages/action/action",
-        "pages/tabbar/tabbar"
+        "pages/tabbar/tabbar",
+        "pages/login/login"
     ],
     "tabBar": {
         "color": "#333",
