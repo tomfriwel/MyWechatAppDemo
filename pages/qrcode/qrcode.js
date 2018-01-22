@@ -2,7 +2,7 @@
 
 var QRCode = require('../../utils/qrcode.js')
 
-console.log(QRCode)
+// console.log(QRCode)
 
 // var qrcode = new QRCode(document.getElementById("qrcode"), {
 //     text: "http://jindo.dev.naver.com/collie",
