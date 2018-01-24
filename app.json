@@ -67,8 +67,7 @@
         "backgroundTextStyle": "dark",
         "navigationBarBackgroundColor": "#333",
         "navigationBarTitleText": "tomfriwel",
-        "navigationBarTextStyle": "white",
-        "enablePullDownRefresh": true
+        "navigationBarTextStyle": "white"
     },
     "networkTimeout": {
         "request": 10000,
