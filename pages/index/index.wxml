@@ -1,39 +1,39 @@
 <!--index.wxml-->
 <scroll-view class="main_scroll_view" scroll-y bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll" scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
-  <navigator url="/pages/userInfo/userInfo" class="scroll-view-item" hover-class="scroll-view-item-hover">
-    <text>userInfo</text>
-    <view class="scroll-view-item-line"></view>
-  </navigator>
-  <navigator url="/pages/map/map" class="scroll-view-item" hover-class="scroll-view-item-hover">
-    <text>map</text>
-    <view class="scroll-view-item-line"></view>
-  </navigator>
-  <navigator url="/pages/card/card" class="scroll-view-item" hover-class="scroll-view-item-hover">
-    <text>card</text>
-    <view class="scroll-view-item-line"></view>
-  </navigator>
-  <navigator url="/pages/action/action" class="scroll-view-item" hover-class="scroll-view-item-hover">
-    <text>action</text>
-    <view class="scroll-view-item-line"></view>
-  </navigator>
-  <navigator url="/pages/block/block" class="scroll-view-item" hover-class="scroll-view-item-hover">
-    <text>block</text>
-    <view class="scroll-view-item-line"></view>
-  </navigator>
-  <navigator url="/pages/mega/mega" class="scroll-view-item" hover-class="scroll-view-item-hover">
-    <text>mega</text>
-    <view class="scroll-view-item-line"></view>
-  </navigator>
-  <navigator url="/pages/canvas/canvas" class="scroll-view-item" hover-class="scroll-view-item-hover">
-    <text>canvas</text>
-    <view class="scroll-view-item-line"></view>
-  </navigator>
-  <navigator url="/pages/tabbar/tabbar" class="scroll-view-item" hover-class="scroll-view-item-hover">
-    <text>tabbar</text>
-    <view class="scroll-view-item-line"></view>
-  </navigator>
-  <navigator url="/pages/webView/webView" class="scroll-view-item" hover-class="scroll-view-item-hover">
-    <text>webView</text>
-    <view class="scroll-view-item-line"></view>
-  </navigator>
+    <navigator url="/pages/userInfo/userInfo" class="scroll-view-item" hover-class="scroll-view-item-hover">
+        <text>userInfo</text>
+        <view class="scroll-view-item-line"></view>
+    </navigator>
+    <navigator url="/pages/map/map" class="scroll-view-item" hover-class="scroll-view-item-hover">
+        <text>map</text>
+        <view class="scroll-view-item-line"></view>
+    </navigator>
+    <navigator url="/pages/card/card" class="scroll-view-item" hover-class="scroll-view-item-hover">
+        <text>card</text>
+        <view class="scroll-view-item-line"></view>
+    </navigator>
+    <navigator url="/pages/action/action" class="scroll-view-item" hover-class="scroll-view-item-hover">
+        <text>action</text>
+        <view class="scroll-view-item-line"></view>
+    </navigator>
+    <navigator url="/pages/block/block" class="scroll-view-item" hover-class="scroll-view-item-hover">
+        <text>block</text>
+        <view class="scroll-view-item-line"></view>
+    </navigator>
+    <navigator url="/pages/mega/mega" class="scroll-view-item" hover-class="scroll-view-item-hover">
+        <text>mega</text>
+        <view class="scroll-view-item-line"></view>
+    </navigator>
+    <navigator url="/pages/canvas/canvas" class="scroll-view-item" hover-class="scroll-view-item-hover">
+        <text>canvas</text>
+        <view class="scroll-view-item-line"></view>
+    </navigator>
+    <navigator url="/pages/tabbar/tabbar" class="scroll-view-item" hover-class="scroll-view-item-hover">
+        <text>tabbar</text>
+        <view class="scroll-view-item-line"></view>
+    </navigator>
+    <navigator url="/pages/webView/webView" class="scroll-view-item" hover-class="scroll-view-item-hover">
+        <text>webView</text>
+        <view class="scroll-view-item-line"></view>
+    </navigator>
 </scroll-view>

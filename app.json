@@ -1,8 +1,10 @@
 {
     "pages": [
+        "pages/launchPage/launchPage",
+        "pages/login/login",
+        "pages/test/test",
         "pages/map/map",
         "pages/qrcode/qrcode",
-        "pages/test/test",
         "pages/hollowOutCover/hollowOutCover",
         "pages/camera/camera",
         "pages/canvas/canvas",
@@ -27,8 +29,7 @@
         "pages/mega/mega",
         "pages/megaNoteEditor/megaNoteEditor",
         "pages/action/action",
-        "pages/tabbar/tabbar",
-        "pages/login/login"
+        "pages/tabbar/tabbar"
     ],
     "tabBar": {
         "color": "#333",

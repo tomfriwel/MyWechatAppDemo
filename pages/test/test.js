@@ -31,4 +31,9 @@ Page({
         // const { nickName, avatarUrl } = userInfo.userInfo;
         // this.setData({ myName: nickName, myAvatar: avatarUrl })
     },
+    toNextPageHandler:function() {
+        wx.navigateTo({
+            url: '/pages/scrollView/scrollView',
+        })
+    }
 });

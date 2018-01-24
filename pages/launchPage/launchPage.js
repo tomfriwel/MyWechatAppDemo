@@ -1,4 +1,4 @@
-// pages/login/login.js
+// pages/launchPage/launchPage.js
 
 const app = getApp()
 
@@ -15,14 +15,14 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        console.log('login onLoad:' + (new Date()).getTime())
+        console.log('launchPage onLoad:' + (new Date()).getTime())
     },
 
     /**
      * 生命周期函数--监听页面初次渲染完成
      */
     onReady: function () {
-        console.log('login onReady:' + (new Date()).getTime())
+        console.log('launchPage onReady:' + (new Date()).getTime())
         app.loginCallback = function () {
             console.log('page callback')
         }
@@ -32,7 +32,7 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
-        console.log('login onShow:' + (new Date()).getTime())
+        console.log('launchPage onShow:' + (new Date()).getTime())
     },
 
     /**

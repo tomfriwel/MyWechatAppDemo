@@ -3,8 +3,6 @@
 // var myBehavior = require('../anotherComponent/anotherComponent.js')
 
 var myBehavior = require('../anotherComponent/lala.js')
-console.log("myBehavior")
-console.log(myBehavior)
 
 Component({
     behaviors:[myBehavior],
