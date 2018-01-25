@@ -6,7 +6,6 @@
     <view class='corner right_bottom'></view>
 </view>  -->
 
-<button bindtap='toNextPageHandler'>to next page</button>
 
 
 

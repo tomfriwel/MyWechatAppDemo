@@ -1,5 +1,6 @@
 {
     "pages": [
+        "pages/throttle/throttle",
         "pages/launchPage/launchPage",
         "pages/login/login",
         "pages/test/test",
