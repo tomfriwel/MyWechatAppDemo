@@ -8,13 +8,17 @@
 
 ### pages
 
-#### snow
+#### snow:
 
 ![Snow Screen Shot 2017-12-26 at 10.45.58.png](http://upload-images.jianshu.io/upload_images/2158535-bb2d3cdcbaa723f9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/300)
 
 
-#### qrcode
+#### qrcode:
 
 > 核心代码来自 https://github.com/davidshimjs/qrcodejs
 
-![]()
+
+#### throttle(函数节流):
+
+> 核心代码来自 https://mp.weixin.qq.com/s/3FZJ0nQLhj9PCi0pfBjc9A
+
