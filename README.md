@@ -22,3 +22,5 @@
 
 > 核心代码来自 https://mp.weixin.qq.com/s/3FZJ0nQLhj9PCi0pfBjc9A
 
+#### promise简化回调
+
