@@ -1,7 +1,8 @@
 {
     "pages": [
-        "pages/throttle/throttle",
+        "pages/promisePage/promisePage",
         "pages/launchPage/launchPage",
+        "pages/throttle/throttle",
         "pages/login/login",
         "pages/test/test",
         "pages/map/map",

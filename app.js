@@ -79,7 +79,7 @@ App({
             if (callback) {
                 callback()
             }
-        }, 1000)
+        }, 0)
     },
     globalData: {
         userInfo: null
