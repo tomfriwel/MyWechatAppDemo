@@ -1,0 +1,3 @@
+<template name="canvasTemplate">
+    <canvas canvas-id='test' class='canvas' style="width:{{w}}px; height:{{h}}px;"></canvas>
+</template>

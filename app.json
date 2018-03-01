@@ -1,5 +1,6 @@
 {
     "pages": [
+        "pages/component/component",
         "pages/promisePage/promisePage",
         "pages/launchPage/launchPage",
         "pages/throttle/throttle",
@@ -17,7 +18,6 @@
         "pages/webView/webView",
         "pages/wxPay/wxPay",
         "pages/iBeacon/iBeacon",
-        "pages/component/component",
         "pages/index/index",
         "pages/form/form",
         "pages/clock/clock",

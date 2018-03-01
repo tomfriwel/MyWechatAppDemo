@@ -1,7 +1,8 @@
 <!--pages/component/component.wxml-->
 <view>
     <view class='button' bindtap='showComponentHandler'>隐藏组件</view>
-
+    <canvasComponent>
+    </canvasComponent>
     <anotherComponent>
     </anotherComponent>
     <block wx:if="{{showComponent}}">
