@@ -25,6 +25,7 @@ Page({
         z.onDeviceFound()
         z.onAdapterStateChange()
         z.onConnectionStateChange()
+        z.onCharacteristicValueChange()
 
         wx.openBluetoothAdapter({
             success: function (res) {
@@ -112,7 +113,7 @@ Page({
             })
 
             if (device.hasOwnProperty('advertisData')) {
-                console.log(device.name)
+                console.log(device.name +'.advertisData:')
                 console.log(ab2hex(device.advertisData))
             }
         })
@@ -122,12 +123,29 @@ Page({
         wx.onBLEConnectionStateChange(function (res) {
             // 该方法回调中可以用于处理连接意外断开等异常情况
             console.log(`device ${res.deviceId} state has changed, connected: ${res.connected}`)
+            
             if (res.connected) {
+                z.setData({
+                    selectedDeviceId: res.deviceId
+                })
                 z.getInfo(res.deviceId)
+            }
+            else {
+                z.setData({
+                    selectedDeviceId: null
+                })
             }
         })
     },
+    onCharacteristicValueChange: function() {
+        // 必须在这里的回调才能获取
+        wx.onBLECharacteristicValueChange(function (characteristic) {
+            console.log('characteristic value comed:', characteristic)
+            console.log(ab2hex(characteristic.value))
+        })
+    },
     getInfo: function (deviceId) {
+        const z = this
         wx.getBLEDeviceServices({
             // 这里的 deviceId 需要已经通过 createBLEConnection 与对应设备建立链接 
             deviceId: deviceId,
@@ -136,16 +154,38 @@ Page({
                 let services = res.services
                 for (let index in services) {
                     let service = services[index]
-                    wx.getBLEDeviceCharacteristics({
-                        // 这里的 deviceId 需要已经通过 createBLEConnection 与对应设备建立链接
-                        deviceId: deviceId,
-                        // 这里的 serviceId 需要在上面的 getBLEDeviceServices 接口中获取
-                        serviceId: service.uuid,
-                        success: function (res) {
-                            console.log('device getBLEDeviceCharacteristics:', res.characteristics)
-                        }
-                    })
+                    z.getCharacteristicsInfo(deviceId, service.uuid)
                 }
+            }
+        })
+    },
+    getCharacteristicsInfo: function (deviceId, serviceId) {
+        const z = this
+        wx.getBLEDeviceCharacteristics({
+            // 这里的 deviceId 需要已经通过 createBLEConnection 与对应设备建立链接
+            deviceId: deviceId,
+            // 这里的 serviceId 需要在上面的 getBLEDeviceServices 接口中获取
+            serviceId: serviceId,
+            success: function (res) {
+                // console.log('device getBLEDeviceCharacteristics:', res.characteristics)
+                let characteristics = res.characteristics
+                for(let index in characteristics) {
+                    let characteristic = characteristics[index]
+                    z.readCharacteristicValue(deviceId, serviceId, characteristic.uuid)
+                }
+            }
+        })
+    },
+    readCharacteristicValue: function (deviceId, serviceId, characteristicId) {
+        wx.readBLECharacteristicValue({
+            // 这里的 deviceId 需要已经通过 createBLEConnection 与对应设备建立链接  [**new**]
+            deviceId: deviceId,
+            // 这里的 serviceId 需要在上面的 getBLEDeviceServices 接口中获取
+            serviceId: serviceId,
+            // 这里的 characteristicId 需要在上面的 getBLEDeviceCharacteristics 接口中获取
+            characteristicId: characteristicId,
+            success: function (res) {
+                console.log('readBLECharacteristicValue:', res.errCode)
             }
         })
     }
