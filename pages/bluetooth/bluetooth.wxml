@@ -1,0 +1,2 @@
+<!--pages/bluetooth/bluetooth.wxml-->
+<button wx:for="{{devices}}">{{item.RSSI + ':' +item.name}}</button>
