@@ -47,7 +47,7 @@ Page({
         }
         return {
             title: '自定义转发标题',
-            path: '/pages/wxShareTo/wxShareTo?id=123',
+            path: '/pages/wxShareTo/wxShareTo?id=123123',
             success: function (res) {
                 // 转发成功
                 console.log(res)
