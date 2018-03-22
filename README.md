@@ -18,9 +18,14 @@
 > 核心代码来自 https://github.com/davidshimjs/qrcodejs
 
 
-#### throttle(函数节流):
+#### throttle:函数节流
 
 > 核心代码来自 https://mp.weixin.qq.com/s/3FZJ0nQLhj9PCi0pfBjc9A
 
-#### promise简化回调
+#### promise:简化回调
+
+
+#### wxApiTest:转发
+
+获取`openGId`(群对小程序的id)
 
