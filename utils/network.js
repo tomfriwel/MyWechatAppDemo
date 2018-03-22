@@ -56,19 +56,25 @@ function post(options) {
         success: function (res) {
             console.log(res)
             // res.data.code = 1101
-            if (res.statusCode == 200 && res.data.code == 1000) {
+            // if (res.statusCode == 200 && res.data.code == 1000) {
+            //     if (success) {
+            //         success(res.data)
+            //     }
+            // }
+            // else if (res.statusCode == 200 && res.data.code == 1101) {
+            //     if (fail) {
+            //         fail(res.data)
+            //     }
+            // }
+            // else if (res.statusCode == 200 && res.data.code) {
+            //     if (fail) {
+            //         fail(res.data)
+            //     }
+            // }
+
+            if (res.statusCode == 200) {
                 if (success) {
                     success(res.data)
-                }
-            }
-            else if (res.statusCode == 200 && res.data.code == 1101) {
-                if (fail) {
-                    fail(res.data)
-                }
-            }
-            else if (res.statusCode == 200 && res.data.code) {
-                if (fail) {
-                    fail(res.data)
                 }
             }
             else {

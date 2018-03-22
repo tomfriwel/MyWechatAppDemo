@@ -1,17 +1,21 @@
-const SERVER_URL = 'http://blog.tomfriwel.'
+const app = getApp()
+const apiconfig = require('./apiconfig.js')
+const serverUrl = apiconfig.serverUrl
 
 function makeUrl(apiUrl) {
-    return SERVER_URL + apiUrl
+    return serverUrl + apiUrl
 }
 
-const user = {
-    getUserInfo: ''
+const wechat = {
+    getUserInfo: '/wechat/getUserInfo',
+    login:'/wechat/login',
+    getDecodeEncryptedData:'/wechat/getDecodeEncryptedData'
 }
-
 
 module.exports = {
-    serverUrl: SERVER_URL,
-    user: {
-        getUserInfo: makeUrl(user.getUserInfo)
+    serverUrl: serverUrl,
+    wechat: {
+        login: makeUrl(wechat.login),
+        getDecodeEncryptedData: makeUrl(wechat.getDecodeEncryptedData)
     }
 }

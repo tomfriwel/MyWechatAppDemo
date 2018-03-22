@@ -1,2 +1,3 @@
 <!--pages/wxApiTest/wxApiTest.wxml-->
-<button>123</button>
+<button bindtap='login'>wx.login</button>
+<button open-type="share">share</button>

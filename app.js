@@ -3,12 +3,16 @@
 const network = require('./utils/network.js')
 const doubanApi = require('./utils/douban_api.js')
 
+const networkp = require('./utils/networkp.js')
+const api = require('./utils/api.js')
+
 let isNormal = true
 const launchPath = 'pages/launchPage/launchPage'
 
 App({
     onLaunch: function (options) {
         console.log('app onLaunch:' + (new Date()).getTime())
+        console.log(options)
         const z = this
 
         let { scene, path, query } = options
@@ -23,8 +27,17 @@ App({
         logs.unshift(Date.now())
         wx.setStorageSync('logs', logs)
     },
-    onShow: function () {
+    onShow: function (options) {
         console.log('app onShow:' + (new Date()).getTime())
+        console.log(options)
+        let scene = options.scene
+
+        // 带 shareTicket 的小程序消息卡片
+        if(scene == 1044) {
+            let shareTicket = options.shareTicket
+            let id = options.query.id
+            this.getShareInfo(shareTicket)
+        }
     },
     setupLogin: function () {
         console.log('setupLogin:' + (new Date()).getTime())
@@ -81,7 +94,47 @@ App({
             }
         }, 0)
     },
+    getShareInfo: function (shareTicket) {
+        const z = this
+        wx.getShareInfo({
+            shareTicket: shareTicket,
+            success: function (res) {
+                console.log(res)
+                let {encryptedData, iv} = res
+
+                if(encryptedData && iv) {
+                    z.getDecodeEncryptedData(encryptedData, iv)
+                }
+            },
+            fail: function (res) {
+                console.log(res)
+            }
+        })
+    },
+    getDecodeEncryptedData: function (encryptedData, iv) {
+        wx.login({
+            success: function (res) {
+                if (res.code) {
+                    networkp.post({
+                        url: api.wechat.getDecodeEncryptedData,
+                        data: {
+                            code: res.code,
+                            encryptedData: encryptedData,
+                            iv: iv
+                        }
+                    }).then(data => {
+                        console.log(data)
+                    }).catch(res => {
+
+                    })
+                } else {
+                    console.log('登录失败！' + res.errMsg)
+                }
+            }
+        });
+    },
     globalData: {
-        userInfo: null
+        userInfo: null,
+        loginData:{}
     }
 })

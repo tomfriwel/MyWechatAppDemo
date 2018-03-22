@@ -34,7 +34,8 @@
         "pages/megaNoteEditor/megaNoteEditor",
         "pages/action/action",
         "pages/tabbar/tabbar",
-        "pages/classPage/classPage"
+        "pages/classPage/classPage",
+        "pages/wxShareTo/wxShareTo"
     ],
     "tabBar": {
         "color": "#333",
