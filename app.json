@@ -1,5 +1,6 @@
 {
     "pages": [
+        "pages/wxApiTest/wxApiTest",
         "pages/bluetooth/bluetooth",
         "pages/component/component",
         "pages/promisePage/promisePage",

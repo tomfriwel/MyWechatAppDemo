@@ -1,5 +1,5 @@
 // pages/wxPay/wxPay.js
-var api = require("../../utils/api.js")
+var network = require("../../utils/network.js")
 
 Page({
     data: {
@@ -14,7 +14,7 @@ Page({
                 var code = res.result
                 console.log(code)
 
-                api.post("http://wx.jue.so/pay/testMicroPay.php", {"auth_code":code}, {}, function(res){
+                network.post("http://wx.jue.so/pay/testMicroPay.php", {"auth_code":code}, {}, function(res){
                     console.lo
                     console.log(res)
                 }, function (res) {
