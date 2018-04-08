@@ -8,6 +8,7 @@ const api = require('./utils/api.js')
 
 let isNormal = true
 const launchPath = 'pages/launchPage/launchPage'
+let scene = null
 
 App({
     onLaunch: function (options) {
@@ -21,16 +22,12 @@ App({
             isNormal = false
         }
 
-
-        //调用API从本地缓存中获取数据
-        var logs = wx.getStorageSync('logs') || []
-        logs.unshift(Date.now())
-        wx.setStorageSync('logs', logs)
+        z.addUser()
     },
     onShow: function (options) {
         console.log('app onShow:' + (new Date()).getTime())
         console.log(options)
-        let scene = options.scene
+        scene = options.scene
 
         // 带 shareTicket 的小程序消息卡片
         if(scene == 1044) {
@@ -112,6 +109,7 @@ App({
         })
     },
     getDecodeEncryptedData: function (encryptedData, iv) {
+        const z = this
         wx.login({
             success: function (res) {
                 if (res.code) {
@@ -122,8 +120,12 @@ App({
                             encryptedData: encryptedData,
                             iv: iv
                         }
-                    }).then(data => {
-                        console.log(data)
+                    }).then(res => {
+                        console.log('获取openGId结果：')
+                        console.log(res)
+                        if(res.openGId) {
+                            z.bindGroupAndUser(res.openGId)
+                        }
                     }).catch(res => {
 
                     })
@@ -133,8 +135,82 @@ App({
             }
         });
     },
+    addUser:function() {
+        wx.getUserInfo({
+            success: function (res) {
+                var userInfo = res.userInfo
+                var nickName = userInfo.nickName
+                var avatarUrl = userInfo.avatarUrl
+                var gender = userInfo.gender //性别 0：未知、1：男、2：女
+                var province = userInfo.province
+                var city = userInfo.city
+                var country = userInfo.country
+
+                wx.login({
+                    success: res=> {
+                        if (res.code) {
+                            networkp.post({
+                                url: api.wechat.addUser,
+                                data: {
+                                    code: res.code,
+                                    nickName: nickName,
+                                    avatarUrl: avatarUrl
+                                }
+                            }).then(data => {
+                                console.log('成功添加用户信息')
+                                console.log(data)
+                            }).catch(res => {
+
+                            })
+                        }
+                    }
+                })
+            }
+        })
+    },
+    bindGroupAndUser: function(openGId) {
+        const z = this
+        wx.login({
+            success: res=>{
+                if (res.code) {
+                    networkp.post({
+                        url: api.wechat.bindGroupAndUser,
+                        data: {
+                            code: res.code,
+                            openGId: openGId
+                        }
+                    }).then(data => {
+                        console.log('成功绑定群与群成员关系')
+                        console.log(data)
+
+                        if (scene && scene == 1044) {
+                            networkp.post({
+                                url: api.wechat.getGroupUserList,
+                                data: {
+                                    openGId: openGId,
+                                }
+                            }).then(data => {
+                                console.log('list')
+                                console.log(data)
+
+                                console.log('call listCallback')
+                                if (z.listCallback) {
+                                    z.listCallback(data)
+                                }
+                            }).catch(res => {
+
+                            })
+                        }
+                    }).catch(res => {
+
+                    })
+                }
+            }
+        })
+    },
     globalData: {
         userInfo: null,
-        loginData:{}
+        loginData:{},
+        list:null
     }
 })

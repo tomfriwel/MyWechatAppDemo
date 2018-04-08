@@ -1,1 +1,15 @@
 /* pages/wxShareTo/wxShareTo.wxss */
+.group-item {
+    width: 100%;
+    height: 88rpx;
+}
+
+.avatar {
+    float: left;
+    width: 66rpx;
+    height: 66rpx;
+}
+
+.nick-name {
+    float: left;
+}

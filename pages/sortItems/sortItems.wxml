@@ -1,0 +1,6 @@
+<!--pages/sortItems/sortItems.wxml-->
+<movable-area class='area'>
+    <movable-view wx:for="{{items}}" wx:key='item' class="item {{item.selected?'selected':''}}" x='{{item.x-len/2}}' y='{{item.y-len/2}}' direction="all" bindtouchstart='onStart' bindtouchend="onEnd" data-index='{{index}}'>{{item.key}}</movable-view>
+</movable-area>
+
+<!-- <button class='btn' bindtap='reSort'>resort</button> -->

@@ -51,8 +51,10 @@ Page({
             success: function (res) {
                 // 转发成功
                 console.log(res)
+                console.log(res.groupMsgInfos)
+                console.log(res.shareTickets)
                 // 只有转发到群聊中打开才可以获取到 shareTickets 返回值，单聊没有 shareTickets
-                if (res.shareTickets.length>0) {
+                if (res.shareTickets && res.shareTickets.length>0) {
                     app.getShareInfo(res.shareTickets[0])
                 }
             },

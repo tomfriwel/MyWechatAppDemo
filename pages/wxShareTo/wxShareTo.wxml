@@ -1,2 +1,5 @@
 <!--pages/wxShareTo/wxShareTo.wxml-->
-<text>pages/wxShareTo/wxShareTo.wxml</text>
+<view wx:for="{{list}}" wx:key="item" class='group-item'>
+    <image class='avatar' src="{{item.avatarUrl}}"></image>
+    <view class='nick-name'>{{item.nickName}}</view>
+</view>
