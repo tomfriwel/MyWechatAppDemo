@@ -29,3 +29,5 @@
 
 获取`openGId`(群对小程序的id)
 
+#### sortItems:拖拽排序
+
