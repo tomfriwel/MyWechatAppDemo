@@ -31,3 +31,5 @@
 
 #### sortItems:拖拽排序
 
+#### bluetooth:蓝牙
+

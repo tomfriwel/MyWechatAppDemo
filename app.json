@@ -1,8 +1,8 @@
 {
     "pages": [
+        "pages/bluetooth/bluetooth",
         "pages/sortItems/sortItems",
         "pages/wxApiTest/wxApiTest",
-        "pages/bluetooth/bluetooth",
         "pages/component/component",
         "pages/promisePage/promisePage",
         "pages/launchPage/launchPage",

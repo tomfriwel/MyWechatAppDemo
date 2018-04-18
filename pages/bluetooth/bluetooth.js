@@ -12,6 +12,11 @@ function ab2hex(buffer) {
     return hexArr.join('');
 }
 
+// 这里只是搜索指定的service，如果要搜索其他的可以把用到下面这三个值进行判断的地方去掉
+const SERVICE_UUID = "CDD1"
+const CHARACTERISTIC_READ_UUID = "CDD2"
+const CHARACTERISTIC_WRITE_UUID = "CDD3"
+
 Page({
     data: {
         devices:[],
@@ -44,6 +49,7 @@ Page({
         })
         // 以微信硬件平台的蓝牙智能灯为例，主服务的 UUID 是 FEE7。传入这个参数，只搜索主服务 UUID 为 FEE7 的设备
         wx.startBluetoothDevicesDiscovery({
+            services:[SERVICE_UUID],
             success: function (res) {
                 console.log(res)
             }
@@ -140,8 +146,8 @@ Page({
     onCharacteristicValueChange: function() {
         // 必须在这里的回调才能获取
         wx.onBLECharacteristicValueChange(function (characteristic) {
-            console.log('characteristic value comed:', characteristic)
-            console.log(ab2hex(characteristic.value))
+            // console.log('characteristic value comed:', characteristic)
+            console.log('onBLECharacteristicValueChange='+ab2hex(characteristic.value))
         })
     },
     getInfo: function (deviceId) {
@@ -154,7 +160,15 @@ Page({
                 let services = res.services
                 for (let index in services) {
                     let service = services[index]
-                    z.getCharacteristicsInfo(deviceId, service.uuid)
+
+                    if (service.uuid.indexOf(SERVICE_UUID)>-1) {
+                        z.getCharacteristicsInfo(deviceId, service.uuid)
+                    }
+                    else {
+                        console.log('not equal')
+                        console.log(service.uuid)
+                        console.log(ab2hex(SERVICE_UUID))
+                    }
                 }
             }
         })
@@ -171,7 +185,26 @@ Page({
                 let characteristics = res.characteristics
                 for(let index in characteristics) {
                     let characteristic = characteristics[index]
-                    z.readCharacteristicValue(deviceId, serviceId, characteristic.uuid)
+
+                    if(characteristic.uuid.indexOf(CHARACTERISTIC_READ_UUID)) {
+                        z.readCharacteristicValue(deviceId, serviceId, characteristic.uuid)
+
+                        wx.notifyBLECharacteristicValueChange({
+                            state: true, // 启用 notify 功能
+                            // 这里的 deviceId 需要已经通过 createBLEConnection 与对应设备建立链接  
+                            deviceId: deviceId,
+                            // 这里的 serviceId 需要在上面的 getBLEDeviceServices 接口中获取
+                            serviceId: serviceId,
+                            // 这里的 characteristicId 需要在上面的 getBLEDeviceCharacteristics 接口中获取
+                            characteristicId: characteristic.uuid,
+                            success: function (res) {
+                                console.log('notifyBLECharacteristicValueChange success', res.errMsg)
+                            }
+                        })
+                    }
+                    else {
+                        console.log('char not equal')
+                    }
                 }
             }
         })
