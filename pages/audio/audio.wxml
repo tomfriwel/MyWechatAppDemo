@@ -1,0 +1,2 @@
+<!--pages/audio/audio.wxml-->
+<button bindtap='play'>play</button>
