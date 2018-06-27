@@ -1,2 +1,5 @@
 <!--card.wxml-->
-<text>card.wxml</text>
+<view>
+    <button bindtap='addCard'>addCard</button>
+    <text>需要后台开发，后台卡券接口请自行准备</text>
+</view>

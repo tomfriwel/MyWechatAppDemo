@@ -1,5 +1,6 @@
 {
     "pages": [
+        "pages/card/card",
         "pages/audio/audio",
         "pages/bluetooth/bluetooth",
         "pages/sortItems/sortItems",
@@ -29,7 +30,6 @@
         "pages/avatarUpload/index",
         "pages/logs/logs",
         "pages/userInfo/userInfo",
-        "pages/card/card",
         "pages/block/block",
         "pages/imagePreview/imagePreview",
         "pages/mega/mega",
@@ -37,7 +37,8 @@
         "pages/action/action",
         "pages/tabbar/tabbar",
         "pages/classPage/classPage",
-        "pages/wxShareTo/wxShareTo"
+        "pages/wxShareTo/wxShareTo",
+        "pages/detectfont/detectfont"
     ],
     "tabBar": {
         "color": "#333",
