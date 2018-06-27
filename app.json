@@ -1,9 +1,9 @@
 {
     "pages": [
+        "pages/sortItems/sortItems",
         "pages/card/card",
         "pages/audio/audio",
         "pages/bluetooth/bluetooth",
-        "pages/sortItems/sortItems",
         "pages/wxApiTest/wxApiTest",
         "pages/component/component",
         "pages/promisePage/promisePage",
