@@ -1,46 +1,57 @@
 var ImageFilters = {};
 ImageFilters.utils = {
-    initSampleCanvas: function () {
-        var _canvas = document.createElement('canvas'),
-            _context = _canvas.getContext('2d');
+    initSampleCanvas: function() {
+        // wx.createCanvasContext(canvasid, this)
+        var _canvas = {} //document.createElement('canvas'),
+        var _context = {} //_canvas.getContext('2d');
 
         _canvas.width = 0;
         _canvas.height = 0;
 
-        this.getSampleCanvas = function () {
+        this.getSampleCanvas = function() {
             return _canvas;
         };
-        this.getSampleContext = function () {
+        this.getSampleContext = function() {
             return _context;
         };
-        this.createImageData = (_context.createImageData) ? function (w, h) {
-            return _context.createImageData(w, h);
-        } : function (w, h) {
-            return new ImageData(w, h);
+        this.createImageData = (_context.createImageData) ? function(w, h) {
+            return {
+                data: new Uint8ClampedArray(4 * w * h),
+                width: w,
+                height: h
+            }
+            // return _context.createImageData(w, h);
+        } : function(w, h) {
+            return {
+                data: new Uint8ClampedArray(4 * w * h),
+                width: w,
+                height: h
+            }
+            // return new ImageData(w, h);
         };
     },
-    getSampleCanvas: function () {
+    getSampleCanvas: function() {
         this.initSampleCanvas();
         return this.getSampleCanvas();
     },
-    getSampleContext: function () {
+    getSampleContext: function() {
         this.initSampleCanvas();
         return this.getSampleContext();
     },
-    createImageData: function (w, h) {
+    createImageData: function(w, h) {
         this.initSampleCanvas();
         return this.createImageData(w, h);
     },
-    clamp: function (value) {
+    clamp: function(value) {
         return value > 255 ? 255 : value < 0 ? 0 : value;
     },
-    buildMap: function (f) {
+    buildMap: function(f) {
         for (var m = [], k = 0, v; k < 256; k += 1) {
             m[k] = (v = f(k)) > 255 ? 255 : v < 0 ? 0 : v | 0;
         }
         return m;
     },
-    applyMap: function (src, dst, map) {
+    applyMap: function(src, dst, map) {
         for (var i = 0, l = src.length; i < l; i += 4) {
             dst[i] = map[src[i]];
             dst[i + 1] = map[src[i + 1]];
@@ -48,10 +59,10 @@ ImageFilters.utils = {
             dst[i + 3] = src[i + 3];
         }
     },
-    mapRGB: function (src, dst, func) {
+    mapRGB: function(src, dst, func) {
         this.applyMap(src, dst, this.buildMap(func));
     },
-    getPixelIndex: function (x, y, width, height, edge) {
+    getPixelIndex: function(x, y, width, height, edge) {
         if (x < 0 || x >= width || y < 0 || y >= height) {
             switch (edge) {
                 case 1: // clamp
@@ -68,7 +79,7 @@ ImageFilters.utils = {
         }
         return (y * width + x) << 2;
     },
-    getPixel: function (src, x, y, width, height, edge) {
+    getPixel: function(src, x, y, width, height, edge) {
         if (x < 0 || x >= width || y < 0 || y >= height) {
             switch (edge) {
                 case 1: // clamp
@@ -89,20 +100,23 @@ ImageFilters.utils = {
         // ARGB
         return src[i + 3] << 24 | src[i] << 16 | src[i + 1] << 8 | src[i + 2];
     },
-    getPixelByIndex: function (src, i) {
+    getPixelByIndex: function(src, i) {
         return src[i + 3] << 24 | src[i] << 16 | src[i + 1] << 8 | src[i + 2];
     },
     /**
      * one of the most important functions in this library.
      * I want to make this as fast as possible.
      */
-    copyBilinear: function (src, x, y, width, height, dst, dstIndex, edge) {
+    copyBilinear: function(src, x, y, width, height, dst, dstIndex, edge) {
         var fx = x < 0 ? x - 1 | 0 : x | 0, // Math.floor(x)
             fy = y < 0 ? y - 1 | 0 : y | 0, // Math.floor(y)
             wx = x - fx,
             wy = y - fy,
             i,
-            nw = 0, ne = 0, sw = 0, se = 0,
+            nw = 0,
+            ne = 0,
+            sw = 0,
+            se = 0,
             cx, cy,
             r, g, b, a;
 
@@ -121,8 +135,7 @@ ImageFilters.utils = {
 
                 i += 4;
                 se = src[i + 3] << 24 | src[i] << 16 | src[i + 1] << 8 | src[i + 2];
-            }
-            else {
+            } else {
                 // no interpolation required
                 dst[dstIndex] = src[i];
                 dst[dstIndex + 1] = src[i + 1];
@@ -130,8 +143,7 @@ ImageFilters.utils = {
                 dst[dstIndex + 3] = src[i + 3];
                 return;
             }
-        }
-        else {
+        } else {
             // edge actions required
             nw = this.getPixel(src, fx, fy, width, height, edge);
 
@@ -139,8 +151,7 @@ ImageFilters.utils = {
                 ne = this.getPixel(src, fx + 1, fy, width, height, edge);
                 sw = this.getPixel(src, fx, fy + 1, width, height, edge);
                 se = this.getPixel(src, fx + 1, fy + 1, width, height, edge);
-            }
-            else {
+            } else {
                 // no interpolation required
                 dst[dstIndex] = nw >> 16 & 0xFF;
                 dst[dstIndex + 1] = nw >> 8 & 0xFF;
@@ -168,7 +179,7 @@ ImageFilters.utils = {
      * @param b 0 <= n <= 255
      * @return Array(h, s, l)
      */
-    rgbToHsl: function (r, g, b) {
+    rgbToHsl: function(r, g, b) {
         r /= 255;
         g /= 255;
         b /= 255;
@@ -187,11 +198,9 @@ ImageFilters.utils = {
             // Hue
             if (r === max) {
                 h = (g - b) / chroma + ((g < b) ? 6 : 0);
-            }
-            else if (g === max) {
+            } else if (g === max) {
                 h = (b - r) / chroma + 2;
-            }
-            else {
+            } else {
                 h = (r - g) / chroma + 4;
             }
             h /= 6;
@@ -208,7 +217,7 @@ ImageFilters.utils = {
      * @param l 0.0 <= n <= 1.0
      * @return Array(r, g, b)
      */
-    hslToRgb: function (h, s, l) {
+    hslToRgb: function(h, s, l) {
         var m1, m2, hue,
             r, g, b,
             rgb = [];
@@ -216,12 +225,10 @@ ImageFilters.utils = {
         if (s === 0) {
             r = g = b = l * 255 + 0.5 | 0;
             rgb = [r, g, b];
-        }
-        else {
+        } else {
             if (l <= 0.5) {
                 m2 = l * (s + 1);
-            }
-            else {
+            } else {
                 m2 = l + s - l * s;
             }
 
@@ -232,21 +239,17 @@ ImageFilters.utils = {
             for (var i = 0; i < 3; i += 1) {
                 if (hue < 0) {
                     hue += 1;
-                }
-                else if (hue > 1) {
+                } else if (hue > 1) {
                     hue -= 1;
                 }
 
                 if (6 * hue < 1) {
                     tmp = m1 + (m2 - m1) * hue * 6;
-                }
-                else if (2 * hue < 1) {
+                } else if (2 * hue < 1) {
                     tmp = m2;
-                }
-                else if (3 * hue < 2) {
+                } else if (3 * hue < 2) {
                     tmp = m1 + (m2 - m1) * (2 / 3 - hue) * 6;
-                }
-                else {
+                } else {
                     tmp = m1;
                 }
 
@@ -262,23 +265,23 @@ ImageFilters.utils = {
 
 
 // TODO
-ImageFilters.Translate = function (srcImageData, x, y, interpolation) {
+ImageFilters.Translate = function(srcImageData, x, y, interpolation) {
 
 };
-ImageFilters.Scale = function (srcImageData, scaleX, scaleY, interpolation) {
+ImageFilters.Scale = function(srcImageData, scaleX, scaleY, interpolation) {
 
 };
-ImageFilters.Rotate = function (srcImageData, originX, originY, angle, resize, interpolation) {
+ImageFilters.Rotate = function(srcImageData, originX, originY, angle, resize, interpolation) {
 
 };
-ImageFilters.Affine = function (srcImageData, matrix, resize, interpolation) {
+ImageFilters.Affine = function(srcImageData, matrix, resize, interpolation) {
 
 };
-ImageFilters.UnsharpMask = function (srcImageData, level) {
+ImageFilters.UnsharpMask = function(srcImageData, level) {
 
 };
 
-ImageFilters.ConvolutionFilter = function (srcImageData, matrixX, matrixY, matrix, divisor, bias, preserveAlpha, clamp, color, alpha) {
+ImageFilters.ConvolutionFilter = function(srcImageData, matrixX, matrixY, matrix, divisor, bias, preserveAlpha, clamp, color, alpha) {
     var srcPixels = srcImageData.data,
         srcWidth = srcImageData.width,
         srcHeight = srcImageData.height,
@@ -320,11 +323,9 @@ ImageFilters.ConvolutionFilter = function (srcImageData, matrixX, matrixY, matri
 
                 if (0 <= rowIndex && rowIndex < srcHeight) {
                     offset = rowIndex * srcWidth;
-                }
-                else if (clamp) {
+                } else if (clamp) {
                     offset = y * srcWidth;
-                }
-                else {
+                } else {
                     replace = true;
                 }
 
@@ -337,8 +338,7 @@ ImageFilters.ConvolutionFilter = function (srcImageData, matrixX, matrixY, matri
                         if (!(0 <= colIndex && colIndex < srcWidth)) {
                             if (clamp) {
                                 colIndex = x;
-                            }
-                            else {
+                            } else {
                                 replace = true;
                             }
                         }
@@ -348,8 +348,7 @@ ImageFilters.ConvolutionFilter = function (srcImageData, matrixX, matrixY, matri
                             g += m * clampG;
                             b += m * clampB;
                             a += m * clampA;
-                        }
-                        else {
+                        } else {
                             var p = (offset + colIndex) << 2;
                             r += m * srcPixels[p];
                             g += m * srcPixels[p + 1];
@@ -373,7 +372,7 @@ ImageFilters.ConvolutionFilter = function (srcImageData, matrixX, matrixY, matri
 /**
  * @param threshold 0.0 <= n <= 1.0
  */
-ImageFilters.Binarize = function (srcImageData, threshold) {
+ImageFilters.Binarize = function(srcImageData, threshold) {
     var srcPixels = srcImageData.data,
         srcWidth = srcImageData.width,
         srcHeight = srcImageData.height,
@@ -397,7 +396,7 @@ ImageFilters.Binarize = function (srcImageData, threshold) {
     return dstImageData;
 };
 
-ImageFilters.BlendAdd = function (srcImageData, blendImageData, dx, dy) {
+ImageFilters.BlendAdd = function(srcImageData, blendImageData, dx, dy) {
     var srcPixels = srcImageData.data,
         srcWidth = srcImageData.width,
         srcHeight = srcImageData.height,
@@ -418,7 +417,7 @@ ImageFilters.BlendAdd = function (srcImageData, blendImageData, dx, dy) {
     return dstImageData;
 };
 
-ImageFilters.BlendSubtract = function (srcImageData, blendImageData, dx, dy) {
+ImageFilters.BlendSubtract = function(srcImageData, blendImageData, dx, dy) {
     var srcPixels = srcImageData.data,
         srcWidth = srcImageData.width,
         srcHeight = srcImageData.height,
@@ -444,8 +443,8 @@ ImageFilters.BlendSubtract = function (srcImageData, blendImageData, dx, dy) {
  * @see http://www.jhlabs.com/ip/blurring.html
  * Copyright 2005 Huxtable.com. All rights reserved.
  */
-ImageFilters.BoxBlur = (function () {
-    var blur = function (src, dst, width, height, radius) {
+ImageFilters.BoxBlur = (function() {
+    var blur = function(src, dst, width, height, radius) {
         var tableSize = radius * 2 + 1;
         var radiusPlus1 = radius + 1;
         var widthMinus1 = width - 1;
@@ -512,7 +511,7 @@ ImageFilters.BoxBlur = (function () {
         }
     };
 
-    return function (srcImageData, hRadius, vRadius, quality) {
+    return function(srcImageData, hRadius, vRadius, quality) {
         var srcPixels = srcImageData.data,
             srcWidth = srcImageData.width,
             srcHeight = srcImageData.height,
@@ -535,7 +534,7 @@ ImageFilters.BoxBlur = (function () {
 /**
  * @ param strength 1 <= n <= 4
  */
-ImageFilters.GaussianBlur = function (srcImageData, strength) {
+ImageFilters.GaussianBlur = function(srcImageData, strength) {
     var size, matrix, divisor;
 
     switch (strength) {
@@ -625,7 +624,7 @@ WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 OTHER DEALINGS IN THE SOFTWARE.
 */
-ImageFilters.StackBlur = (function () {
+ImageFilters.StackBlur = (function() {
     var mul_table = [
         512, 512, 456, 512, 328, 456, 335, 512, 405, 328, 271, 456, 388, 335, 292, 512,
         454, 405, 364, 328, 298, 271, 496, 456, 420, 388, 360, 335, 312, 292, 273, 512,
@@ -642,7 +641,8 @@ ImageFilters.StackBlur = (function () {
         451, 446, 442, 437, 433, 428, 424, 420, 416, 412, 408, 404, 400, 396, 392, 388,
         385, 381, 377, 374, 370, 367, 363, 360, 357, 354, 350, 347, 344, 341, 338, 335,
         332, 329, 326, 323, 320, 318, 315, 312, 310, 307, 304, 302, 299, 297, 294, 292,
-        289, 287, 285, 282, 280, 278, 275, 273, 271, 269, 267, 265, 263, 261, 259];
+        289, 287, 285, 282, 280, 278, 275, 273, 271, 269, 267, 265, 263, 261, 259
+    ];
 
 
     var shg_table = [
@@ -661,7 +661,8 @@ ImageFilters.StackBlur = (function () {
         24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24,
         24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24,
         24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24,
-        24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24];
+        24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24
+    ];
 
     function BlurStack() {
         this.r = 0;
@@ -671,7 +672,7 @@ ImageFilters.StackBlur = (function () {
         this.next = null;
     }
 
-    return function (srcImageData, radius) {
+    return function(srcImageData, radius) {
         var srcPixels = srcImageData.data,
             srcWidth = srcImageData.width,
             srcHeight = srcImageData.height,
@@ -894,7 +895,7 @@ ImageFilters.StackBlur = (function () {
 /**
  * TV based algorithm
  */
-ImageFilters.Brightness = function (srcImageData, brightness) {
+ImageFilters.Brightness = function(srcImageData, brightness) {
     var srcPixels = srcImageData.data,
         srcWidth = srcImageData.width,
         srcHeight = srcImageData.height,
@@ -902,7 +903,7 @@ ImageFilters.Brightness = function (srcImageData, brightness) {
         dstImageData = this.utils.createImageData(srcWidth, srcHeight),
         dstPixels = dstImageData.data;
 
-    this.utils.mapRGB(srcPixels, dstPixels, function (value) {
+    this.utils.mapRGB(srcPixels, dstPixels, function(value) {
         value += brightness;
         return (value > 255) ? 255 : value;
     });
@@ -915,7 +916,7 @@ ImageFilters.Brightness = function (srcImageData, brightness) {
  * @param brightness -100 <= n <= 100
  * @param contrast -100 <= n <= 100
  */
-ImageFilters.BrightnessContrastGimp = function (srcImageData, brightness, contrast) {
+ImageFilters.BrightnessContrastGimp = function(srcImageData, brightness, contrast) {
     var srcPixels = srcImageData.data,
         srcWidth = srcImageData.width,
         srcHeight = srcImageData.height,
@@ -940,11 +941,10 @@ ImageFilters.BrightnessContrastGimp = function (srcImageData, brightness, contra
     }
     avg = avg / (srcLength / 4);
 
-    this.utils.mapRGB(srcPixels, dstPixels, function (value) {
+    this.utils.mapRGB(srcPixels, dstPixels, function(value) {
         if (brightness < 0) {
             value = value * (1 + brightness);
-        }
-        else if (brightness > 0) {
+        } else if (brightness > 0) {
             value = value + ((255 - value) * brightness);
         }
         //value += brightness;
@@ -962,7 +962,7 @@ ImageFilters.BrightnessContrastGimp = function (srcImageData, brightness, contra
  * @param brightness -100 <= n <= 100
  * @param contrast -100 <= n <= 100
  */
-ImageFilters.BrightnessContrastPhotoshop = function (srcImageData, brightness, contrast) {
+ImageFilters.BrightnessContrastPhotoshop = function(srcImageData, brightness, contrast) {
     var srcPixels = srcImageData.data,
         srcWidth = srcImageData.width,
         srcHeight = srcImageData.height,
@@ -974,7 +974,7 @@ ImageFilters.BrightnessContrastPhotoshop = function (srcImageData, brightness, c
     brightness = (brightness + 100) / 100;
     contrast = (contrast + 100) / 100;
 
-    this.utils.mapRGB(srcPixels, dstPixels, function (value) {
+    this.utils.mapRGB(srcPixels, dstPixels, function(value) {
         value *= brightness;
         value = (value - 127.5) * contrast + 127.5;
         return value + 0.5 | 0;
@@ -982,7 +982,7 @@ ImageFilters.BrightnessContrastPhotoshop = function (srcImageData, brightness, c
     return dstImageData;
 };
 
-ImageFilters.Channels = function (srcImageData, channel) {
+ImageFilters.Channels = function(srcImageData, channel) {
     var matrix;
 
     switch (channel) {
@@ -1016,14 +1016,14 @@ ImageFilters.Channels = function (srcImageData, channel) {
     return this.ColorMatrixFilter(srcImageData, matrix);
 };
 
-ImageFilters.Clone = function (srcImageData) {
+ImageFilters.Clone = function(srcImageData) {
     return this.Copy(srcImageData, this.utils.createImageData(srcImageData.width, srcImageData.height));
 };
 
 /**
  * slower
  */
-ImageFilters.CloneBuiltin = function (srcImageData) {
+ImageFilters.CloneBuiltin = function(srcImageData) {
     var srcWidth = srcImageData.width,
         srcHeight = srcImageData.height,
         canvas = this.utils.getSampleCanvas(),
@@ -1042,7 +1042,7 @@ ImageFilters.CloneBuiltin = function (srcImageData) {
     return dstImageData;
 };
 
-ImageFilters.ColorMatrixFilter = function (srcImageData, matrix) {
+ImageFilters.ColorMatrixFilter = function(srcImageData, matrix) {
     var srcPixels = srcImageData.data,
         srcWidth = srcImageData.width,
         srcHeight = srcImageData.height,
@@ -1087,7 +1087,7 @@ ImageFilters.ColorMatrixFilter = function (srcImageData, matrix) {
     return dstImageData;
 };
 
-ImageFilters.ColorTransformFilter = function (
+ImageFilters.ColorTransformFilter = function(
     srcImageData, redMultiplier, greenMultiplier, blueMultiplier, alphaMultiplier,
     redOffset, greenOffset, blueOffset, alphaOffset) {
     var srcPixels = srcImageData.data,
@@ -1108,7 +1108,7 @@ ImageFilters.ColorTransformFilter = function (
     return dstImageData;
 };
 
-ImageFilters.Copy = function (srcImageData, dstImageData) {
+ImageFilters.Copy = function(srcImageData, dstImageData) {
     var srcPixels = srcImageData.data,
         srcLength = srcPixels.length,
         dstPixels = dstImageData.data;
@@ -1120,7 +1120,7 @@ ImageFilters.Copy = function (srcImageData, dstImageData) {
     return dstImageData;
 };
 
-ImageFilters.Crop = function (srcImageData, x, y, width, height) {
+ImageFilters.Crop = function(srcImageData, x, y, width, height) {
     var srcPixels = srcImageData.data,
         srcWidth = srcImageData.width,
         srcHeight = srcImageData.height,
@@ -1150,7 +1150,7 @@ ImageFilters.Crop = function (srcImageData, x, y, width, height) {
     return dstImageData;
 };
 
-ImageFilters.CropBuiltin = function (srcImageData, x, y, width, height) {
+ImageFilters.CropBuiltin = function(srcImageData, x, y, width, height) {
     var srcWidth = srcImageData.width,
         srcHeight = srcImageData.height,
         canvas = this.utils.getSampleCanvas(),
@@ -1170,7 +1170,7 @@ ImageFilters.CropBuiltin = function (srcImageData, x, y, width, height) {
 /**
  * sets to the average of the highest and lowest contrast
  */
-ImageFilters.Desaturate = function (srcImageData) {
+ImageFilters.Desaturate = function(srcImageData) {
     var srcPixels = srcImageData.data,
         srcWidth = srcImageData.width,
         srcHeight = srcImageData.height,
@@ -1196,7 +1196,7 @@ ImageFilters.Desaturate = function (srcImageData) {
 /**
  * TODO: use bilinear
  */
-ImageFilters.DisplacementMapFilter = function (srcImageData, mapImageData, mapX, mapY, componentX, componentY, scaleX, scaleY, mode) {
+ImageFilters.DisplacementMapFilter = function(srcImageData, mapImageData, mapX, mapY, componentX, componentY, scaleX, scaleY, mode) {
     var srcPixels = srcImageData.data,
         srcWidth = srcImageData.width,
         srcHeight = srcImageData.height,
@@ -1264,7 +1264,7 @@ ImageFilters.DisplacementMapFilter = function (srcImageData, mapImageData, mapX,
  * Floyd-Steinberg algorithm
  * @param levels 2 <= n <= 255
  */
-ImageFilters.Dither = function (srcImageData, levels) {
+ImageFilters.Dither = function(srcImageData, levels) {
     var srcWidth = srcImageData.width,
         srcHeight = srcImageData.height,
         dstImageData = this.Clone(srcImageData),
@@ -1284,7 +1284,7 @@ ImageFilters.Dither = function (srcImageData, levels) {
         levelMap[i] = (255 * i) / levelsMinus1;
     }
 
-    posterize = this.utils.buildMap(function (value) {
+    posterize = this.utils.buildMap(function(value) {
         var ret = levelMap[j];
 
         k += levels;
@@ -1389,32 +1389,25 @@ ImageFilters.Dither = function (srcImageData, levels) {
     return dstImageData;
 };
 
-ImageFilters.Edge = function (srcImageData) {
+ImageFilters.Edge = function(srcImageData) {
     //pretty close to Fireworks 'Find Edges' effect
-    return this.ConvolutionFilter(srcImageData, 3, 3, [
-        -1, -1, -1,
-        -1, 8, -1,
-        -1, -1, -1
-    ]);
+    return this.ConvolutionFilter(srcImageData, 3, 3, [-1, -1, -1, -1, 8, -1, -1, -1, -1]);
 };
 
-ImageFilters.Emboss = function (srcImageData) {
-    return this.ConvolutionFilter(srcImageData, 3, 3, [
-        -2, -1, 0,
-        -1, 1, 1,
+ImageFilters.Emboss = function(srcImageData) {
+    return this.ConvolutionFilter(srcImageData, 3, 3, [-2, -1, 0, -1, 1, 1,
         0, 1, 2
     ]);
 };
 
-ImageFilters.Enrich = function (srcImageData) {
+ImageFilters.Enrich = function(srcImageData) {
     return this.ConvolutionFilter(srcImageData, 3, 3, [
-        0, -2, 0,
-        -2, 20, -2,
+        0, -2, 0, -2, 20, -2,
         0, -2, 0
     ], 10, -40);
 };
 
-ImageFilters.Flip = function (srcImageData, vertical) {
+ImageFilters.Flip = function(srcImageData, vertical) {
     var srcPixels = srcImageData.data,
         srcWidth = srcImageData.width,
         srcHeight = srcImageData.height,
@@ -1429,8 +1422,7 @@ ImageFilters.Flip = function (srcImageData, vertical) {
             srcIndex = (y * srcWidth + x) << 2;
             if (vertical) {
                 dstIndex = ((srcHeight - y - 1) * srcWidth + x) << 2;
-            }
-            else {
+            } else {
                 dstIndex = (y * srcWidth + (srcWidth - x - 1)) << 2;
             }
 
@@ -1444,7 +1436,7 @@ ImageFilters.Flip = function (srcImageData, vertical) {
     return dstImageData;
 };
 
-ImageFilters.Gamma = function (srcImageData, gamma) {
+ImageFilters.Gamma = function(srcImageData, gamma) {
     var srcPixels = srcImageData.data,
         srcWidth = srcImageData.width,
         srcHeight = srcImageData.height,
@@ -1452,7 +1444,7 @@ ImageFilters.Gamma = function (srcImageData, gamma) {
         dstImageData = this.utils.createImageData(srcWidth, srcHeight),
         dstPixels = dstImageData.data;
 
-    this.utils.mapRGB(srcPixels, dstPixels, function (value) {
+    this.utils.mapRGB(srcPixels, dstPixels, function(value) {
         value = (255 * Math.pow(value / 255, 1 / gamma) + 0.5);
         return value > 255 ? 255 : value + 0.5 | 0;
     });
@@ -1460,7 +1452,7 @@ ImageFilters.Gamma = function (srcImageData, gamma) {
     return dstImageData;
 };
 
-ImageFilters.GrayScale = function (srcImageData) {
+ImageFilters.GrayScale = function(srcImageData) {
     var srcPixels = srcImageData.data,
         srcWidth = srcImageData.width,
         srcHeight = srcImageData.height,
@@ -1474,6 +1466,7 @@ ImageFilters.GrayScale = function (srcImageData) {
         dstPixels[i] = dstPixels[i + 1] = dstPixels[i + 2] = intensity;
         dstPixels[i + 3] = srcPixels[i + 3];
     }
+    console.log(dstImageData)
 
     return dstImageData;
 };
@@ -1483,7 +1476,7 @@ ImageFilters.GrayScale = function (srcImageData) {
  * @param satDelta  -100 <= n <= 100
  * @param lightness -100 <= n <= 100
  */
-ImageFilters.HSLAdjustment = function (srcImageData, hueDelta, satDelta, lightness) {
+ImageFilters.HSLAdjustment = function(srcImageData, hueDelta, satDelta, lightness) {
     var srcPixels = srcImageData.data,
         srcWidth = srcImageData.width,
         srcHeight = srcImageData.height,
@@ -1516,8 +1509,7 @@ ImageFilters.HSLAdjustment = function (srcImageData, hueDelta, satDelta, lightne
         s = hsl[1] + hsl[1] * satDelta;
         if (s < 0) {
             s = 0;
-        }
-        else if (s > 1) {
+        } else if (s > 1) {
             s = 1;
         }
 
@@ -1525,8 +1517,7 @@ ImageFilters.HSLAdjustment = function (srcImageData, hueDelta, satDelta, lightne
         l = hsl[2];
         if (lightness > 0) {
             l += (1 - l) * lightness;
-        }
-        else if (lightness < 0) {
+        } else if (lightness < 0) {
             l += l * lightness;
         }
 
@@ -1542,7 +1533,7 @@ ImageFilters.HSLAdjustment = function (srcImageData, hueDelta, satDelta, lightne
     return dstImageData;
 };
 
-ImageFilters.Invert = function (srcImageData) {
+ImageFilters.Invert = function(srcImageData) {
     var srcPixels = srcImageData.data,
         srcWidth = srcImageData.width,
         srcHeight = srcImageData.height,
@@ -1550,14 +1541,14 @@ ImageFilters.Invert = function (srcImageData) {
         dstImageData = this.utils.createImageData(srcWidth, srcHeight),
         dstPixels = dstImageData.data;
 
-    this.utils.mapRGB(srcPixels, dstPixels, function (value) {
+    this.utils.mapRGB(srcPixels, dstPixels, function(value) {
         return 255 - value;
     });
 
     return dstImageData;
 };
 
-ImageFilters.Mosaic = function (srcImageData, blockSize) {
+ImageFilters.Mosaic = function(srcImageData, blockSize) {
     var srcPixels = srcImageData.data,
         srcWidth = srcImageData.width,
         srcHeight = srcImageData.height,
@@ -1631,7 +1622,7 @@ ImageFilters.Mosaic = function (srcImageData, blockSize) {
  * @param range  1 <= n <= 5
  * @param levels 1 <= n <= 256
  */
-ImageFilters.Oil = function (srcImageData, range, levels) {
+ImageFilters.Oil = function(srcImageData, range, levels) {
     var srcPixels = srcImageData.data,
         srcWidth = srcImageData.width,
         srcHeight = srcImageData.height,
@@ -1712,7 +1703,7 @@ ImageFilters.Oil = function (srcImageData, range, levels) {
     return dstImageData;
 };
 
-ImageFilters.OpacityFilter = function (srcImageData, opacity) {
+ImageFilters.OpacityFilter = function(srcImageData, opacity) {
     var srcPixels = srcImageData.data,
         srcWidth = srcImageData.width,
         srcHeight = srcImageData.height,
@@ -1733,7 +1724,7 @@ ImageFilters.OpacityFilter = function (srcImageData, opacity) {
 /**
  * @param levels 2 <= n <= 255
  */
-ImageFilters.Posterize = function (srcImageData, levels) {
+ImageFilters.Posterize = function(srcImageData, levels) {
     var srcPixels = srcImageData.data,
         srcWidth = srcImageData.width,
         srcHeight = srcImageData.height,
@@ -1753,7 +1744,7 @@ ImageFilters.Posterize = function (srcImageData, levels) {
         levelMap[i] = (255 * i) / levelsMinus1;
     }
 
-    this.utils.mapRGB(srcPixels, dstPixels, function (value) {
+    this.utils.mapRGB(srcPixels, dstPixels, function(value) {
         var ret = levelMap[j];
 
         k += levels;
@@ -1772,7 +1763,7 @@ ImageFilters.Posterize = function (srcImageData, levels) {
 /**
  * @param scale 0.0 <= n <= 5.0
  */
-ImageFilters.Rescale = function (srcImageData, scale) {
+ImageFilters.Rescale = function(srcImageData, scale) {
     var srcPixels = srcImageData.data,
         srcWidth = srcImageData.width,
         srcHeight = srcImageData.height,
@@ -1780,7 +1771,7 @@ ImageFilters.Rescale = function (srcImageData, scale) {
         dstImageData = this.utils.createImageData(srcWidth, srcHeight),
         dstPixels = dstImageData.data;
 
-    this.utils.mapRGB(srcPixels, dstPixels, function (value) {
+    this.utils.mapRGB(srcPixels, dstPixels, function(value) {
         value *= scale;
         return (value > 255) ? 255 : value + 0.5 | 0;
     });
@@ -1791,7 +1782,7 @@ ImageFilters.Rescale = function (srcImageData, scale) {
 /**
  * Nearest neighbor
  */
-ImageFilters.ResizeNearestNeighbor = function (srcImageData, width, height) {
+ImageFilters.ResizeNearestNeighbor = function(srcImageData, width, height) {
     var srcPixels = srcImageData.data,
         srcWidth = srcImageData.width,
         srcHeight = srcImageData.height,
@@ -1801,7 +1792,8 @@ ImageFilters.ResizeNearestNeighbor = function (srcImageData, width, height) {
 
     var xFactor = srcWidth / width,
         yFactor = srcHeight / height,
-        dstIndex = 0, srcIndex,
+        dstIndex = 0,
+        srcIndex,
         x, y, offset;
 
     for (y = 0; y < height; y += 1) {
@@ -1824,7 +1816,7 @@ ImageFilters.ResizeNearestNeighbor = function (srcImageData, width, height) {
 /**
  * Bilinear
  */
-ImageFilters.Resize = function (srcImageData, width, height) {
+ImageFilters.Resize = function(srcImageData, width, height) {
     var srcPixels = srcImageData.data,
         srcWidth = srcImageData.width,
         srcHeight = srcImageData.height,
@@ -1854,7 +1846,7 @@ ImageFilters.Resize = function (srcImageData, width, height) {
  * this might not work if the image is transparent.
  * to fix that we probably need two contexts
  */
-ImageFilters.ResizeBuiltin = function (srcImageData, width, height) {
+ImageFilters.ResizeBuiltin = function(srcImageData, width, height) {
     var srcWidth = srcImageData.width,
         srcHeight = srcImageData.height,
         canvas = this.utils.getSampleCanvas(),
@@ -1878,7 +1870,7 @@ ImageFilters.ResizeBuiltin = function (srcImageData, width, height) {
     return dstImageData;
 };
 
-ImageFilters.Sepia = function (srcImageData) {
+ImageFilters.Sepia = function(srcImageData) {
     var srcPixels = srcImageData.data,
         srcWidth = srcImageData.width,
         srcHeight = srcImageData.height,
@@ -1905,16 +1897,12 @@ ImageFilters.Sepia = function (srcImageData) {
 /**
  * @param factor 1 <= n
  */
-ImageFilters.Sharpen = function (srcImageData, factor) {
+ImageFilters.Sharpen = function(srcImageData, factor) {
     //Convolution formula from VIGRA
-    return this.ConvolutionFilter(srcImageData, 3, 3, [
-        -factor / 16, -factor / 8, -factor / 16,
-        -factor / 8, factor * 0.75 + 1, -factor / 8,
-        -factor / 16, -factor / 8, -factor / 16
-    ]);
+    return this.ConvolutionFilter(srcImageData, 3, 3, [-factor / 16, -factor / 8, -factor / 16, -factor / 8, factor * 0.75 + 1, -factor / 8, -factor / 16, -factor / 8, -factor / 16]);
 };
 
-ImageFilters.Solarize = function (srcImageData) {
+ImageFilters.Solarize = function(srcImageData) {
     var srcPixels = srcImageData.data,
         srcWidth = srcImageData.width,
         srcHeight = srcImageData.height,
@@ -1922,14 +1910,14 @@ ImageFilters.Solarize = function (srcImageData) {
         dstImageData = this.utils.createImageData(srcWidth, srcHeight),
         dstPixels = dstImageData.data;
 
-    this.utils.mapRGB(srcPixels, dstPixels, function (value) {
+    this.utils.mapRGB(srcPixels, dstPixels, function(value) {
         return value > 127 ? (value - 127.5) * 2 : (127.5 - value) * 2;
     });
 
     return dstImageData;
 };
 
-ImageFilters.Transpose = function (srcImageData) {
+ImageFilters.Transpose = function(srcImageData) {
     var srcPixels = srcImageData.data,
         srcWidth = srcImageData.width,
         srcHeight = srcImageData.height,
@@ -1961,7 +1949,7 @@ ImageFilters.Transpose = function (srcImageData) {
  * @param angle(degree)
  * @param smooth
  */
-ImageFilters.Twril = function (srcImageData, centerX, centerY, radius, angle, edge, smooth) {
+ImageFilters.Twril = function(srcImageData, centerX, centerY, radius, angle, edge, smooth) {
     var srcPixels = srcImageData.data,
         srcWidth = srcImageData.width,
         srcHeight = srcImageData.height,
@@ -1994,8 +1982,7 @@ ImageFilters.Twril = function (srcImageData, centerX, centerY, radius, angle, ed
                 dstPixels[dstIndex + 1] = srcPixels[dstIndex + 1];
                 dstPixels[dstIndex + 2] = srcPixels[dstIndex + 2];
                 dstPixels[dstIndex + 3] = srcPixels[dstIndex + 3];
-            }
-            else {
+            } else {
                 // main formula
                 distance = Math.sqrt(distance);
                 a = Math.atan2(dy, dx) + (angle * (radius - distance)) / radius;
@@ -2006,8 +1993,7 @@ ImageFilters.Twril = function (srcImageData, centerX, centerY, radius, angle, ed
                 if (smooth) {
                     // bilinear
                     this.utils.copyBilinear(srcPixels, tx, ty, srcWidth, srcHeight, dstPixels, dstIndex, edge);
-                }
-                else {
+                } else {
                     // nearest neighbor
                     // round tx, ty
                     // TODO edge actions!!
@@ -2028,4 +2014,3 @@ ImageFilters.Twril = function (srcImageData, centerX, centerY, radius, angle, ed
 
 
 module.exports = ImageFilters
-

@@ -1,7 +1,9 @@
 // pages/canvasImage/canvasImage.js
 const ImageFilters = require('../../utils/ImageFilters.js')
+// const welFilters = require('../../utils/welImageFilters.js')
 
 console.log(ImageFilters)
+// console.log(welFilters)
 
 const canvasId = 'hehe'
 const canvasW = 300
@@ -41,9 +43,43 @@ Page({
     data: {
     },
     onLoad: function(options) {
-
+        
     },
     filterTap() {
+        function ImageData(data, w, h) {
+            this.data = new Uint8ClampedArray(data)
+            this.width = w
+            this.height = h
+        }
+
+        let imageData = new ImageData(originalData, canvasW, canvasH)
+
+        // console.log(imageData.data[0])
+        // let filtered = ImageFilters.GrayScale(imageData)
+        let filtered = ImageFilters.Mosaic(imageData, 10)
+        // console.log(imageData.data[0])
+        // let srcLength = data.length
+        // let srcPixels = data
+        // let dstPixels = new Uint8ClampedArray(srcLength)
+        
+        // for (var i = 0; i < srcLength; i += 4) {
+        //     var intensity = (srcPixels[i] * 19595 + srcPixels[i + 1] * 38470 + srcPixels[i + 2] * 7471) >> 16;
+        //     //var intensity = (srcPixels[i] * 0.3086 + srcPixels[i + 1] * 0.6094 + srcPixels[i + 2] * 0.0820) | 0;
+        //     dstPixels[i] = dstPixels[i + 1] = dstPixels[i + 2] = intensity;
+        //     dstPixels[i + 3] = srcPixels[i + 3];
+        // }
+        wx.canvasPutImageData({
+            canvasId: canvasId,
+            data: filtered.data,
+            x: 0,
+            y: 0,
+            width: canvasW,
+            height: canvasH,
+            complete: res => {
+                console.log(res)
+            }
+        })
+        return
         const z = this
         wx.showActionSheet({
             itemList: keys,
