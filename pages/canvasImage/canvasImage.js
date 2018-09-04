@@ -2,7 +2,12 @@
 const ImageFilters = require('../../utils/ImageFilters.js')
 // const welFilters = require('../../utils/welImageFilters.js')
 
-console.log(ImageFilters)
+function ImageData(data, w, h) {
+    this.data = new Uint8ClampedArray(data)
+    this.width = w
+    this.height = h
+}
+// console.log(ImageFilters)
 // console.log(welFilters)
 
 const canvasId = 'hehe'
@@ -16,24 +21,8 @@ const filters = {
         return data
     },
     black: function(data) {
-        for (var i = 0; i < data.length; i += 4) {
-            //计算获取单位元素的RBG然后取平均值 
-            var avg = (data[i] + data[i + 1] + data[i + 2]) / 3;
-            data[i] = avg > 128 ? 255 : 0;
-            data[i + 1] = avg > 128 ? 255 : 0;
-            data[i + 2] = avg > 128 ? 255 : 0;
-        }
-        return data
     },
     gray: function(data) {
-        for (var i = 0; i < data.length; i += 4) {
-            //计算获取单位元素的RBG然后取平均值 然后复制给自身得到灰色的图像 
-            var avg = (data[i] + data[i + 1] + data[i + 2]) / 3;
-            data[i] = avg;
-            data[i + 1] = avg;
-            data[i + 2] = avg;
-        }
-        return data
     }
 }
 
@@ -46,28 +35,15 @@ Page({
         
     },
     filterTap() {
-        function ImageData(data, w, h) {
-            this.data = new Uint8ClampedArray(data)
-            this.width = w
-            this.height = h
-        }
-
+        wx.showLoading({
+            title: '正在加载...',
+        })
         let imageData = new ImageData(originalData, canvasW, canvasH)
 
-        // console.log(imageData.data[0])
         // let filtered = ImageFilters.GrayScale(imageData)
-        let filtered = ImageFilters.Mosaic(imageData, 10)
-        // console.log(imageData.data[0])
-        // let srcLength = data.length
-        // let srcPixels = data
-        // let dstPixels = new Uint8ClampedArray(srcLength)
-        
-        // for (var i = 0; i < srcLength; i += 4) {
-        //     var intensity = (srcPixels[i] * 19595 + srcPixels[i + 1] * 38470 + srcPixels[i + 2] * 7471) >> 16;
-        //     //var intensity = (srcPixels[i] * 0.3086 + srcPixels[i + 1] * 0.6094 + srcPixels[i + 2] * 0.0820) | 0;
-        //     dstPixels[i] = dstPixels[i + 1] = dstPixels[i + 2] = intensity;
-        //     dstPixels[i + 3] = srcPixels[i + 3];
-        // }
+        // let filtered = ImageFilters.Mosaic(imageData, 10)
+        let filtered = ImageFilters.GaussianBlur(imageData, 4)
+
         wx.canvasPutImageData({
             canvasId: canvasId,
             data: filtered.data,
@@ -77,6 +53,7 @@ Page({
             height: canvasH,
             complete: res => {
                 console.log(res)
+                wx.hideLoading()
             }
         })
         return
