@@ -1,0 +1,4 @@
+<!--pages/canvasImage/canvasImage.wxml-->
+<button bindtap='choose'>choose image</button>
+<button bindtap='filterTap'>filter</button>
+<canvas canvas-id='hehe' style='width:300px; height:300px; border:1px solid black;'></canvas>

@@ -1,5 +1,8 @@
 {
     "pages": [
+        "pages/canvasImage/canvasImage",
+        "pages/canvas/canvas",
+        "pages/test/test",
         "pages/sortItems/sortItems",
         "pages/card/card",
         "pages/audio/audio",
@@ -10,12 +13,10 @@
         "pages/launchPage/launchPage",
         "pages/throttle/throttle",
         "pages/login/login",
-        "pages/test/test",
         "pages/map/map",
         "pages/qrcode/qrcode",
         "pages/hollowOutCover/hollowOutCover",
         "pages/camera/camera",
-        "pages/canvas/canvas",
         "pages/myCanvas/myCanvas",
         "pages/snow/snow",
         "pages/scrollView/scrollView",

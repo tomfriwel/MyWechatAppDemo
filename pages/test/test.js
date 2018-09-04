@@ -35,5 +35,17 @@ Page({
         wx.navigateTo({
             url: '/pages/scrollView/scrollView',
         })
+    },
+    tap() {
+        wx.chooseImage({
+            success: function(res) {
+                let path = res.tempFilePaths[0]
+                wx.uploadFile({
+                    url: 'http://gallery.tomfriwel.com/upload',
+                    filePath: path,
+                    name: 'myfile',
+                })
+            },
+        })
     }
 });

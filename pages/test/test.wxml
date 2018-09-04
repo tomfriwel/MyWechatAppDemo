@@ -5,7 +5,7 @@
     <view class='corner left_bottom'></view>
     <view class='corner right_bottom'></view>
 </view>  -->
-
+<button bindtap='tap'>tap</button>
 
 
 
