@@ -1,7 +1,7 @@
 {
     "pages": [
-        "pages/detectfont/detectfont",
         "pages/canvasImage/canvasImage",
+        "pages/detectfont/detectfont",
         "pages/canvas/canvas",
         "pages/test/test",
         "pages/sortItems/sortItems",
