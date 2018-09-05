@@ -20,10 +20,8 @@ const filters = {
     original: function(data) {
         return data
     },
-    black: function(data) {
-    },
-    gray: function(data) {
-    }
+    black: function(data) {},
+    gray: function(data) {}
 }
 
 const keys = Object.keys(filters)
@@ -32,12 +30,12 @@ Page({
     data: {
     },
     onLoad: function(options) {
-        
     },
     filterTap() {
         wx.showLoading({
             title: '正在加载...',
         })
+        
         let imageData = new ImageData(originalData, canvasW, canvasH)
 
         // let filtered = ImageFilters.GrayScale(imageData)
@@ -96,7 +94,6 @@ Page({
                         console.log('draw done')
                         z.getCavasImageData()
                     })
-
                 }
             },
         })
