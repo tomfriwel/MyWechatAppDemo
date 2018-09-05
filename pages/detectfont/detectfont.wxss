@@ -1,1 +1,9 @@
 /* pages/detectfont/detectfont.wxss */
+.txt1 {
+    font-size: 90rpx;
+    font-family: 'Catamaran SemiBold';
+}
+.txt2 {
+    font-size: 90rpx;
+    font-family: 'AritaSans Bold';
+}

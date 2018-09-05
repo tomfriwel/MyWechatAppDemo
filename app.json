@@ -1,5 +1,6 @@
 {
     "pages": [
+        "pages/detectfont/detectfont",
         "pages/canvasImage/canvasImage",
         "pages/canvas/canvas",
         "pages/test/test",
@@ -38,8 +39,7 @@
         "pages/action/action",
         "pages/tabbar/tabbar",
         "pages/classPage/classPage",
-        "pages/wxShareTo/wxShareTo",
-        "pages/detectfont/detectfont"
+        "pages/wxShareTo/wxShareTo"
     ],
     "tabBar": {
         "color": "#333",

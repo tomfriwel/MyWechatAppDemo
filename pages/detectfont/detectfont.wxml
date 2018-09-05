@@ -1,2 +1,5 @@
 <!--pages/detectfont/detectfont.wxml-->
-<text>pages/detectfont/detectfont.wxml</text>
+<button bindtap='loadFont'>load font</button>
+
+<view class='txt1'>1234567890</view>
+<view class='txt2'>news square</view>
