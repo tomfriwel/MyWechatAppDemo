@@ -17,7 +17,7 @@ Page({
     loadFont() {
         wx.loadFontFace({
             family: 'Catamaran SemiBold',
-            source: 'url("https://www.tomfriwel.com/static/font/Catamaran-SemiBold.ttf")',
+            source: 'url("path")',
             success: function (res) {
                 console.log(res.status) //  loaded
             },
@@ -30,7 +30,7 @@ Page({
         });
         wx.loadFontFace({
             family: 'AritaSans Bold',
-            source: 'url("https://www.tomfriwel.com/static/font/AritaSans-Bold.ttf")',
+            source: 'url("path")',
             success: function (res) {
                 console.log(res.status) //  loaded
             },
