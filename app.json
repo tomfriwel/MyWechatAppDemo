@@ -1,5 +1,6 @@
 {
     "pages": [
+        "pages/calendar/calendar",
         "pages/canvasImage/canvasImage",
         "pages/detectfont/detectfont",
         "pages/canvas/canvas",
