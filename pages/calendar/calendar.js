@@ -1,9 +1,9 @@
 // pages/calendar/calendar.js
-const Calendar = require('../../utils/Calendar.js')
+// const Calendar = require('../../utils/Calendar.js')
 
-let calendar = new Calendar()
-let result
-result = calendar.solar(2017, 5, 5)
+// let calendar = new Calendar()
+// let result
+// result = calendar.solar(2017, 5, 5)
 
 Page({
     data: {
