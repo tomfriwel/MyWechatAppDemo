@@ -1,4 +1,16 @@
 <!--pages/canvasImage/canvasImage.wxml-->
-<button bindtap='choose'>choose image</button>
-<button bindtap='filterTap'>filter</button>
-<canvas canvas-id='hehe' style='width:300px; height:300px; border:1px solid black;'></canvas>
+<view class='wrap'>
+    <button bindtap='choose'>choose image</button>
+    <!-- <button wx:if="{{selected}}" bindtap='filterTap'>filter</button> -->
+    <view wx:if="{{selected}}" class='picker-wrap'>
+        <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+            <view class="picker">
+                当前选择：{{array[index]}}
+            </view>
+        </picker>
+    </view>
+    <view class='time' wx:if="{{gap}}">Processing time:{{gap}}ms</view>
+</view>
+<canvas canvas-id='hehe' style='margin:0 auto;width:320px; height:320px; border:1px solid #ddd;'></canvas>
+
+<button wx:if="{{selected}}" bindtap='save' class='save'>save</button>
