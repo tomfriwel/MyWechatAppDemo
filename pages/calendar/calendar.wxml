@@ -11,7 +11,7 @@
         <view class='item' wx:for="{{fisrtDay}}" wx:key="item"></view>
         <view bindtap='itemTap' data-key='{{index}}' class='item style{{currentDate!=null&&currentDate==index?1:(selectedDate!=null&&selectedDate==index?2:0)}}' wx:for="{{monthCount}}" wx:key="item">
             <view>{{item+1}}</view>
-            <view class='small'>初一</view>
+            <!-- <view class='small'>初一</view> -->
         </view>
     </view>
 </view>

@@ -1,4 +1,10 @@
 // pages/calendar/calendar.js
+const Calendar = require('../../utils/Calendar.js')
+
+let calendar = new Calendar()
+let result
+result = calendar.solar(2017, 5, 5)
+
 Page({
     data: {
         weekItems: ['日', '一', '二', '三', '四', '五', '六'],
@@ -44,7 +50,6 @@ Page({
         now.setMonth(currentMonth)
         now.setFullYear(currentYear)
         
-        console.log(now)
         this.setup(now)
     },
     nextMonth() {
@@ -64,7 +69,6 @@ Page({
         now.setMonth(currentMonth)
         now.setFullYear(currentYear)
         
-        console.log(now)
         this.setup(now)
     },
     setup(date) {
