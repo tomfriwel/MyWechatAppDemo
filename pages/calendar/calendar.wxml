@@ -1,2 +1,17 @@
 <!--pages/calendar/calendar.wxml-->
-<text>pages/calendar/calendar.wxml</text>
+
+<view class='container'>
+    <view>{{currentYear + '-' + (currentMonth+1)+'-'+(currentDate+1)}}</view>
+    <button bindtap='preMonth'>上一月</button>
+    <button bindtap='nextMonth'>下一月</button>
+    <view class='line-wrap'>
+        <view class='item' wx:for="{{weekItems}}" wx:key="item">{{item}}</view>
+    </view>
+    <view class='line-wrap'>
+        <view class='item' wx:for="{{fisrtDay}}" wx:key="item"></view>
+        <view bindtap='itemTap' data-key='{{index}}' class='item style{{currentDate!=null&&currentDate==index?1:(selectedDate!=null&&selectedDate==index?2:0)}}' wx:for="{{monthCount}}" wx:key="item">
+            <view>{{item+1}}</view>
+            <view class='small'>初一</view>
+        </view>
+    </view>
+</view>

@@ -1,1 +1,33 @@
 /* pages/calendar/calendar.wxss */
+
+.line-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    /* border-right: 2rpx solid #AFAAA5; */
+}
+
+.item {
+    width: 100rpx;
+    height: 100rpx;
+    border-left: 2rpx solid #AFAAA5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 2rpx solid #AFAAA5;
+    font-size: 30rpx;
+    font-weight: 400;
+    color: #272A14;
+}
+.item .small {
+    font-size: 24rpx;
+}
+.item.style1 {
+    background: #FFF3EB;
+}
+.item.style2 {
+    background: #F6B79C;
+}
+/* 
+.item:last-child {
+} */

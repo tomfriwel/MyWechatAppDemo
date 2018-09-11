@@ -1,66 +1,100 @@
 // pages/calendar/calendar.js
 Page({
+    data: {
+        weekItems: ['日', '一', '二', '三', '四', '五', '六'],
+        monthCount: 0,
+        fisrtDay: 0,
+        currentDate: 0,
+        currentMonth: 0,
+        currentYear: 0,
+        selectedDate: null
+    },
+    onLoad: function(options) {
+        let now = new Date()
+        this.setup(now)
+    },
+    getCountDays(date) {
+        var month = date.getMonth();
+        date.setMonth(month + 1);
+        date.setDate(0);
+        return date.getDate();
+    },
+    itemTap(e) {
+        let {
+            key
+        } = e.currentTarget.dataset
+        this.setData({
+            selectedDate: key
+        })
+    },
+    preMonth() {
+        let {
+            currentMonth,
+            currentYear,
+        } = this.data
 
-  /**
-   * Page initial data
-   */
-  data: {
+        let now = new Date()
 
-  },
+        if (currentMonth > 0) {
+            currentMonth -= 1
+        } else {
+            currentMonth = 11
+            currentYear -= 1
+        }
+        now.setMonth(currentMonth)
+        now.setFullYear(currentYear)
+        
+        console.log(now)
+        this.setup(now)
+    },
+    nextMonth() {
+        let {
+            currentMonth,
+            currentYear,
+        } = this.data
 
-  /**
-   * Lifecycle function--Called when page load
-   */
-  onLoad: function (options) {
+        let now = new Date()
 
-  },
+        if (currentMonth < 11) {
+            currentMonth += 1
+        } else {
+            currentMonth = 0
+            currentYear += 1
+        }
+        now.setMonth(currentMonth)
+        now.setFullYear(currentYear)
+        
+        console.log(now)
+        this.setup(now)
+    },
+    setup(date) {
+        let now = new Date()
+        console.log(date)
+        
+        date.setDate(1)
+        let fisrtDay = date.getDay() //0~6
+        let monthCount = this.getCountDays(date)
+        let currentMonth = date.getMonth() //0~11
+        let currentYear = date.getFullYear()
 
-  /**
-   * Lifecycle function--Called when page is initially rendered
-   */
-  onReady: function () {
 
-  },
+        let currentDate = null
+        if (now.getFullYear() == currentYear && now.getMonth() == currentMonth) {
+            currentDate = now.getDate() - 1
+        }
 
-  /**
-   * Lifecycle function--Called when page show
-   */
-  onShow: function () {
+        console.log({
+            fisrtDay,
+            monthCount,
+        })
 
-  },
-
-  /**
-   * Lifecycle function--Called when page hide
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * Lifecycle function--Called when page unload
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * Page event handler function--Called when user drop down
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * Called when page reach bottom
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * Called when user click on the top right corner to share
-   */
-  onShareAppMessage: function () {
-
-  }
+        this.setData({
+            fisrtDay,
+            monthCount,
+            currentDate,
+            currentMonth,
+            currentYear,
+            selectedDate: null
+        })
+    }
 })
