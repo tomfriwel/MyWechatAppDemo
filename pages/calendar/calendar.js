@@ -41,26 +41,7 @@ Page({
             currentYear,
         } = this.data
 
-        // console.log({
-        //     currentMonth,
-        //     currentYear,
-        //     key
-        // })
-
         this.setupLunarTitle(currentYear, currentMonth, key)
-        // let res = calendar.solar(currentYear, currentMonth + 1, key + 1)
-
-        // let {
-        //     animal,
-        //     ganzhi_year,
-        //     ganzhi_month,
-        //     ganzhi_day,
-        //     lunar_month_chinese,
-        //     lunar_day_chinese
-        // } = res
-        // console.log(res)
-        // console.log(`${ganzhi_year}年 【${animal}年】 ${ganzhi_month}月 ${ganzhi_day}日`)
-        // console.log(`${lunar_month_chinese} ${lunar_day_chinese}`)
 
         this.setData({
             selectedDate: key
@@ -136,15 +117,8 @@ Page({
         let currentDate = null
         if (now.getFullYear() == currentYear && now.getMonth() == currentMonth) {
             currentDate = now.getDate() - 1
-
-            // this.setupLunarTitle(currentYear, currentMonth, currentDate)
         }
         this.setupLunarTitle(currentYear, currentMonth, currentDate)
-
-        // console.log({
-        //     fisrtDay,
-        //     monthCount,
-        // })
 
         let days = []
         let obj = null
@@ -182,11 +156,11 @@ Page({
                 json.style = 'first'
             }
 
-            if (holidayData[currentMonth + 1] && holidayData[currentMonth + 1][i + 1]) {
+            if (holidayData[currentYear] && holidayData[currentYear][currentMonth + 1] && holidayData[currentYear][currentMonth + 1][i + 1]) {
                 // title = holidayData[currentMonth + 1][i + 1].title
                 // json.infos.unshift(holidayData[currentMonth + 1][i + 1].title)
                 // json.style = 'holiday'
-                obj = holidayData[currentMonth + 1][i + 1]
+                obj = holidayData[currentYear][currentMonth + 1][i + 1]
             }
             if (obj && obj.range[0] < i + 2 && obj.range[1] > i) {
                 json.style = 'holiday'
