@@ -1,7 +1,10 @@
 <!--pages/calendar/calendar.wxml-->
 
 <view class='container'>
-    <view class='title'>{{currentYear + '-' + (currentMonth+1)+'-'+(currentDate+1)}}</view>
+    <view class='title'>
+        <text>{{currentYear + '-' + (currentMonth+1)+'-'+(currentDate+1)}}</text>
+        <text class='style0'>{{'\n'+lunarTitle}}</text>
+    </view>
     <view class='action-wrap'>
         <button bindtap='preMonth'>上一月</button>
         <button bindtap='nextMonth'>下一月</button>
@@ -12,8 +15,8 @@
     <view class='line-wrap'>
         <view class='item' wx:for="{{fisrtDay}}" wx:key="item"></view>
         <view bindtap='itemTap' data-key='{{index}}' class='item style{{currentDate!=null&&currentDate==index?1:(selectedDate!=null&&selectedDate==index?2:0)}}' wx:for="{{days}}" wx:key="item">
-            <view>{{item.day}}</view>
-            <view class='small'>{{item.lunar_day_chinese}}</view>
+            <view class='large'>{{item.day}}</view>
+            <view class='small style{{item.isFisrt?1:0}}'>{{item.isFisrt?item.lunar_month_chinese:item.lunar_day_chinese}}</view>
         </view>
     </view>
 </view>

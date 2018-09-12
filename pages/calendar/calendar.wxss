@@ -1,12 +1,21 @@
 /* pages/calendar/calendar.wxss */
+
 .title {
     text-align: center;
-    line-height: 88rpx;
+    /* line-height: 88rpx; */
+    color: #272a14;
+    font-size: 36rpx;
+    margin: 20rpx 0;
+}
+
+.title .style0 {
+    font-size: 30rpx;
 }
 .action-wrap {
     display: flex;
     margin-bottom: 20rpx;
 }
+
 .line-wrap {
     display: flex;
     flex-wrap: wrap;
@@ -17,25 +26,37 @@
 .item {
     width: 100rpx;
     height: 100rpx;
-    border-left: 2rpx solid #AFAAA5;
+    border-left: 2rpx solid #afaaa5;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    border-bottom: 2rpx solid #AFAAA5;
+    border-bottom: 2rpx solid #afaaa5;
     font-size: 30rpx;
     font-weight: 400;
-    color: #272A14;
+    color: #272a14;
 }
+.item .large {
+    font-weight: 500;
+    font-size: 32rpx;
+}
+
 .item .small {
     font-size: 24rpx;
 }
+
+.item .small.style1 {
+    border-bottom: 4rpx solid red;
+}
+
 .item.style1 {
-    background: #FFF3EB;
+    background: #fff3eb;
 }
+
 .item.style2 {
-    background: #F6B79C;
+    background: #f6b79c;
 }
+
 /* 
 .item:last-child {
 } */

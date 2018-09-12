@@ -16,7 +16,8 @@ Page({
         currentMonth: 0,
         currentYear: 0,
         selectedDate: null,
-        days: []
+        days: [],
+        lunarTitle: ''
     },
     onLoad: function(options) {
         let now = new Date()
@@ -44,7 +45,27 @@ Page({
         //     key
         // })
 
-        let res = calendar.solar(currentYear, currentMonth + 1, key + 1)
+        this.setupLunarTitle(currentYear, currentMonth, key)
+        // let res = calendar.solar(currentYear, currentMonth + 1, key + 1)
+
+        // let {
+        //     animal,
+        //     ganzhi_year,
+        //     ganzhi_month,
+        //     ganzhi_day,
+        //     lunar_month_chinese,
+        //     lunar_day_chinese
+        // } = res
+        // console.log(res)
+        // console.log(`${ganzhi_year}年 【${animal}年】 ${ganzhi_month}月 ${ganzhi_day}日`)
+        // console.log(`${lunar_month_chinese} ${lunar_day_chinese}`)
+
+        this.setData({
+            selectedDate: key
+        })
+    },
+    setupLunarTitle(year, month, day) {
+        let res = calendar.solar(year, month + 1, day + 1)
 
         let {
             animal,
@@ -54,11 +75,11 @@ Page({
             lunar_month_chinese,
             lunar_day_chinese
         } = res
-        console.log(`${ganzhi_year}年 【${animal}年】 ${ganzhi_month}月 ${ganzhi_day}日`)
-        console.log(`${lunar_month_chinese} ${lunar_day_chinese}`)
-
+        // console.log(res)
+        // console.log(`${ganzhi_year}年 【${animal}年】 ${ganzhi_month}月 ${ganzhi_day}日`)
+        // console.log(`${lunar_month_chinese} ${lunar_day_chinese}`)
         this.setData({
-            selectedDate: key
+            lunarTitle: `${lunar_month_chinese} ${lunar_day_chinese} ${ganzhi_year}年 【${animal}年】 ${ganzhi_month}月 ${ganzhi_day}日`
         })
     },
     preMonth() {
@@ -113,12 +134,15 @@ Page({
         let currentDate = null
         if (now.getFullYear() == currentYear && now.getMonth() == currentMonth) {
             currentDate = now.getDate() - 1
-        }
 
-        console.log({
-            fisrtDay,
-            monthCount,
-        })
+            // this.setupLunarTitle(currentYear, currentMonth, currentDate)
+        }
+        this.setupLunarTitle(currentYear, currentMonth, currentDate)
+
+        // console.log({
+        //     fisrtDay,
+        //     monthCount,
+        // })
 
         let days = []
         for (let i = 0; i < monthCount; i++) {
@@ -130,17 +154,20 @@ Page({
                 ganzhi_month,
                 ganzhi_day,
                 lunar_month_chinese,
-                lunar_day_chinese
+                lunar_day_chinese,
+                lunar_day
             } = res
             days.push(Object.assign({
                 day: i + 1,
+                isFisrt: lunar_day == 1
             }, {
                 animal,
                 ganzhi_year,
                 ganzhi_month,
                 ganzhi_day,
                 lunar_month_chinese,
-                lunar_day_chinese
+                lunar_day_chinese,
+                lunar_day
             }))
         }
 
