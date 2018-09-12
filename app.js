@@ -22,7 +22,7 @@ App({
             isNormal = false
         }
 
-        z.addUser()
+        // z.addUser()
     },
     onShow: function (options) {
         console.log('app onShow:' + (new Date()).getTime())

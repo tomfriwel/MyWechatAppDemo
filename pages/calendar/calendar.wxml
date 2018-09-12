@@ -14,9 +14,10 @@
     </view>
     <view class='line-wrap'>
         <view class='item' wx:for="{{fisrtDay}}" wx:key="item"></view>
-        <view bindtap='itemTap' data-key='{{index}}' class='item style{{currentDate!=null&&currentDate==index?1:(selectedDate!=null&&selectedDate==index?2:0)}}' wx:for="{{days}}" wx:key="item">
+        <view bindtap='itemTap' data-key='{{index}}' class='item {{item.style}} style{{currentDate!=null&&currentDate==index?1:(selectedDate!=null&&selectedDate==index?2:0)}}' wx:for="{{days}}" wx:key="item">
             <view class='large'>{{item.day}}</view>
-            <view class='small style{{item.isFisrt?1:0}}'>{{item.isFisrt?item.lunar_month_chinese:item.lunar_day_chinese}}</view>
+            <!-- <view class='small style{{item.isFisrt?1:0}}'>{{item.isFisrt?item.lunar_month_chinese:item.lunar_day_chinese}}</view> -->
+            <view class='small'>{{item.infos[0]}}</view>
         </view>
     </view>
 </view>

@@ -1,11 +1,13 @@
 // pages/calendar/calendar.js
-const Calendar = require('../../utils/Calendar.js')
+const Calendar = require('../../utils/Calendar/Calendar.js')
+const holidayData = require('../../utils/Calendar/holiday.js')
 
 let calendar = new Calendar()
 // let result
 // result = calendar.solar(2018, 9, 12)
-
 // console.log(result)
+
+
 
 Page({
     data: {
@@ -75,7 +77,7 @@ Page({
             lunar_month_chinese,
             lunar_day_chinese
         } = res
-        // console.log(res)
+        console.log(res)
         // console.log(`${ganzhi_year}年 【${animal}年】 ${ganzhi_month}月 ${ganzhi_day}日`)
         // console.log(`${lunar_month_chinese} ${lunar_day_chinese}`)
         this.setData({
@@ -145,9 +147,9 @@ Page({
         // })
 
         let days = []
+        let obj = null
         for (let i = 0; i < monthCount; i++) {
             let res = calendar.solar(currentYear, currentMonth + 1, i + 1)
-
             let {
                 animal,
                 ganzhi_year,
@@ -157,10 +159,13 @@ Page({
                 lunar_day_chinese,
                 lunar_day
             } = res
-            days.push(Object.assign({
+            let json = {
                 day: i + 1,
-                isFisrt: lunar_day == 1
-            }, {
+                isFisrt: lunar_day == 1,
+                infos: [],
+                style: 'normal'
+            }
+            days.push(Object.assign(json, {
                 animal,
                 ganzhi_year,
                 ganzhi_month,
@@ -169,6 +174,29 @@ Page({
                 lunar_day_chinese,
                 lunar_day
             }))
+
+            // 将当前日期的信息添加到infos数组里，显示的时候取第一个，如果要查看全部信息可以取出infos里的数据
+            json.infos.unshift(lunar_day_chinese)
+            if (json.isFisrt) {
+                json.infos.unshift(lunar_month_chinese)
+                json.style = 'first'
+            }
+
+            if (holidayData[currentMonth + 1] && holidayData[currentMonth + 1][i + 1]) {
+                // title = holidayData[currentMonth + 1][i + 1].title
+                // json.infos.unshift(holidayData[currentMonth + 1][i + 1].title)
+                // json.style = 'holiday'
+                obj = holidayData[currentMonth + 1][i + 1]
+            }
+            if (obj && obj.range[0] < i + 2 && obj.range[1] > i) {
+                json.style = 'holiday'
+                if (obj.at == i + 1) {
+                    json.infos.unshift(obj.title)
+                }
+                if (obj.range[1] == i + 1) {
+                    obj = null
+                }
+            }
         }
 
         this.setData({
