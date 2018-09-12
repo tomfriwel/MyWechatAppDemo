@@ -1,4 +1,67 @@
 // https://github.com/overtrue/chinese-calendar/edit/master/src/Calendar.php
+// ---util start---
+// 1111-11-11 11:11:11
+function isObject(obj) {
+    return obj !== null && typeof obj === 'object'
+}
+
+function dateFromString(time) {
+    if (time == null) {
+        return ''
+    }
+    time = time.replace(/-/g, ':').replace(' ', ':')
+    time = time.split(':')
+    var time1 = new Date(time[0], (time[1] - 1), time[2], time[3], time[4], time[5])
+    return time1
+}
+// yyyy/mm/dd
+function ymdFormat(date, sep = '/') {
+    if (date == null) {
+        return ''
+    }
+    if (!isObject(date)) {
+        date = dateFromString(date)
+    }
+    const year = date.getFullYear()
+    let month = date.getMonth() + 1
+    let day = date.getDate()
+
+    month = month < 10 ? '0' + month : month
+    day = day < 10 ? '0' + day : day
+
+    return [year, month, day].join(sep)
+}
+function str_split(string, splitLength) { // eslint-disable-line camelcase
+    //  discuss at: http://locutus.io/php/str_split/
+    // original by: Martijn Wieringa
+    // improved by: Brett Zamir (http://brett-zamir.me)
+    // bugfixed by: Onno Marsman (https://twitter.com/onnomarsman)
+    //  revised by: Theriault (https://github.com/Theriault)
+    //  revised by: Rafał Kukawski (http://blog.kukawski.pl)
+    //    input by: Bjorn Roesbeke (http://www.bjornroesbeke.be/)
+    //   example 1: str_split('Hello Friend', 3)
+    //   returns 1: ['Hel', 'lo ', 'Fri', 'end']
+
+    if (splitLength === null) {
+        splitLength = 1
+    }
+    if (string === null || splitLength < 1) {
+        return false
+    }
+
+    string += ''
+    var chunks = []
+    var pos = 0
+    var len = string.length
+
+    while (pos < len) {
+        chunks.push(string.slice(pos, pos += splitLength))
+    }
+
+    return chunks
+}
+// ---util end---
+
 
 
 let Calendar = function() {
@@ -192,10 +255,11 @@ let Calendar = function() {
  * @return array
  */
 Calendar.prototype.solar = function(year, month, day, hour = null) {
-    date = this.makeDate(`${year}.${month}.${day}`);
+    let date = this.makeDate(`${year}-${month}-${day}`);
     // date = this.makeDate("{year}-{month}-{day}");
-    lunar = this.solar2lunar(year, month, day, hour);
-    week = abs(date.format('w')); // 0 ~ 6 修正 星期七 为 星期日
+    let lunar = this.solar2lunar(year, month, day, hour);
+    let week = date.getDay(); // 0 ~ 6 修正 星期七 为 星期日
+    // let week = abs(date.format('w')); // 0 ~ 6 修正 星期七 为 星期日
 
     return Object.assign({}, lunar, {
         'gregorian_year': year,
@@ -203,10 +267,13 @@ Calendar.prototype.solar = function(year, month, day, hour = null) {
         // 'gregorian_month': sprintf('%02d', month),
         'gregorian_day': day,
         // 'gregorian_day': sprintf('%02d', day),
-        'gregorian_hour': !is_numeric(hour) || hour < 0 || hour > 23 ? null : sprintf('%02d', hour),
+        
+        'gregorian_hour': isNaN(parseInt(hour)) || hour < 0 || hour > 23 ? null : sprintf('%02d', hour),
+        // 'gregorian_hour': !is_numeric(hour) || hour < 0 || hour > 23 ? null : sprintf('%02d', hour),
         'week_no': week, // 在周日时将会传回 0
-        'week_name': '星期'.this.weekdayAlias[week],
-        'is_today': 0 === this.makeDate('now').diff(date).days,
+        'week_name': '星期' + this.weekdayAlias[week],
+        'is_today': 0 === this.dateDiff(this.makeDate('now'), date).days,
+        // 'is_today': 0 === this.makeDate('now').diff(date).days,
         'constellation': this.toConstellation(month, day),
     })
 }
@@ -236,9 +303,9 @@ Calendar.prototype.lunar = function(year, month, day, isLeapMonth = false, hour 
  * @return int
  */
 Calendar.prototype.daysOfYear = function(year) {
-    sum = 348;
+    let sum = 348;
 
-    for (i = 0x8000; i > 0x8; i >>= 1) {
+    for (let i = 0x8000; i > 0x8; i >>= 1) {
         sum += (this.lunars[year - 1900] & i) ? 1 : 0;
     }
 
@@ -339,12 +406,12 @@ Calendar.prototype.ganZhiYear = function(lunarYear, termIndex = null) {
      *
      * 即使考虑节气，有的年份没有立春，有的年份有两个立春，此处逻辑仍不能处理该特殊情况
      */
-    adjust = null !== termIndex && 3 > termIndex ? 1 : 0;
+    let adjust = null !== termIndex && 3 > termIndex ? 1 : 0;
 
-    ganKey = (lunarYear + adjust - 4) % 10;
-    zhiKey = (lunarYear + adjust - 4) % 12;
+    let ganKey = (lunarYear + adjust - 4) % 10;
+    let zhiKey = (lunarYear + adjust - 4) % 12;
 
-    return this.gan[ganKey].this.zhi[zhiKey];
+    return this.gan[ganKey] + this.zhi[zhiKey];
 }
 
 /**
@@ -356,14 +423,18 @@ Calendar.prototype.ganZhiYear = function(lunarYear, termIndex = null) {
  * @return string
  */
 Calendar.prototype.toConstellation = function(gregorianMonth, gregorianDay) {
-    constellations = '魔羯水瓶双鱼白羊金牛双子巨蟹狮子处女天秤天蝎射手魔羯';
-    arr = [20, 19, 21, 21, 21, 22, 23, 23, 23, 23, 22, 22];
+    let constellations = '魔羯水瓶双鱼白羊金牛双子巨蟹狮子处女天秤天蝎射手魔羯';
+    let arr = [20, 19, 21, 21, 21, 22, 23, 23, 23, 23, 22, 22];
 
-    return mb_substr(
-        constellations,
+    // return mb_substr(
+    //     constellations,
+    //     gregorianMonth * 2 - (gregorianDay < arr[gregorianMonth - 1] ? 2 : 0),
+    //     2,
+    //     'UTF-8'
+    // );
+    return constellations.substr(
         gregorianMonth * 2 - (gregorianDay < arr[gregorianMonth - 1] ? 2 : 0),
         2,
-        'UTF-8'
     );
 }
 
@@ -375,7 +446,7 @@ Calendar.prototype.toConstellation = function(gregorianMonth, gregorianDay) {
  * @return string
  */
 Calendar.prototype.toGanZhi = function(offset) {
-    return this.gan[offset % 10].this.zhi[offset % 12];
+    return this.gan[offset % 10] + this.zhi[offset % 12];
 }
 
 /**
@@ -398,27 +469,37 @@ Calendar.prototype.getTerm = function(year, no) {
     if (no < 1 || no > 24) {
         return -1;
     }
-    solarTermsOfYear = array_map('hexdec', str_split(this.solarTerms[year - 1900], 5));
-    positions = {
+    // let solarTermsOfYear = array_map('hexdec', str_split(this.solarTerms[year - 1900], 5));
+    let solarTermsOfYear = str_split(this.solarTerms[year - 1900], 5).map(ele=>{
+        // hex2dec
+        return parseInt(ele, 16) + ''
+    })
+    let positions = {
         0: [0, 1],
         1: [1, 2],
         2: [3, 1],
         3: [4, 2],
     };
-    group = intval((no - 1) / 4);
+    let group = parseInt((no - 1) / 4);
     // list(offset, length) = positions[(no - 1) % 4];
     let offset, length = positions[(no - 1) % 4];
 
-    return substr(solarTermsOfYear[group], offset, length);
+    return solarTermsOfYear[group].substr(offset, length)
+    // return substr(solarTermsOfYear[group], offset, length);
+    // return substr(solarTermsOfYear[group], offset, length);
 }
 
 Calendar.prototype.toChinaYear = function(year) {
-    if (!is_numeric(year)) {
-        throw new InvalidArgumentException("错误的年份:{year}");
+    // if (!is_numeric(year)) {
+    //     throw new InvalidArgumentException("错误的年份:{year}");
+    // }
+    if (isNaN(parseInt(year))) {
+        throw `错误的年份:${year}`
     }
-    lunarYear = '';
-    year = year;
-    for (i = 0, l = strlen(year); i < l; ++i) {
+    let lunarYear = '';
+    // year = year;
+    // for (let i = 0, l = strlen(year); i < l; ++i) {
+    for (let i = 0, l = year.length; i < l; ++i) {
         lunarYear += '0' !== year[i] ? this.weekdayAlias[year[i]] : '零';
     }
 
@@ -438,7 +519,8 @@ Calendar.prototype.toChinaMonth = function(month) {
         throw new InvalidArgumentException("错误的月份:{month}");
     }
 
-    return this.monthAlias[abs(month) - 1] + '月';
+    return this.monthAlias[Math.abs(month) - 1] + '月';
+    // return this.monthAlias[abs(month) - 1] + '月';
 }
 
 /**
@@ -457,7 +539,8 @@ Calendar.prototype.toChinaDay = function(day) {
         case 30:
             return '三十';
         default:
-            return this.dateAlias[intval(day / 10)].this.weekdayAlias[day % 10];
+            // return this.dateAlias[intval(day / 10)].this.weekdayAlias[day % 10];
+            return this.dateAlias[parseInt(day / 10)] + this.weekdayAlias[day % 10];
     }
 }
 
@@ -473,9 +556,9 @@ Calendar.prototype.toChinaDay = function(day) {
  */
 Calendar.prototype.getAnimal = function(year, termIndex = null) {
     // 认为此逻辑不需要，详情参见 ganZhiYear 相关注释
-    adjust = null !== termIndex && 3 > termIndex ? 1 : 0;
+    let adjust = null !== termIndex && 3 > termIndex ? 1 : 0;
 
-    animalIndex = (year + adjust - 4) % 12;
+    let animalIndex = (year + adjust - 4) % 12;
 
     return this.animals[animalIndex];
 }
@@ -492,7 +575,8 @@ Calendar.prototype.getColor = function(ganZhi) {
         return null;
     }
 
-    gan = substr(ganZhi, 2);
+    // gan = substr(ganZhi, 2);
+    let gan = ganZhi.substr(2);
 
     if (!gan) {
         return null;
@@ -513,7 +597,8 @@ Calendar.prototype.getWuXing = function(ganZhi) {
         return null;
     }
 
-    gan = substr(ganZhi, 2);
+    let gan = ganZhi.substr(2);
+    // gan = substr(ganZhi, 2);
 
     if (!gan) {
         return null;
@@ -537,22 +622,24 @@ Calendar.prototype.solar2lunar = function(year, month, day, hour = null) {
         // 23点过后算子时，农历以子时为一天的起始
         day += 1;
     }
-    date = this.makeDate("{year}-{month}-{day}");
+    let date = this.makeDate(`${year}-${month}-${day}`);
 
-    [year, month, day] = date.format('Y-n-j').split('-')
+    // [year, month, day] = date.format('Y-n-j').split('-')//1992-1-1
 
     // 参数区间1900.1.31~2100.12.31
     if (year < 1900 || year > 2100) {
-        throw new InvalidArgumentException("不支持的年份:{year}");
+        throw ("不支持的年份:{year}");
+        // throw new InvalidArgumentException("不支持的年份:{year}");
     }
 
     // 年份限定、上限
     if (1900 == year && 1 == month && day < 31) {
-        throw new InvalidArgumentException("不支持的日期:{year}-{month}-{day}");
+        throw ("不支持的日期:{year}-{month}-{day}");
+        // throw new InvalidArgumentException("不支持的日期:{year}-{month}-{day}");
     }
 
-    offset = this.dateDiff(date, '1900-01-31').days;
-
+    let offset = this.dateDiff(date, '1900-01-31').days;
+    let i, daysOfYear
     for (i = 1900; i < 2101 && offset > 0; ++i) {
         daysOfYear = this.daysOfYear(i);
         offset -= daysOfYear;
@@ -564,12 +651,13 @@ Calendar.prototype.solar2lunar = function(year, month, day, hour = null) {
     }
 
     // 农历年
-    lunarYear = i;
+    let lunarYear = i;
 
-    leap = this.leapMonth(i); // 闰哪个月
-    isLeap = false;
+    let leap = this.leapMonth(i); // 闰哪个月
+    let isLeap = false;
 
     // 用当年的天数 offset,逐个减去每月（农历）的天数，求出当天是本月的第几天
+    let daysOfMonth
     for (i = 1; i < 13 && offset > 0; ++i) {
         // 闰月
         if (leap > 0 && i == (leap + 1) && !isLeap) {
@@ -603,24 +691,24 @@ Calendar.prototype.solar2lunar = function(year, month, day, hour = null) {
     }
 
     // 农历月
-    lunarMonth = i;
+    let lunarMonth = i;
 
     // 农历日
-    lunarDay = offset + 1;
+    let lunarDay = offset + 1;
 
     // 月柱 1900 年 1 月小寒以前为 丙子月(60进制12)
-    firstNode = this.getTerm(lunarYear, (month * 2 - 1)); // 返回当月「节气」为几日开始
-    secondNode = this.getTerm(lunarYear, (month * 2)); // 返回当月「节气」为几日开始
+    let firstNode = this.getTerm(lunarYear, (month * 2 - 1)); // 返回当月「节气」为几日开始
+    let secondNode = this.getTerm(lunarYear, (month * 2)); // 返回当月「节气」为几日开始
 
     // 依据 12 节气修正干支月
-    ganZhiMonth = this.toGanZhi((year - 1900) * 12 + month + 11);
+    let ganZhiMonth = this.toGanZhi((year - 1900) * 12 + month + 11);
 
     if (day >= firstNode) {
         ganZhiMonth = this.toGanZhi((year - 1900) * 12 + month + 12);
     }
 
     // 获取该天的节气
-    termIndex = null;
+    let termIndex = null;
     if (firstNode == day) {
         termIndex = month * 2 - 2;
     }
@@ -629,26 +717,28 @@ Calendar.prototype.solar2lunar = function(year, month, day, hour = null) {
         termIndex = month * 2 - 1;
     }
 
-    term = null != termIndex ? this.solarTerm[termIndex] : null;
+    let term = null != termIndex ? this.solarTerm[termIndex] : null;
 
     // 日柱 当月一日与 1900/1/1 相差天数
-    dayCyclical = this.dateDiff("{year}-{month}-01", '1900-01-01').days + 10;
+    let dayCyclical = this.dateDiff(`${year}-${month}-01`, '1900-01-01').days + 10;
     dayCyclical += day - 1;
-    ganZhiDay = this.toGanZhi(dayCyclical);
+    let ganZhiDay = this.toGanZhi(dayCyclical);
 
     // 时柱和时辰
     let ganZhiHour, lunarHour;
     [ganZhiHour, lunarHour, hour] = this.ganZhiHour(hour, dayCyclical);
 
-    ganZhiYear = this.ganZhiYear(lunarYear, termIndex);
+    let ganZhiYear = this.ganZhiYear(lunarYear, termIndex);
 
     return {
         'lunar_year': lunarYear,
-        'lunar_month': sprintf('%02d', lunarMonth),
-        'lunar_day': sprintf('%02d', lunarDay),
+        'lunar_month': lunarMonth,
+        'lunar_day': lunarDay,
+        // 'lunar_month': sprintf('%02d', lunarMonth),
+        // 'lunar_day': sprintf('%02d', lunarDay),
         'lunar_hour': hour,
         'lunar_year_chinese': this.toChinaYear(lunarYear),
-        'lunar_month_chinese': (isLeap ? '闰' : '').this.toChinaMonth(lunarMonth),
+        'lunar_month_chinese': (isLeap ? '闰' : '') + this.toChinaMonth(lunarMonth),
         'lunar_day_chinese': this.toChinaDay(lunarDay),
         'lunar_hour_chinese': lunarHour,
         'ganzhi_year': ganZhiYear,
@@ -751,16 +841,31 @@ Calendar.prototype.lunar2solar = function(year, month, day, isLeapMonth = false)
  *
  * @return bool|\DateInterval
  */
-Calendar.prototype.dateDiff = function(date1, date2) {
-    if (!(date1 instanceof DateTime)) {
-        date1 = this.makeDate(date1);
+Calendar.prototype.dateDiff = function(a, b) {
+    // if (!(date1 instanceof DateTime)) {
+    //     date1 = this.makeDate(date1);
+    // }
+
+    // if (!(date2 instanceof DateTime)) {
+    //     date2 = this.makeDate(date2);
+    // }
+
+    // return date1.diff(date2);
+    // Discard the time and time-zone information.
+    if (!isObject(a)) {
+        a = this.makeDate(a);
     }
 
-    if (!(date2 instanceof DateTime)) {
-        date2 = this.makeDate(date2);
+    if (!isObject(b)) {
+        b = this.makeDate(b);
     }
+    const _MS_PER_DAY = 1000 * 60 * 60 * 24;
+    const utc1 = Date.UTC(a.getFullYear(), a.getMonth(), a.getDate());
+    const utc2 = Date.UTC(b.getFullYear(), b.getMonth(), b.getDate());
 
-    return date1.diff(date2);
+    return {
+        days: Math.abs(Math.floor((utc2 - utc1) / _MS_PER_DAY))
+    }
 }
 
 /**
@@ -1075,25 +1180,17 @@ Calendar.prototype.subDays = function(lunar, value = 1) {
  * @return \DateTime
  */
 Calendar.prototype.makeDate = function(str = 'now', timezone = 'PRC') {
-    if(str=='now') {
-        return ymdFormat(new Date(), '-')
-    }
-
-    function ymdFormat(date, sep = '/') {
-        if (date == null) {
-            return ''
-        }
-        // if (!isObject(date)) {
-        //     date = dateFromString(date)
-        // }
-        const year = date.getFullYear()
-        let month = date.getMonth() + 1
-        let day = date.getDate()
-
-        month = month < 10 ? '0' + month : month
-        day = day < 10 ? '0' + day : day
-
-        return [year, month, day].join(sep)
+    if (str == 'now') {
+        // return ymdFormat(new Date(), '-')
+        return new Date()
+    } else {
+        let [year, month, day] = str.split('-')
+        let date = new Date()
+        date.setFullYear(year)
+        date.setMonth(month-1)
+        date.setDate(day)
+        // return ymdFormat(date, '-')
+        return date
     }
     // return 
     // return new DateTime(str, new DateTimeZone(timezone));
@@ -1110,7 +1207,8 @@ Calendar.prototype.makeDate = function(str = 'now', timezone = 'PRC') {
  * @see https://baike.baidu.com/item/%E6%97%B6%E6%9F%B1/6274024
  */
 Calendar.prototype.ganZhiHour = function(hour, ganZhiDay) {
-    if (!is_numeric(hour) || hour < 0 || hour > 23) {
+    // if (!is_numeric(hour) || hour < 0 || hour > 23) {
+    if (isNaN(parseInt(hour)) || hour < 0 || hour > 23) {
         return [null, null, null];
     }
 

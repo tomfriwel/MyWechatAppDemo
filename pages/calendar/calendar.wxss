@@ -1,8 +1,16 @@
 /* pages/calendar/calendar.wxss */
-
+.title {
+    text-align: center;
+    line-height: 88rpx;
+}
+.action-wrap {
+    display: flex;
+    margin-bottom: 20rpx;
+}
 .line-wrap {
     display: flex;
     flex-wrap: wrap;
+    width: 714rpx;
     /* border-right: 2rpx solid #AFAAA5; */
 }
 

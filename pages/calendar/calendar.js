@@ -1,9 +1,11 @@
 // pages/calendar/calendar.js
-// const Calendar = require('../../utils/Calendar.js')
+const Calendar = require('../../utils/Calendar.js')
 
-// let calendar = new Calendar()
+let calendar = new Calendar()
 // let result
-// result = calendar.solar(2017, 5, 5)
+// result = calendar.solar(2018, 9, 12)
+
+// console.log(result)
 
 Page({
     data: {
@@ -13,7 +15,8 @@ Page({
         currentDate: 0,
         currentMonth: 0,
         currentYear: 0,
-        selectedDate: null
+        selectedDate: null,
+        days: []
     },
     onLoad: function(options) {
         let now = new Date()
@@ -29,6 +32,31 @@ Page({
         let {
             key
         } = e.currentTarget.dataset
+
+        let {
+            currentMonth,
+            currentYear,
+        } = this.data
+
+        // console.log({
+        //     currentMonth,
+        //     currentYear,
+        //     key
+        // })
+
+        let res = calendar.solar(currentYear, currentMonth + 1, key + 1)
+
+        let {
+            animal,
+            ganzhi_year,
+            ganzhi_month,
+            ganzhi_day,
+            lunar_month_chinese,
+            lunar_day_chinese
+        } = res
+        console.log(`${ganzhi_year}年 【${animal}年】 ${ganzhi_month}月 ${ganzhi_day}日`)
+        console.log(`${lunar_month_chinese} ${lunar_day_chinese}`)
+
         this.setData({
             selectedDate: key
         })
@@ -49,7 +77,7 @@ Page({
         }
         now.setMonth(currentMonth)
         now.setFullYear(currentYear)
-        
+
         this.setup(now)
     },
     nextMonth() {
@@ -68,13 +96,13 @@ Page({
         }
         now.setMonth(currentMonth)
         now.setFullYear(currentYear)
-        
+
         this.setup(now)
     },
     setup(date) {
         let now = new Date()
         console.log(date)
-        
+
         date.setDate(1)
         let fisrtDay = date.getDay() //0~6
         let monthCount = this.getCountDays(date)
@@ -92,13 +120,38 @@ Page({
             monthCount,
         })
 
+        let days = []
+        for (let i = 0; i < monthCount; i++) {
+            let res = calendar.solar(currentYear, currentMonth + 1, i + 1)
+
+            let {
+                animal,
+                ganzhi_year,
+                ganzhi_month,
+                ganzhi_day,
+                lunar_month_chinese,
+                lunar_day_chinese
+            } = res
+            days.push(Object.assign({
+                day: i + 1,
+            }, {
+                animal,
+                ganzhi_year,
+                ganzhi_month,
+                ganzhi_day,
+                lunar_month_chinese,
+                lunar_day_chinese
+            }))
+        }
+
         this.setData({
             fisrtDay,
             monthCount,
             currentDate,
             currentMonth,
             currentYear,
-            selectedDate: null
+            selectedDate: null,
+            days
         })
     }
 })
