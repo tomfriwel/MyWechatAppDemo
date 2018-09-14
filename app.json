@@ -1,7 +1,7 @@
 {
     "pages": [
-        "pages/request/request",
         "pages/calendar/calendar",
+        "pages/request/request",
         "pages/canvasImage/canvasImage",
         "pages/detectfont/detectfont",
         "pages/canvas/canvas",
