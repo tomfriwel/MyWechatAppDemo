@@ -1,6 +1,6 @@
 // pages/wxPay/wxPay.js
 const network = require("../../utils/network.js")
-const api = require("../../utils/api.js")
+const api = require("../../utils/api-old.js")
 
 Page({
     data: {

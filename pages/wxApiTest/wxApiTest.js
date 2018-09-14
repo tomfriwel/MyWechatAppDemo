@@ -1,7 +1,7 @@
 // pages/wxApiTest/wxApiTest.js
 const app = getApp()
 const networkp = require('../../utils/networkp.js')
-const api = require('../../utils/api.js')
+const api = require('../../utils/api-old.js')
 
 Page({
     data: {

@@ -7,8 +7,6 @@ let calendar = new Calendar()
 // result = calendar.solar(2018, 9, 12)
 // console.log(result)
 
-
-
 Page({
     data: {
         weekItems: ['日', '一', '二', '三', '四', '五', '六'],

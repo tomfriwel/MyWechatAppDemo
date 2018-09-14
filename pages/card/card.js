@@ -1,6 +1,6 @@
 // card.js
 
-const api = require('../../utils/api.js')
+const api = require('../../utils/api-old.js')
 const net = require('../../utils/network.js')
 
 Page({

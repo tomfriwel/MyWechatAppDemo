@@ -4,39 +4,49 @@ const network = require('./utils/network.js')
 const doubanApi = require('./utils/douban_api.js')
 
 const networkp = require('./utils/networkp.js')
-const api = require('./utils/api.js')
+const apiold = require('./utils/api-old.js')
+
+// api
+const api = require('./utils/api/api.js')
 
 let isNormal = true
 const launchPath = 'pages/launchPage/launchPage'
 let scene = null
 
 App({
-    onLaunch: function (options) {
+    onLaunch: function(options) {
         console.log('app onLaunch:' + (new Date()).getTime())
         console.log(options)
         const z = this
 
-        let { scene, path, query } = options
+        let {
+            scene,
+            path,
+            query
+        } = options
 
         if (path != launchPath) {
             isNormal = false
         }
 
         // z.addUser()
+        // api
+        this.api = api
+
     },
-    onShow: function (options) {
+    onShow: function(options) {
         console.log('app onShow:' + (new Date()).getTime())
         console.log(options)
         scene = options.scene
 
         // 带 shareTicket 的小程序消息卡片
-        if(scene == 1044) {
+        if (scene == 1044) {
             let shareTicket = options.shareTicket
             let id = options.query.id
             this.getShareInfo(shareTicket)
         }
     },
-    setupLogin: function () {
+    setupLogin: function() {
         console.log('setupLogin:' + (new Date()).getTime())
         var z = this
         // setup login
@@ -50,8 +60,7 @@ App({
                 console.log('app callback:' + (new Date()).getTime())
                 z.loginCallback()
             }
-        }
-        else {
+        } else {
             z.globalData.isLogin = 0
             z.globalData.loginData = null
 
@@ -60,16 +69,16 @@ App({
             }
         }
     },
-    getUserInfo: function (cb) {
+    getUserInfo: function(cb) {
         var that = this
         if (this.globalData.userInfo) {
             typeof cb == "function" && cb(this.globalData.userInfo)
         } else {
             //调用登录接口
             wx.login({
-                success: function () {
+                success: function() {
                     wx.getUserInfo({
-                        success: function (res) {
+                        success: function(res) {
                             that.globalData.userInfo = res.userInfo
                             typeof cb == "function" && cb(that.globalData.userInfo)
                         }
@@ -78,12 +87,14 @@ App({
             })
         }
     },
-    login: function (callback) {
+    login: function(callback) {
         let z = this
         // login code, code below is just simulation
 
-        setTimeout(function () {
-            wx.setStorageSync('loginData', { id: '123' })
+        setTimeout(function() {
+            wx.setStorageSync('loginData', {
+                id: '123'
+            })
             z.setupLogin()
 
             if (callback) {
@@ -91,30 +102,33 @@ App({
             }
         }, 0)
     },
-    getShareInfo: function (shareTicket) {
+    getShareInfo: function(shareTicket) {
         const z = this
         wx.getShareInfo({
             shareTicket: shareTicket,
-            success: function (res) {
+            success: function(res) {
                 console.log(res)
-                let {encryptedData, iv} = res
+                let {
+                    encryptedData,
+                    iv
+                } = res
 
-                if(encryptedData && iv) {
+                if (encryptedData && iv) {
                     z.getDecodeEncryptedData(encryptedData, iv)
                 }
             },
-            fail: function (res) {
+            fail: function(res) {
                 console.log(res)
             }
         })
     },
-    getDecodeEncryptedData: function (encryptedData, iv) {
+    getDecodeEncryptedData: function(encryptedData, iv) {
         const z = this
         wx.login({
-            success: function (res) {
+            success: function(res) {
                 if (res.code) {
                     networkp.post({
-                        url: api.wechat.getDecodeEncryptedData,
+                        url: apiold.wechat.getDecodeEncryptedData,
                         data: {
                             code: res.code,
                             encryptedData: encryptedData,
@@ -123,7 +137,7 @@ App({
                     }).then(res => {
                         console.log('获取openGId结果：')
                         console.log(res)
-                        if(res.openGId) {
+                        if (res.openGId) {
                             z.bindGroupAndUser(res.openGId)
                         }
                     }).catch(res => {
@@ -135,9 +149,9 @@ App({
             }
         });
     },
-    addUser:function() {
+    addUser: function() {
         wx.getUserInfo({
-            success: function (res) {
+            success: function(res) {
                 var userInfo = res.userInfo
                 var nickName = userInfo.nickName
                 var avatarUrl = userInfo.avatarUrl
@@ -147,10 +161,10 @@ App({
                 var country = userInfo.country
 
                 wx.login({
-                    success: res=> {
+                    success: res => {
                         if (res.code) {
                             networkp.post({
-                                url: api.wechat.addUser,
+                                url: apiold.wechat.addUser,
                                 data: {
                                     code: res.code,
                                     nickName: nickName,
@@ -171,10 +185,10 @@ App({
     bindGroupAndUser: function(openGId) {
         const z = this
         wx.login({
-            success: res=>{
+            success: res => {
                 if (res.code) {
                     networkp.post({
-                        url: api.wechat.bindGroupAndUser,
+                        url: apiold.wechat.bindGroupAndUser,
                         data: {
                             code: res.code,
                             openGId: openGId
@@ -185,7 +199,7 @@ App({
 
                         if (scene && scene == 1044) {
                             networkp.post({
-                                url: api.wechat.getGroupUserList,
+                                url: apiold.wechat.getGroupUserList,
                                 data: {
                                     openGId: openGId,
                                 }
@@ -208,9 +222,12 @@ App({
             }
         })
     },
+    login(cb) {
+
+    },
     globalData: {
         userInfo: null,
-        loginData:{},
-        list:null
+        loginData: {},
+        list: null
     }
 })
