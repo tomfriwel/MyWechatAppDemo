@@ -1,2 +1,4 @@
 <!--pages/request/request.wxml-->
-<text>pages/request/request.wxml</text>
+<view wx:for="{{items}}" wx:key="item" class='wrap'>
+    {{item.name}}
+</view>

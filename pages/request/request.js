@@ -3,18 +3,24 @@ const app = getApp()
 
 Page({
     data: {
-
+        items:[]
     },
     onLoad: function(options) {
 
     },
     onReady: function() {
-        // app.api.movie.getList().then(res=>{
+        const z = this
+        app.api.movie.getList().then(res => {
+            let {
+                data
+            } = res
+            z.setData({
+                items: data
+            })
+        }).catch(res => {})
+        // app.api.login.login().then(res=>{
 
-        // }).catch(res=>{})
-        app.api.login.login().then(res=>{
-
-        }).catch(res=>{
-        })
+        // }).catch(res=>{
+        // })
     },
 })

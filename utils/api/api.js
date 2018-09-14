@@ -1,5 +1,4 @@
 const network = require('./network-wrap.js')
-const loading = require('./loading.js')
 const SERVER_URL = 'https://www.easy-mock.com/mock/5b9b22636a29d2427a5d90a6/apitest'
 
 const movie = {
@@ -33,14 +32,6 @@ function makeUrlMap(map) {
                 options.data = {}
             }
 
-            let showLoading = true
-            if (options.showLoading != undefined) {
-                showLoading = options.showLoading
-            }
-            if (showLoading) {
-                loading.show()
-            }
-
             const app = getApp()
             if (app.globalData.loginData) {
                 Object.assign(options.data, app.globalData.loginData)
@@ -50,11 +41,7 @@ function makeUrlMap(map) {
 
             Object.assign(options, {
                 url,
-                complete: function(res) {
-                    if (showLoading) {
-                        loading.hide()
-                    }
-                }
+                complete: function(res) {}
             })
             return network[type](options)
         }
