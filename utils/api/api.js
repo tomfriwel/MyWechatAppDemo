@@ -23,8 +23,6 @@ function makeUrlMap(map) {
          * options:{
          *      type, post, get, upload
          *      data,
-         *      success,
-         *      fail,
          * }
          */
         obj[key] = function(options) {
