@@ -1,15 +1,7 @@
-const network = require('./network-wrap.js')
+const network = require('./libs/network-wrap.js')
+const loading = require('./libs/loading.js')
+const routes = require('./api-routes.js')
 const SERVER_URL = 'https://www.easy-mock.com/mock/5b9b22636a29d2427a5d90a6/apitest'
-
-const movie = {
-    getList: '/movie/getList'
-}
-const login = {
-    login: '/login/login'
-}
-const test = {
-    test: '/test/test'
-}
 
 function makeUrl(apiUrl) {
     return SERVER_URL + apiUrl
@@ -40,9 +32,16 @@ function makeUrlMap(map) {
             let type = options.type || 'post'
             delete options.type
 
+            // wx.showLoading, 如果不需要刻意去掉
+            loading.show()
             Object.assign(options, {
                 url,
-                complete: function(res) {}
+                complete: function(res) {
+                    loading.hide()
+                    if (res.statusCode != 200 || res.statusCode == 200 && res.data.code && res.data.code != 1000) {
+                        loading.error(res.data.data || res.data)
+                    }
+                }
             })
             return network[type](options)
         }
@@ -50,9 +49,12 @@ function makeUrlMap(map) {
     return obj
 }
 
-module.exports = {
-    serverUrl: SERVER_URL,
-    movie: makeUrlMap(movie),
-    login: makeUrlMap(login),
-    test: makeUrlMap(test),
+let exports = {
+    serverUrl: SERVER_URL
 }
+
+for (let key in routes) {
+    exports[key] = makeUrlMap(routes[key])
+}
+
+module.exports = exports

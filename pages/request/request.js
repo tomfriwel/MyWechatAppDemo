@@ -19,9 +19,14 @@ Page({
             })
         }).catch(res => {})
 
-
-        // app.api.test.test().then(res => {
+        // 未登录测试
+        // app.api.login.login().then(res => {
         //     console.log(res)
         // }).catch(res => { })
+
+
+        app.api.test.test().then(res => {
+            console.log(res)
+        }).catch(res => { })
     },
 })

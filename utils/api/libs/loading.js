@@ -6,10 +6,11 @@ function show() {
     if (timer) {
         return
     }
-    let title = '加载中...'
+
+    // 对于很快完成的请求就不显示loading了
     timer = setTimeout(() => {
         wx.showLoading({
-            title,
+            title: '加载中...',
             mask: true
         })
     }, 400)
@@ -24,7 +25,7 @@ function hide() {
     wx.hideLoading()
 }
 
-function fail(content) {
+function error(content) {
     if (content == null || content == undefined) {
         content = ''
     } else if (content !== null && typeof content === 'object') {
@@ -37,6 +38,8 @@ function fail(content) {
     }
 
     content = content + ''
+
+    // 太长的话，显示框会超出屏幕，截掉多余的
     content = content.substring(0, 499)
     wx.showModal({
         title: '提示',
@@ -49,5 +52,5 @@ function fail(content) {
 module.exports = {
     show,
     hide,
-    fail,
+    error,
 }
