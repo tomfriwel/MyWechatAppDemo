@@ -7,6 +7,9 @@ const movie = {
 const login = {
     login: '/login/login'
 }
+const test = {
+    test: '/test/test'
+}
 
 function makeUrl(apiUrl) {
     return SERVER_URL + apiUrl
@@ -53,4 +56,5 @@ module.exports = {
     serverUrl: SERVER_URL,
     movie: makeUrlMap(movie),
     login: makeUrlMap(login),
+    test: makeUrlMap(test),
 }

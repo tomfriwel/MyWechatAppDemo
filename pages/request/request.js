@@ -18,9 +18,10 @@ Page({
                 items: data
             })
         }).catch(res => {})
-        // app.api.login.login().then(res=>{
 
-        // }).catch(res=>{
-        // })
+
+        // app.api.test.test().then(res => {
+        //     console.log(res)
+        // }).catch(res => { })
     },
 })
