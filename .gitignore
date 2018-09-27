@@ -4,6 +4,7 @@ typings
 project.config.json
 jsconfig.json
 apiconfig.js
+miniprogram_npm
 
 
 # Created by https://www.gitignore.io/api/node,macos
