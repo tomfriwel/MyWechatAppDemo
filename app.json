@@ -1,7 +1,8 @@
 {
     "pages": [
-        "pages/request/request",
+        "pages/color/color",
         "pages/calendar/calendar",
+        "pages/request/request",
         "pages/canvasImage/canvasImage",
         "pages/detectfont/detectfont",
         "pages/canvas/canvas",

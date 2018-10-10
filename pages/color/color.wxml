@@ -1,0 +1,9 @@
+<!--pages/color/color.wxml-->
+<view class='wrap'>
+    <view wx:for="{{colors}}" wx:key="item" class='item' style="background:rgb({{item.r}}, {{item.g}}, {{item.b}})"></view>
+    <view class='color-picker'>
+        <view class='bg'></view>
+        <view class='cover'></view>
+    </view>
+    <view class='color-picker-hue'></view>
+</view>
