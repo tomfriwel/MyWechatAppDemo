@@ -44,3 +44,7 @@
 #### Page:calendar - 公农日历
 
 ![](https://upload-images.jianshu.io/upload_images/2158535-0d889c9cb18ca1a8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/375)
+
+#### Page:color - 拾色器
+
+![](https://upload-images.jianshu.io/upload_images/2158535-36174e426000b9f3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/375)
