@@ -1,6 +1,11 @@
 <!--pages/color/color.wxml-->
 <scroll-view class='main' scroll-y>
     <view class='wrap'>
+        <view class='info'>
+            <view>
+                <text selectable='{{true}}'>rgb({{pickerColor.r}}, {{pickerColor.g}}, {{pickerColor.b}})</text>
+            </view>
+        </view>
         <!-- picker -->
         <view bindtouchstart='colorPickerStart' bindtouchmove='colorPickerMove' class='color-picker'>
             <view class='bg' style='background-color:rgb({{color.r}}, {{color.g}}, {{color.b}})'></view>

@@ -10,15 +10,7 @@ function inRange(value, min, max) {
     return value >= min && value < max
 }
 
-function sb2sl(s, b) {
-    let SL = {
-        s: 0,
-        l: 0
-    }
-    SL.l = (2 - s) * b / 2;
-    SL.s = SL.l && SL.l < 1 ? s * b / (SL.l < 0.5 ? SL.l * 2 : 2 - SL.l * 2) : SL.s;
-    return SL
-}
+
 Page({
     data: {
         colors: [{
@@ -74,7 +66,7 @@ Page({
         },
         hue: 1,
         pickerColor: {
-            r: 0,
+            r: 255,
             g: 0,
             b: 0
         },
@@ -121,10 +113,15 @@ Page({
 
             // to right saturation
             // to top lightness
-            let temp = tools.hslToRgb({
+            // let temp = tools.hslToRgb({
+            //     h: this.data.hue,
+            //     s: percentX,
+            //     l: sb2sl(percentX, 1 - percentY).l
+            // })
+            let temp = tools.hsbToRgb({
                 h: this.data.hue,
                 s: percentX,
-                l: sb2sl(percentX, 1 - percentY).l
+                b: 1 - percentY
             })
             let pickerColor = {
                 r: parseInt(temp[0]),
@@ -139,11 +136,11 @@ Page({
                 pickerColor
             })
             console.log(pickerColor)
-            console.log({
-                h: this.data.hue,
-                s: percentX,
-                l: sb2sl(percentX, 1 - percentY).l
-            })
+            // console.log({
+            //     h: this.data.hue,
+            //     s: percentX,
+            //     l: sb2sl(percentX, 1 - percentY).l
+            // })
         }
     },
     colorPickerStart(e) {
@@ -200,7 +197,8 @@ Page({
             this.setData({
                 huePosition: pos,
                 hue: percent,
-                color: color
+                color: color,
+                pickerColor:color
             })
         }
     },

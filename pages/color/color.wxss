@@ -16,6 +16,15 @@
     flex-wrap: wrap;
 }
 
+.info {
+    margin: 10rpx auto;
+    padding: 10rpx;
+    width: 700rpx;
+    border: 2rpx solid #ddd;
+    font-size: 30rpx;
+    font-weight: 500;
+}
+
 .item {
     margin: 10rpx;
     width: 100rpx;

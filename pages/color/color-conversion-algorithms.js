@@ -1,3 +1,5 @@
+// https://gist.github.com/mjackson/5311256
+
 /**
  * Converts an RGB color value to HSL. Conversion formula
  * adapted from http://en.wikipedia.org/wiki/HSL_color_space.
@@ -9,10 +11,15 @@
  * @param   Number  b       The blue color value
  * @return  Array           The HSL representation
  */
-function rgbToHsl({r, g, b}) {
+function rgbToHsl({
+    r,
+    g,
+    b
+}) {
     r /= 255, g /= 255, b /= 255;
 
-    var max = Math.max(r, g, b), min = Math.min(r, g, b);
+    var max = Math.max(r, g, b),
+        min = Math.min(r, g, b);
     var h, s, l = (max + min) / 2;
 
     if (max == min) {
@@ -22,9 +29,15 @@ function rgbToHsl({r, g, b}) {
         s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
 
         switch (max) {
-            case r: h = (g - b) / d + (g < b ? 6 : 0); break;
-            case g: h = (b - r) / d + 2; break;
-            case b: h = (r - g) / d + 4; break;
+            case r:
+                h = (g - b) / d + (g < b ? 6 : 0);
+                break;
+            case g:
+                h = (b - r) / d + 2;
+                break;
+            case b:
+                h = (r - g) / d + 4;
+                break;
         }
 
         h /= 6;
@@ -44,7 +57,11 @@ function rgbToHsl({r, g, b}) {
  * @param   Number  l       The lightness
  * @return  Array           The RGB representation
  */
-function hslToRgb({h, s, l}) {
+function hslToRgb({
+    h,
+    s,
+    l
+}) {
     var r, g, b;
 
     if (s == 0) {
@@ -84,7 +101,8 @@ function hslToRgb({h, s, l}) {
 function rgbToHsv(r, g, b) {
     r /= 255, g /= 255, b /= 255;
 
-    var max = Math.max(r, g, b), min = Math.min(r, g, b);
+    var max = Math.max(r, g, b),
+        min = Math.min(r, g, b);
     var h, s, v = max;
 
     var d = max - min;
@@ -94,9 +112,15 @@ function rgbToHsv(r, g, b) {
         h = 0; // achromatic
     } else {
         switch (max) {
-            case r: h = (g - b) / d + (g < b ? 6 : 0); break;
-            case g: h = (b - r) / d + 2; break;
-            case b: h = (r - g) / d + 4; break;
+            case r:
+                h = (g - b) / d + (g < b ? 6 : 0);
+                break;
+            case g:
+                h = (b - r) / d + 2;
+                break;
+            case b:
+                h = (r - g) / d + 4;
+                break;
         }
 
         h /= 6;
@@ -126,20 +150,57 @@ function hsvToRgb(h, s, v) {
     var t = v * (1 - (1 - f) * s);
 
     switch (i % 6) {
-        case 0: r = v, g = t, b = p; break;
-        case 1: r = q, g = v, b = p; break;
-        case 2: r = p, g = v, b = t; break;
-        case 3: r = p, g = q, b = v; break;
-        case 4: r = t, g = p, b = v; break;
-        case 5: r = v, g = p, b = q; break;
+        case 0:
+            r = v, g = t, b = p;
+            break;
+        case 1:
+            r = q, g = v, b = p;
+            break;
+        case 2:
+            r = p, g = v, b = t;
+            break;
+        case 3:
+            r = p, g = q, b = v;
+            break;
+        case 4:
+            r = t, g = p, b = v;
+            break;
+        case 5:
+            r = v, g = p, b = q;
+            break;
     }
 
     return [r * 255, g * 255, b * 255];
+}
+
+
+// addition
+function sb2sl(s, b) {
+    let SL = {
+        s: 0,
+        l: 0
+    }
+    SL.l = (2 - s) * b / 2;
+    SL.s = SL.l && SL.l < 1 ? s * b / (SL.l < 0.5 ? SL.l * 2 : 2 - SL.l * 2) : SL.s;
+    return SL
+}
+
+function hsbToRgb({
+    h,
+    s,
+    b
+}) {
+    return hslToRgb({
+        h: h,
+        s: s,
+        l: sb2sl(s, b).l
+    })
 }
 
 module.exports = {
     rgbToHsl,
     hslToRgb,
     rgbToHsv,
-    hsvToRgb
+    hsvToRgb,
+    hsbToRgb
 }
