@@ -2,6 +2,7 @@
 
 .wrap {
     display: flex;
+    flex-wrap: wrap;
 }
 
 .item {
@@ -13,8 +14,8 @@
 .color-picker {
     position: relative;
     margin: 20rpx;
-    width: 200rpx;
-    height: 200rpx;
+    width: 600rpx;
+    height: 600rpx;
 }
 
 .color-picker .bg {
@@ -23,7 +24,7 @@
     top: 0;
     width: 100%;
     height: 100%;
-    background: red;
+    background: blue;
 }
 
 .color-picker .cover {
@@ -35,11 +36,35 @@
     background-image: linear-gradient(to top, #000, rgba(204, 154, 129, 0));
 }
 
+.color-picker .light {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(to right, #fff, rgba(204, 154, 129, 0));
+}
+
 .color-picker-hue {
+    position: relative;
     margin: 20rpx;
     border-radius: 10rpx;
-    width: 100rpx;
+    width: 60rpx;
     height: 600rpx;
     background: linear-gradient(to bottom, #ff0000 0%, #ffff00 17%, #00ff00 33%, #00ffff 50%, #0000ff 67%, #ff00ff 83%, #ff0000 100%);
 }
 
+.hue-position {
+    position: absolute;
+    top: 0;
+    left: -20rpx;
+    width: 100rpx;
+    height: 4rpx;
+    background: white;
+    border: 4rpx solid black;
+}
+
+
+.slider {
+    width: 600rpx;
+}

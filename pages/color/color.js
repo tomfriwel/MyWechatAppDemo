@@ -20,4 +20,13 @@ Page({
     onLoad: function(options) {
 
     },
+    hueHandler(e) {
+        console.log(e)
+        const z = this;
+        const query = wx.createSelectorQuery().in(this)
+        query.select('#color-picker-hue').boundingClientRect(function (res) {
+            // res.top // 这个组件内 #the-id 节点的上边界坐标
+            console.log(res)
+        }).exec()
+    }
 })
