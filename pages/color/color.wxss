@@ -1,15 +1,35 @@
 /* pages/color/color.wxss */
 
+.main {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 750rpx;
+    height: 100vh;
+}
 .wrap {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 750rpx;
     display: flex;
     flex-wrap: wrap;
 }
 
 .item {
-    margin: 20rpx;
-    width: 200rpx;
-    height: 200rpx;
+    margin: 10rpx;
+    width: 100rpx;
+    height: 100rpx;
     /* background: pink; */
+}
+.item.special0 {
+    background-image: linear-gradient(to top, rgb(255,255,0), rgb(0,255,255));
+}
+.item.special1 {
+    background-image: linear-gradient(to top, rgb(255,255,0), rgb(255,0,255));
+}
+.item.special2 {
+    background-image: linear-gradient(to top, rgb(0,255,255), rgb(255,0,255));
 }
 .color-picker {
     position: relative;
@@ -61,9 +81,4 @@
     height: 4rpx;
     background: white;
     border: 4rpx solid black;
-}
-
-
-.slider {
-    width: 600rpx;
 }

@@ -12,18 +12,49 @@ function inRange(value, min, max) {
 Page({
     data: {
         colors: [{
-                r: 220,
-                g: 20,
-                b: 20
+                r: 255,
+                g: 255,
+                b: 0
             },
             {
-                r: 120,
-                g: 120,
-                b: 120
-            }, {
-                r: 170,
-                g: 70,
-                b: 70
+                r: 0,
+                g: 255,
+                b: 255
+            },
+            {
+                r: 255,
+                g: 0,
+                b: 255
+            },
+            {
+                r: 128,
+                g: 255,
+                b: 128
+            },
+            {
+                r: 128,
+                g: 128,
+                b: 255
+            },
+            {
+                r: 255,
+                g: 128,
+                b: 128
+            },
+            {
+                r: 191,
+                g: 128,
+                b: 191
+            },
+            {
+                r: 128,
+                g: 191,
+                b: 191
+            },
+            {
+                r: 191,
+                g: 191,
+                b: 128
             },
         ],
         color: {
@@ -71,8 +102,13 @@ Page({
             // 67% ~ 83% (0,0,255) ~ (255,0,255)
             // 83% ~ 100% (255,0,255) ~ (255,0,0)
             let v = 1530 * percent
+            let isZero = v == 0
             let n = parseInt(v / 255)
-            v = parseInt(v - n * 255)
+            v = v - n * 255
+            if (v == 0 && !isZero) {
+                v = 255
+            }
+            v = parseInt(v)
             console.log(v + ',' + percent)
             percent *= 100
             let color = {
@@ -86,12 +122,15 @@ Page({
                     g: v,
                     b: 0
                 }
+                console.log(1)
             } else if (inRange(percent, 17, 33)) {
                 color = {
                     r: 255 - v,
                     g: 255,
                     b: 0
                 }
+
+                console.log(2)
             } else if (inRange(percent, 33, 50)) {
                 color = {
                     r: 0,
@@ -122,6 +161,7 @@ Page({
                     g: 0,
                     b: 0
                 }
+                console.log(3)
             }
 
             // (to bottom, #ff0000 0%, #ffff00 17%, #00ff00 33%, #00ffff 50%, #0000ff 67%, #ff00ff 83%, #ff0000 100%);

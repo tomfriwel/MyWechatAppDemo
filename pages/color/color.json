@@ -1,3 +1,4 @@
 {
-    "navigationBarTitleText": "颜色"
+    "navigationBarTitleText": "颜色",
+    "disableScroll": true
 }

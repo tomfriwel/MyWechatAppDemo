@@ -1,14 +1,21 @@
 <!--pages/color/color.wxml-->
-<view class='wrap'>
-    <view wx:for="{{colors}}" wx:key="item" class='item' style="background:rgb({{item.r}}, {{item.g}}, {{item.b}})"></view>
-    <view class='color-picker'>
-        <view class='bg' style='background-color:rgb({{color.r}}, {{color.g}}, {{color.b}})'></view>
-        <view class='light'></view>
-        <view class='cover'></view>
-    </view>
-    <view bindtap='hueHandler' bindtouchstart='hueStart' bindtouchmove='hueMove' class='color-picker-hue' id='color-picker-hue'>
-        <view class='hue-position' style='top:{{huePosition}}rpx'></view>
-    </view>
-    <slider class='slider' max='1530' />
+<scroll-view class='main' scroll-y>
+    <view class='wrap'>
+        <!-- picker -->
+        <view class='color-picker'>
+            <view class='bg' style='background-color:rgb({{color.r}}, {{color.g}}, {{color.b}})'></view>
+            <view class='light'></view>
+            <view class='cover'></view>
+        </view>
+        <view bindtap='hueHandler' bindtouchstart='hueStart' bindtouchmove='hueMove' class='color-picker-hue' id='color-picker-hue'>
+            <view class='hue-position' style='top:{{huePosition}}rpx'></view>
+        </view>
 
-</view>
+        <!-- color -->
+        <view wx:for="{{colors}}" wx:key="item" class='item' style="background:rgb({{item.r}}, {{item.g}}, {{item.b}})"></view>
+        <view class='item special0'></view>
+        <view class='item special1'></view>
+        <view class='item special2'></view>
+
+    </view>
+</scroll-view>
