@@ -1,4 +1,5 @@
 // pages/color/color.js
+// https://www.htmlcolor-picker.com/
 const tools = require('./color-conversion-algorithms.js')
 const W = wx.getSystemInfoSync().screenWidth
 const rate = 750.0 / W

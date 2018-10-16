@@ -1,6 +1,7 @@
 {
     "pages": [
         "pages/color/color",
+        "pages/es6/es6",
         "pages/calendar/calendar",
         "pages/request/request",
         "pages/canvasImage/canvasImage",
