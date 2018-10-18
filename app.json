@@ -1,12 +1,13 @@
 {
     "pages": [
+        "pages/longFigure/longFigure",
+        "pages/canvas/canvas",
         "pages/color/color",
         "pages/es6/es6",
         "pages/calendar/calendar",
         "pages/request/request",
         "pages/canvasImage/canvasImage",
         "pages/detectfont/detectfont",
-        "pages/canvas/canvas",
         "pages/test/test",
         "pages/sortItems/sortItems",
         "pages/card/card",

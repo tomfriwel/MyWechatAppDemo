@@ -1,0 +1,2 @@
+<!--pages/longFigure/longFigure.wxml-->
+<canvas canvas-id='cvs' style='width:300px; height:300px;border:1px solid gray;'></canvas>
