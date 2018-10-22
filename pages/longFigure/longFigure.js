@@ -1,4 +1,5 @@
 // pages/longFigure/longFigure.js
+// https://www.cnblogs.com/gavinjay/p/8582137.html
 Page({
     data: {
 
