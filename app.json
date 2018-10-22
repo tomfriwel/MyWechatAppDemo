@@ -1,5 +1,6 @@
 {
     "pages": [
+        "pages/remember/remember",
         "pages/longFigure/longFigure",
         "pages/canvas/canvas",
         "pages/color/color",

@@ -1,0 +1,12 @@
+/* pages/remember/remember.wxss */
+.number {
+    text-align: center;
+    font-size: 80rpx;
+}
+
+.input {
+    font-size: 80rpx;
+    padding: 20rpx;
+    margin: 40rpx auto;
+    height: 80rpx;
+}

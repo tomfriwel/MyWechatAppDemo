@@ -1,0 +1,4 @@
+<!--pages/remember/remember.wxml-->
+<view bindtap='start' class='number'>{{num}}</view>
+<input class='input' bindconfirm='inputConfirm' placeholder='Input numbers'></input>
+<view class='number'>{{text}}</view>
