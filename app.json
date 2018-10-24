@@ -1,10 +1,10 @@
 {
     "pages": [
+        "pages/color/color",
+        "pages/canvas/canvas",
+        "pages/longFigure/longFigure",
         "pages/perlinNoise/perlinNoise",
         "pages/remember/remember",
-        "pages/longFigure/longFigure",
-        "pages/canvas/canvas",
-        "pages/color/color",
         "pages/es6/es6",
         "pages/calendar/calendar",
         "pages/request/request",
