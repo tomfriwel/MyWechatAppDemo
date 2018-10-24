@@ -1,5 +1,6 @@
 {
     "pages": [
+        "pages/perlinNoise/perlinNoise",
         "pages/remember/remember",
         "pages/longFigure/longFigure",
         "pages/canvas/canvas",

@@ -1,4 +1,6 @@
 // pages/remember/remember.js
+// 类似于《刻意练习》里的记忆小游戏，点击开始。
+// 显示完6个数字后，在输入框中输入记忆的数字，回车查看是否正确。
 Page({
     data: {
         num: 'Click to start',
