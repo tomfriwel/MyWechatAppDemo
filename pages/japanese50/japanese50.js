@@ -263,11 +263,11 @@ const jp = {
                 en: 'wo',
             },
         ],
-        // [{
-        //     hiragana: 'ん',
-        //     katakana: 'ン',
-        //     en: 'n',
-        // }, ],
+        [{
+            hiragana: 'ん',
+            katakana: 'ン',
+            en: 'n',
+        }, ],
     ],
     // 浊音
     itemDull: [
@@ -623,8 +623,10 @@ function swap(arr, idxObj0, idxObj1) {
 
 function shuffle(array) {
     var itemLength = array[0].length;
-    var currentIndex = array.length * itemLength,
-        temporaryValue, randomIndex;
+    var currentIndex = 0, temporaryValue, randomIndex;
+    array.map(items => {
+        currentIndex += items.length;
+    });
     // While there remain elements to shuffle...
     while (0 !== currentIndex) {
         // Pick a remaining element...
@@ -649,7 +651,15 @@ Page({
         selected: [-1, -1],
     },
     onLoad: function(options) {
-        // jp.items = shuffle(jp.items);
+        let items = jp.items;
+        for (let i = 0; i < items.length; i++) {
+            for (let j = 0; j < items[i].length; j++) {
+                items[i][j].index = i;
+                items[i][j].subindex = j;
+            }
+        }
+        jp.items = items;
+        jp.items = shuffle(jp.items);
         this.setData({
             jp
         });
