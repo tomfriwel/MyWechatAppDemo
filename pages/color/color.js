@@ -74,7 +74,6 @@ Page({
         huePosition: 0
     },
     onLoad: function(options) {
-
     },
     // color picker
     // colorPickerHandler(e) {

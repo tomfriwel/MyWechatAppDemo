@@ -1,0 +1,14 @@
+<!--pages/japanese50/japanese50.wxml-->
+<view class='wrap'>
+    <view wx:for="{{jp.items}}" wx:key="item" class='item-wrap'>
+        <view bindtap='tap' data-index='{{index}}' data-subindex='{{subindex}}' wx:for="{{item}}" wx:key="item" wx:for-item="subitem" wx:for-index="subindex" class="item {{selected[0]==index&&selected[1]==subindex?'selected':''}}">
+            <view class='text-wrap'>
+                <text wx:if="{{type==0||type==2}}">{{subitem.hiragana}}</text>
+                <text wx:if="{{type==1||type==2}}">{{subitem.katakana}}</text>
+            </view>
+            <text wx:if="{{displayEn}}">{{subitem.en}}</text>
+        </view>
+    </view>
+    <button bindtap='shuffle'>shuffle</button>
+    <view wx:if="{{!finish}}" class='tip'>Comleted!</view>
+</view>
