@@ -6,9 +6,10 @@
                 <text wx:if="{{type==0||type==2}}">{{subitem.hiragana}}</text>
                 <text wx:if="{{type==1||type==2}}">{{subitem.katakana}}</text>
             </view>
-            <text wx:if="{{displayEn}}">{{subitem.en}}</text>
+            <text wx:if="{{displayEn || finish}}">{{subitem.en}}</text>
         </view>
     </view>
-    <button bindtap='shuffle'>shuffle</button>
-    <view wx:if="{{!finish}}" class='tip'>Comleted!</view>
+    <button bindtap='shuffle'>打乱顺序</button>
+    <view class='tip'>点击两个方块进行交换，知道顺序全部正确</view>
+    <view wx:if="{{finish}}" class='tip'>Comleted!</view>
 </view>

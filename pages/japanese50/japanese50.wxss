@@ -1,4 +1,5 @@
 /* pages/japanese50/japanese50.wxss */
+
 .wrap {
     width: 100%;
     display: flex;
@@ -6,9 +7,12 @@
     flex-direction: column;
     align-items: center;
 }
+
 .item-wrap {
+    width: 100%;
     display: flex;
 }
+
 .item {
     width: 148rpx;
     height: 200rpx;
@@ -20,11 +24,13 @@
     justify-content: center;
     align-items: center;
 }
+
 .text-wrap {
     display: flex;
     width: 100%;
     justify-content: space-evenly;
 }
+
 .item.selected {
     background: #eee;
 }
