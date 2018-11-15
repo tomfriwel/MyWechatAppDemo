@@ -1,5 +1,6 @@
 // pages/japanese50/japanese50.js
 
+// 将打乱顺序的五十音图重新排序。
 const jp = {
     // 清音
     items: [
