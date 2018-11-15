@@ -3,7 +3,7 @@
     <!-- <image class='img' src='/images/1.jpg' mode='aspectFit'></image> -->
     <movable-area class="area">
         <block wx:for="{{items}}" wx:key="item">
-            <movable-view x="{{item.x}}" y="{{item.y}}" class='item' direction="all"></movable-view>
+            <movable-view bindtouchend='endHandler' data-index='{{index}}' x="{{item.x}}" y="{{item.y}}" class='item' direction="all"></movable-view>
         </block>
     </movable-area>
 </view>

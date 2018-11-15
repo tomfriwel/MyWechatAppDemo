@@ -1,7 +1,7 @@
 {
     "pages": [
-        "pages/japanese50/japanese50",
         "pages/drag/drag",
+        "pages/japanese50/japanese50",
         "pages/color/color",
         "pages/canvas/canvas",
         "pages/longFigure/longFigure",
