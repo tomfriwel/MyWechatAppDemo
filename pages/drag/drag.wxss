@@ -1,0 +1,29 @@
+/* pages/drag/drag.wxss */
+.container {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 750rpx;
+    height: 100vh;
+}
+
+.img {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+.area {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 750rpx;
+    height: 100vh;
+}
+
+.item {
+    width: 100rpx;
+    height: 100rpx;
+    background: pink;
+}
