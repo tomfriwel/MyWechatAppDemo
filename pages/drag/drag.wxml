@@ -1,9 +1,16 @@
 <!--pages/drag/drag.wxml-->
 <view class='container'>
-    <!-- <image class='img' src='/images/1.jpg' mode='aspectFit'></image> -->
+    <image class='img' src='/images/1.jpg' mode='aspectFit'></image>
+    <!-- <image wx:if="{{scaleInfo}}" class='img' src='/images/tree.jpg' mode='aspectFit' style="width:{{scaleInfo.w}}px;height:{{scaleInfo.h}}px;"></image> -->
     <movable-area class="area">
         <block wx:for="{{items}}" wx:key="item">
-            <movable-view bindtouchend='endHandler' data-index='{{index}}' x="{{item.x}}" y="{{item.y}}" class='item' direction="all"></movable-view>
+            <movable-view style='background:{{item.color}};' bindtouchstart='startHandler' bindtouchend='endHandler' data-index='{{index}}' x="{{item.x}}" y="{{item.y}}" class='item' direction="all">
+                <!-- <view><text class='text'>{{item.title}}</text></view> -->
+                <!-- <image class='item-image' src='/images/1.jpg' mode='aspectFit'></image> -->
+            </movable-view>
         </block>
     </movable-area>
+    <!-- <view class='layer'>
+        <view wx:if="{{scaleInfo}}" class='mask' style="width:{{scaleInfo.w}}px;height:{{scaleInfo.h}}px;"></view>
+    </view> -->
 </view>
