@@ -1,7 +1,7 @@
 <!--pages/drag/drag.wxml-->
 <view class='container'>
-    <image class='img' src='/images/1.jpg' mode='aspectFit'></image>
-    <!-- <image wx:if="{{scaleInfo}}" class='img' src='/images/tree.jpg' mode='aspectFit' style="width:{{scaleInfo.w}}px;height:{{scaleInfo.h}}px;"></image> -->
+    <image class='img' src='/images/tree.jpg' mode='aspectFit'></image>
+    <!-- <image wx:if="{{scaleInfo}}" clas6s='img' src='/images/tree.jpg' mode='aspectFit' style="width:{{scaleInfo.w}}px;height:{{scaleInfo.h}}px;"></image> -->
     <movable-area class="area">
         <block wx:for="{{items}}" wx:key="item">
             <movable-view style='background:{{item.color}};' bindtouchstart='startHandler' bindtouchend='endHandler' data-index='{{index}}' x="{{item.x}}" y="{{item.y}}" class='item' direction="all">

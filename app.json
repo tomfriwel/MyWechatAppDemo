@@ -1,8 +1,9 @@
 {
     "pages": [
+        "pages/drag/drag",
+        "pages/test/test",
         "pages/japanese50/japanese50",
         "pages/live/live",
-        "pages/drag/drag",
         "pages/color/color",
         "pages/canvas/canvas",
         "pages/longFigure/longFigure",
@@ -13,7 +14,6 @@
         "pages/request/request",
         "pages/canvasImage/canvasImage",
         "pages/detectfont/detectfont",
-        "pages/test/test",
         "pages/sortItems/sortItems",
         "pages/card/card",
         "pages/audio/audio",
