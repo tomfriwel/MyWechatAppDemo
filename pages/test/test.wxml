@@ -1,1 +1,80 @@
-<view wx:for="{{list}}" wx:key="itemadsf" class="item">{{item.title}}</view>
+<button bindtap='add'>add</button>
+<view class='item-wrap' wx:for="{{tires}}" wx:key="item">
+    <!-- 选择框 -->
+    <view class='input-wrap'>
+        <view class='input-title'>轮位</view>
+        <picker class='picker-cover' bindchange="positionPickerChange" data-key='positionIndex' data-index='{{index}}' value="{{item.positionIndex}}" range="{{item.position}}">
+            <view class='input-content'>
+                <view wx:if="{{item.positionIndex==null}}" class='picker-placeholder placeholder'>请选择延保轮胎轮位</view>
+                <view wx:else class='picker-content'>{{item.position[item.positionIndex]}}</view>
+                <image class='picker-icon' src='/images/arrow-down.png' mode='aspectFit'></image>
+            </view>
+        </picker>
+    </view>
+
+    <view class='input-wrap'>
+        <view class='input-title'>品牌</view>
+        <picker class='picker-cover' bindchange="bindPickerChange" data-key='brandnameIndex' data-index='{{index}}' value="{{item.brandnameIndex}}" range="{{item.brandnames}}">
+            <view class='input-content'>
+                <view wx:if="{{item.brandnameIndex==null}}" class='picker-placeholder placeholder'>请选择轮胎品牌</view>
+                <view wx:else class='picker-content'>{{item.brandnames[item.brandnameIndex]}}</view>
+                <image class='picker-icon' src='/images/arrow-down.png' mode='aspectFit'></image>
+            </view>
+        </picker>
+    </view>
+
+    <view class='input-wrap'>
+        <view class='input-title'>规格</view>
+        <picker class='picker-cover' bindchange="bindPickerChange" data-key='seriesIndex' data-index='{{index}}' value="{{item.seriesIndex}}" range="{{item.series}}">
+            <view class='input-content'>
+                <view wx:if="{{item.seriesIndex==null}}" class='picker-placeholder placeholder'>请选择轮胎系列</view>
+                <view wx:else class='picker-content'>{{item.series[item.seriesIndex]}}</view>
+                <image class='picker-icon' src='/images/arrow-down.png' mode='aspectFit'></image>
+            </view>
+        </picker>
+    </view>
+
+    <view class='input-wrap'>
+        <view class='input-title'></view>
+        <picker class='picker-cover' bindchange="bindPickerChange" data-key='specificationsIndex' data-index='{{index}}' value="{{item.specificationsIndex}}" range="{{item.specifications}}">
+            <view class='input-content'>
+                <view wx:if="{{item.specificationsIndex==null}}" class='picker-placeholder placeholder'>请选择轮胎规格号</view>
+                <view wx:else class='picker-content'>{{item.specifications[item.specificationsIndex]}}</view>
+                <image class='picker-icon' src='/images/arrow-down.png' mode='aspectFit'></image>
+            </view>
+        </picker>
+    </view>
+
+    <view class='input-wrap'>
+        <view class='input-title'></view>
+        <picker class='picker-cover' bindchange="bindPickerChange" data-key='figureIndex' data-index='{{index}}' value="{{item.figureIndex}}" range="{{item.figure}}">
+            <view class='input-content'>
+                <view wx:if="{{item.figureIndex==null}}" class='picker-placeholder placeholder'>请选择轮胎花纹</view>
+                <view wx:else class='picker-content'>{{item.figure[item.figureIndex]}}</view>
+                <image class='picker-icon' src='/images/arrow-down.png' mode='aspectFit'></image>
+            </view>
+        </picker>
+    </view>
+
+    <!-- <view class='input-wrap'>
+            <view class='input-title'></view>
+            <picker class='picker-cover' bindchange="bindPickerChange" data-key='speedIndex' value="{{speedIndex}}" range="{{speed}}">
+                <view class='input-content'>
+                    <view wx:if="{{speedIndex==null}}" class='picker-placeholder placeholder'>请选择轮胎花纹</view>
+                    <view wx:else class='picker-content'>{{speed[speedIndex]}}</view>
+                    <image class='picker-icon' src='/images/arrow-down.png' mode='aspectFit'></image>
+                </view>
+            </picker>
+        </view> -->
+
+    <!-- 输入框 -->
+    <view class='input-wrap'>
+        <view class='input-title'>轮胎DOT</view>
+        <input class='input-content' placeholder-class='placeholder' bindinput='inputChange' data-key='plateNo' data-index='{{index}}' placeholder='请输入轮胎DOT信息'></input>
+    </view>
+    <view class='input-wrap'>
+        <view class='input-title style0'>胎侧照片</view>
+        <view class='input-capture style0' hover-class='button-hover' bindtap='capture' data-key='image' data-index='{{index}}'>{{item.image?'点击重新拍摄':'点击拍摄轮胎胎侧照片'}}</view>
+    </view>
+    <image wx:if="{{item.image}}" class='input-image' src='{{serverUrl+item.image}}' mode='aspectFill'></image>
+</view>

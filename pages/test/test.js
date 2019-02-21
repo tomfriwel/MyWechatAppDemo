@@ -1,78 +1,49 @@
 Page({
+    data: {
+        tires: []
+    },
+    onLoad: function(options) {
+        this.add()
+    },
+    add() {
+        let { tires} = this.data
+        tires.unshift({
+            positionIndex: null,
+            position: [
+                '前左',
+                '前右',
+                '后左',
+                '后右',
+            ],
+            brandnames: [],
+            brandnameIndex: null,
+            series: [],
+            seriesIndex: null,
+            specifications: [],
+            specificationsIndex: null,
+            figure: [],
+            figureIndex: null,
+            image: null,
+            tirebatchno: '',
+            specId: '',
+            time: (new Date()).getTime()
+        })
+        this.setData({
+            tires
+        })
+    },
+    positionPickerChange(e) {
+        let {
+            key,
+            index
+        } = e.currentTarget.dataset
+        let tires = this.data.tires
 
-  /**
-   * 页面的初始数据
-   */
-  data: {
-    list:[
-        {
-            title:123
-        },
-        {
-            title: 'hehe'
-        },
-        {
-            title: 'aa'
-        },
-        {
-            title: 123
-        },
-    ]
-  },
+        tires[index].positionIndex = +e.detail.value
+        tires[index].time = (new Date()).getTime()
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-    
-  },
+        console.log(tires[index])
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-    
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-    
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-    
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-    
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-    
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-    
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-    
-  }
+        this.setData({tires})
+    },
 })
