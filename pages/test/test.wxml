@@ -1,11 +1,1 @@
-
- <!-- <view class="single_discount_coupon_container">
-    <view class='corner left_top'></view>
-    <view class='corner right_top'></view>
-    <view class='corner left_bottom'></view>
-    <view class='corner right_bottom'></view>
-</view>  -->
-<button bindtap='tap'>tap</button>
-
-
-
+<view wx:for="{{list}}" wx:key="itemadsf" class="item">{{item.title}}</view>
