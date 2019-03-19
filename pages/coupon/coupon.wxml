@@ -1,0 +1,18 @@
+<!--pages/coupon/coupon.wxml-->
+<view wx:for="{{3}}" class="wrap">
+    <view class="top-shadow"></view>
+    <view class="left-shadow"></view>
+    <view class="right-shadow"></view>
+    <view class="bottom-shadow"></view>
+    <view class="left"></view>
+    <view class="right"></view>
+    <!--上面主要为卡券背景，半圆、阴影  -->
+    <view class="center">
+        <view class="top-wrap">
+            <!-- 虚线上部分 -->
+        </view>
+        <view class="bottom-wrap">
+            <!-- 虚线下部分 -->
+        </view>
+    </view>
+</view>

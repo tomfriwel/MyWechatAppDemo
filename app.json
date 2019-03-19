@@ -1,7 +1,8 @@
 {
     "pages": [
-        "pages/test/test",
+        "pages/coupon/coupon",
         "pages/japanese50/japanese50",
+        "pages/test/test",
         "pages/drag/drag",
         "pages/live/live",
         "pages/color/color",

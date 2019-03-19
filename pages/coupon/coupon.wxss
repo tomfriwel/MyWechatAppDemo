@@ -1,0 +1,90 @@
+/* pages/coupon/coupon.wxss */
+page {
+    background: #eee;
+}
+.wrap {
+    position: relative;
+    margin: 22rpx auto 0 auto;
+    width: 688rpx;
+    height: 262rpx;
+}
+
+.wrap .center {
+    position: absolute;
+    left: 20rpx;
+    top: 0;
+    width: 648rpx;
+    height: 262rpx;
+    background: white;
+}
+
+.wrap .left {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 20rpx;
+    height: 262rpx;
+    background: radial-gradient(circle at 0% 150rpx, rgba(0, 0, 0, 0) 20rpx, white 0rpx);
+}
+
+.wrap .right {
+    position: absolute;
+    left: 668rpx;
+    top: 0;
+    width: 20rpx;
+    height: 262rpx;
+    background: radial-gradient(circle at 100% 150rpx, rgba(0, 0, 0, 0) 20rpx, white 0rpx);
+}
+
+.wrap .left-shadow {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 20rpx;
+    height: 262rpx;
+    background: radial-gradient(circle at 0% 154rpx, rgba(0, 0, 0, 0) 20rpx, #D7DADB 0rpx);
+}
+
+.wrap .right-shadow {
+    position: absolute;
+    left: 668rpx;
+    top: 0;
+    width: 20rpx;
+    height: 262rpx;
+    background: radial-gradient(circle at 100% 154rpx, rgba(0, 0, 0, 0) 20rpx, #D7DADB 0rpx);
+}
+
+.wrap .bottom-line {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2rpx;
+    background: #D7DADB;
+}
+.wrap .top-shadow {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 128rpx;
+    box-shadow: 0rpx 2rpx 2rpx #D7DADB;
+}
+.wrap .bottom-shadow {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 96rpx;
+    box-shadow: 0rpx 2rpx 2rpx #D7DADB;
+}
+
+/*内容部分*/
+/*top*/
+.wrap .center .top-wrap {
+    height: 168rpx;
+}
+
+/*bottom*/
+.wrap .center .bottom-wrap {
+    height: 96rpx;
+    border-top: 2rpx dashed #DEE0E2;
+}
