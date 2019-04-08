@@ -1,1 +1,6 @@
-<button bindtap='add'>add</button>
+
+
+<button bindtap='add'>start</button>
+<button bindtap='stop'>stop</button>
+
+<camera id="test"  style="width: 300px; height: 300px;"></camera>

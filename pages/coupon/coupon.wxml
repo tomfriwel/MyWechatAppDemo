@@ -1,9 +1,9 @@
 <!--pages/coupon/coupon.wxml-->
-<view wx:for="{{3}}" class="wrap">
-    <view class="top-shadow"></view>
+<view wx:for="{{3}}" wx:key="item" class="wrap">
+    <!-- <view class="top-shadow"></view>
     <view class="left-shadow"></view>
     <view class="right-shadow"></view>
-    <view class="bottom-shadow"></view>
+    <view class="bottom-shadow"></view> -->
     <view class="left"></view>
     <view class="right"></view>
     <!--上面主要为卡券背景，半圆、阴影  -->
@@ -16,3 +16,5 @@
         </view>
     </view>
 </view>
+
+<view class='test' style=''></view>

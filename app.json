@@ -1,8 +1,9 @@
 {
     "pages": [
         "pages/coupon/coupon",
-        "pages/japanese50/japanese50",
         "pages/test/test",
+        "pages/video/video",
+        "pages/japanese50/japanese50",
         "pages/drag/drag",
         "pages/live/live",
         "pages/color/color",

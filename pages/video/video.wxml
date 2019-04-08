@@ -1,0 +1,2 @@
+<!--pages/video/video.wxml-->
+<video wx:if="{{tempVideoPath}}" src="{{tempVideoPath}}" controls style="width: 300px; height: 300px;"></video>

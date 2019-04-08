@@ -1,7 +1,9 @@
 /* pages/coupon/coupon.wxss */
+
 page {
     background: #eee;
 }
+
 .wrap {
     position: relative;
     margin: 22rpx auto 0 auto;
@@ -24,7 +26,8 @@ page {
     top: 0;
     width: 20rpx;
     height: 262rpx;
-    background: radial-gradient(circle at 0% 150rpx, rgba(0, 0, 0, 0) 20rpx, white 0rpx);
+    background: radial-gradient(circle at 0% 150rpx, rgba(0, 0, 0, 0) 20rpx, rgba(0, 0, 0, 0) 0rpx);
+    /* background-color: pink; */
 }
 
 .wrap .right {
@@ -42,7 +45,7 @@ page {
     top: 0;
     width: 20rpx;
     height: 262rpx;
-    background: radial-gradient(circle at 0% 154rpx, rgba(0, 0, 0, 0) 20rpx, #D7DADB 0rpx);
+    background: radial-gradient(circle at 0% 154rpx, rgba(0, 0, 0, 0) 20rpx, #d7dadb 0rpx);
 }
 
 .wrap .right-shadow {
@@ -51,7 +54,7 @@ page {
     top: 0;
     width: 20rpx;
     height: 262rpx;
-    background: radial-gradient(circle at 100% 154rpx, rgba(0, 0, 0, 0) 20rpx, #D7DADB 0rpx);
+    background: radial-gradient(circle at 100% 154rpx, rgba(0, 0, 0, 0) 20rpx, #d7dadb 0rpx);
 }
 
 .wrap .bottom-line {
@@ -60,31 +63,45 @@ page {
     left: 0;
     right: 0;
     height: 2rpx;
-    background: #D7DADB;
+    background: #d7dadb;
 }
+
 .wrap .top-shadow {
     position: absolute;
     top: 0;
     width: 100%;
     height: 128rpx;
-    box-shadow: 0rpx 2rpx 2rpx #D7DADB;
+    box-shadow: 0rpx 2rpx 2rpx #d7dadb;
 }
+
 .wrap .bottom-shadow {
     position: absolute;
     bottom: 0;
     width: 100%;
     height: 96rpx;
-    box-shadow: 0rpx 2rpx 2rpx #D7DADB;
+    box-shadow: 0rpx 2rpx 2rpx #d7dadb;
 }
 
 /*内容部分*/
+
 /*top*/
+
 .wrap .center .top-wrap {
     height: 168rpx;
 }
 
 /*bottom*/
+
 .wrap .center .bottom-wrap {
     height: 96rpx;
-    border-top: 2rpx dashed #DEE0E2;
+    border-top: 2rpx dashed #dee0e2;
+}
+
+/* test */
+
+.test {
+    width: 100px;
+    height: 100px;
+    background: radial-gradient(bottom left, #fff 0%, #fff 60%, green 60%, green 100%);
+    background: red;
 }
